@@ -248,7 +248,7 @@ if ($reg_data != 'yes')
 										break;
 										case 7:
 										// Type d'authentification : deux valeurs autorisées : local ou ext
-										if (preg_match ("`(local|ext)`", $data[$c])) {
+										if (preg_match ("`(^local$|^ext$)`", $data[$c])) {
 											$data_type_auth = htmlentities($data[$c]);
 											if (($data_mdp == "") && ($data_type_auth == "local"))
 											{
