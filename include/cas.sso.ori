@@ -1,0 +1,11 @@
+<?php
+$serveurSSO='cas_server.domain';
+$serveurSSOPort=443;
+$serveurSSORacine='cas';
+/* Set all proxies that are authorized to send a logout request */
+$serveurSSOProxy=array('front1.domain','front2.domain','front3.domain', 'front4.domain');
+/* Uncomment this line to enable phpCAS debug log and set the file path to use */
+//$serveurSSODebugFile='/tmp/phpcas_grr2-noc.log';
+/* Set the path to the CA cert used for the CAS server */
+$serveurSSOPathCA='/folder/to/ca/domain-cacert.pem';
+?>
