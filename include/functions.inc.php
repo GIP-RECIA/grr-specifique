@@ -936,6 +936,10 @@ function begin_page($title, $page = "with_session")
 	$a .= '<meta name="Robots" content="noindex" />'.PHP_EOL;
 	$a .= '<title>'.$title.'</title>'.PHP_EOL;
 	$a .= '<link rel="shortcut icon" href="./favicon.ico" />'.PHP_EOL;
+	// Ajout pour le extended-uportal-header
+	$a .= '<script type="text/javascript" src="/commun/extended-uportal-header.min.js"></script>'.PHP_EOL;
+	// Ajout pour le extended-uportal-footer
+	$a .= '<script type="text/javascript" src="/commun/extended-uportal-footer.min.js"></script>'.PHP_EOL;
 
 	if (@file_exists('admin_accueil.php') || @file_exists('install_mysql.php')){ // Si on est dans l'administration
 
@@ -1101,6 +1105,25 @@ function print_header($day = '', $month = '', $year = '', $type_session = 'with_
 			$day   = date("d",$date_);
 			$month = date("m",$date_);
 			$year  = date("Y",$date_);
+			
+			// Ajout pour le extended-uportal-header
+			echo '<extended-uportal-header messages=\'[{"locales": ["fr", "fr-FR"], "messages": { "message": {"header": {"login": "Connexion ENT" } }}}]\'';
+			echo '    domain="'.$_SERVER['HTTP_HOST'].'"';
+			echo '    service-name="GRR" context-api-url="/portail" sign-out-url="/portail/Logout"';
+			echo '    default-org-logo-path="/annuaire_images/default_banner_v1.jpg" default-avatar-path="/images/icones/noPictureUser.svg"';
+			echo '    default-org-icon-path="/images/partners/netocentre-simple.svg" favorite-api-url="/portail/api/layout"';
+			echo '    layout-api-url="/portail/api/v4-3/dlm/layout.json" organization-api-url="/change-etablissement/rest/v2/structures/structs/"';
+			echo '    portlet-api-url="/portail/api/v4-3/dlm/portletRegistry.json?category=All%20categories"';
+			echo '    user-info-api-url="/portail/api/v5-1/userinfo?claims=private,name,ESCOSIRENCourant,ESCOSIREN,picture&groups="';
+			echo '    session-api-url="/portail/api/session.json"';
+			echo '    user-info-portlet-url="/portail/api/ExternalURLStats?fname=ESCO-MCE&amp;service=/MCE"';
+			echo '    template-api-path="/commun/portal_template_api.tpl.json" switch-org-portlet-url="/portail/p/etablissement-swapper"';
+			echo '    favorites-portlet-card-size="small" grid-portlet-card-size="auto" hide-action-mode="never"';
+			echo '    show-favorites-in-slider="true" return-home-title="Aller à l\'accueil" return-home-target="_self"';
+			echo '    icon-type="nine-square" sign-in-url="/portail/Login" >';
+			echo '</extended-uportal-header>';
+			// Fin ajout pour le extended-uportal-header
+
 			echo '<div id="toppanel">'.PHP_EOL;
 			echo '<div id="panel">'.PHP_EOL;
 			echo '<table id="header">'.PHP_EOL;
