@@ -63,26 +63,28 @@ $liste_tables = array(
 
 # Liste des feuilles de style
 $liste_themes = array(
-	"default",
-	"vert",
-	"violet",
-	"orange",
-	"bleu",
-	"rouge",
-	"rose",
-	"fluo"
+#	"default",
+	"default"
+#	"vert",
+#	"violet",
+#	"orange",
+#	"bleu",
+#	"rouge",
+#	"rose",
+#	"fluo"
 	);
 
 # Liste des noms des styles
 $liste_name_themes = array(
-	"Grand bleu",
-	"Verdoyant",
-	"Violeta",
-	"Orange Talmont",
-	"Bleu Talmont",
-	"Rouge Feu",
-	"Roseline",
-	"Jaune Fluo"
+#	"Grand bleu",
+#	"Verdoyant",
+#	"Violeta",
+#	"Orange Talmont",
+#	"Bleu Talmont",
+#	"Rouge Feu",
+#	"Roseline",
+#	"Jaune Fluo"
+	"Cher"
 	);
 
 # Liste des langues
