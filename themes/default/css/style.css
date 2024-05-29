@@ -35,7 +35,7 @@ table.table-striped th{background-color:gray !important; border:0px !important;}
 .administration{background-color:#fff;width:15%;text-align:center;margin:0 auto}
 .configuration{background-color:#fff;width:20%;text-align:center;margin:0 auto}
 .contactformulaire{background-color:#fff;width:15%;vertical-align:middle;text-align:center}
-#menuGauche{background-color:#31A3DD;float:left;height:100%;min-width:200px;width:100%;padding-bottom:10px}
+#menuGauche{background-color:#31A3DD;float:left;height:100%;width:100%;padding-bottom:10px}
 #menuGaucheMonthAll2{display:none;background-color:#31A3DD;float:left;height:100%;min-width:200px;width:300px;padding-bottom:10px}
 .cal_current_day{color:#000;vertical-align:middle;text-align:center;line-height:30px}
 .week td a{background-color:#8b8b8b;vertical-align:middle;text-align:center;height:100%;width:100%}
@@ -131,7 +131,7 @@ a.buttonsReservation{cursor:pointer}
 
 .closepop{float:right;cursor:pointer}
 
-#toppanel{position:relative;top:0;width:100%;z-index:999;text-align:center;border-bottom:1px solid #31A3DD}
+#toppanel{position:relative;top:0;width:100%;z-index:14;text-align:center;border-bottom:1px solid #31A3DD}
 #panel{width:100%;overflow:hidden;position:relative;z-index:3}
 #panel a{text-decoration:none}
 .pad-15,.pad-15 tboby{padding-left:15px !important}
