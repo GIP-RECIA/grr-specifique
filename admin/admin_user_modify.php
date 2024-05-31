@@ -17,9 +17,8 @@
  */
 include "../include/admin.inc.php";
 $grr_script_name = "admin_user_modify.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
+
 if ((authGetUserLevel(getUserName(), -1) < 6) && (authGetUserLevel(getUserName(), -1, 'user') !=  1))
 {
 	showAccessDenied($back);

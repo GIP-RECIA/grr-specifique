@@ -54,10 +54,9 @@ if (isset($_GET["id"]))
 }
 else
 	die();
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars_decode($_SERVER['HTTP_REFERER']);
-// echo $back;
+
+$back = getBackUri();
+
 if (isset($_GET["action_moderate"])){
     // ici on a l'id de la réservation, on peut donc construire un lien de retour complet, à la bonne date et avec la ressource précise
     /* $page = $_GET["page"];

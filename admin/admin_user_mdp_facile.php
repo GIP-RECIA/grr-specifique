@@ -17,9 +17,7 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_user_mdp_facile.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 $display = isset($_GET["display"]) ? $_GET["display"] : NULL;
 $order_by = isset($_GET["order_by"]) ? $_GET["order_by"] : NULL;
 $msg = '';

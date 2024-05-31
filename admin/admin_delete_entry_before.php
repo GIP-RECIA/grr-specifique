@@ -17,9 +17,7 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_delete_entry_before.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 $_SESSION['chemin_retour'] = "admin_config.php";
 
 if (!Settings::load()) {

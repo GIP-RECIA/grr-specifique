@@ -55,4 +55,4 @@ if ((getUserName()=='') && !$defederated) {
   echo get_vocab('lasso_defederated');
 }
 echo "<br />";
-echo "<a href='{$_SERVER['HTTP_REFERER']}'>".get_vocab('back').'</a>';
+echo "<a href='".getBackUri()."'>".get_vocab('back').'</a>';

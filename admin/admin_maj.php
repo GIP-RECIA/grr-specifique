@@ -203,9 +203,7 @@ if ( (!@grr_resumeSession()) && $valid!='yes' && $connexionAdminMAJ == 1)
 			die();
 }
 
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 
 if ((authGetUserLevel(getUserName(),-1) < 6) && ($valid != 'yes') && $connexionAdminMAJ == 1)
 {

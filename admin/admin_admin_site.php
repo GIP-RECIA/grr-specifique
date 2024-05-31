@@ -23,9 +23,8 @@ if (empty($id_site))
 	$id_site = get_default_site();
 if (!isset($id_site))
 	settype($id_site, "integer");
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
+
 check_access(6, $back);
 if (Settings::get("module_multisite") != "Oui")
 {

@@ -17,9 +17,7 @@
  */
 
 $grr_script_name = "admin_config_calend2.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 check_access(6, $back);
 # print the page header
 print_header("", "", "", $type="with_session");

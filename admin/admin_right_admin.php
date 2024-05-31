@@ -21,9 +21,9 @@ $grr_script_name = "admin_right_admin.php";
 $id_area = isset($_POST["id_area"]) ? $_POST["id_area"] : (isset($_GET["id_area"]) ? $_GET["id_area"] : NULL);
 if (!isset($id_area))
 	settype($id_area,"integer");
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+
+$back = getBackUri();
+
 $day   = date("d");
 $month = date("m");
 $year  = date("Y");

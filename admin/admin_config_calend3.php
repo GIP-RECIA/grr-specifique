@@ -96,8 +96,7 @@ function cal3($month, $year)
     $s .= "</table>\n";
     return $s;
 }
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 	check_access(6, $back);
 	print_header("", "", "", $type = "with_session");
 	// Affichage de la colonne de gauche

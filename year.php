@@ -99,9 +99,7 @@ if ((Settings::get("authentification_obli") == 0) && (getUserName() == ''))
 	$type_session = "no_session";
 else
 	$type_session = "with_session";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 if (check_begin_end_bookings($day, $from_month, $from_year))
 {
 	showNoBookings($day, $from_month, $from_year, $back);

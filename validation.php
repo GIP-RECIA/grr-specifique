@@ -43,9 +43,7 @@ if ($_GET['pview'] == 1)
 	$class_image = "print_image";
 else
 	$class_image = "image";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 if (($settings->get("authentification_obli") == 0) && (getUserName() == ''))
 	$type_session = "no_session";
 else

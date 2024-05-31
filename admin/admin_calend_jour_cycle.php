@@ -18,9 +18,7 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_calend_jour_cycle.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 $_SESSION['chemin_retour'] = "admin_calend_jour_cycle.php";
 $day   = date("d");
 $month = date("m");

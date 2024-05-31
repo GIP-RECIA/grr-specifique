@@ -86,9 +86,7 @@ $delais_option_reservation  = grr_sql_query1("SELECT delais_option_reservation F
 $qui_peut_reserver_pour  = grr_sql_query1("SELECT qui_peut_reserver_pour FROM ".TABLE_PREFIX."_room WHERE id='".$room."'");
 $active_cle  = grr_sql_query1("SELECT active_cle FROM ".TABLE_PREFIX."_room WHERE id='".$room."'");
 $periodiciteConfig = Settings::get("periodicite");
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars( $_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 $longueur_liste_ressources_max = Settings::get("longueur_liste_ressources_max");
 if ($longueur_liste_ressources_max == '')
 	$longueur_liste_ressources_max = 20;

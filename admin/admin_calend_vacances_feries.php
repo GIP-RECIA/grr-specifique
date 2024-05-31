@@ -18,9 +18,7 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_calend_vacances_feries.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 check_access(6, $back);
 # print the page header
 print_header("", "", "", $type="with_session");

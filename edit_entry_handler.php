@@ -167,12 +167,7 @@ if (!isset($_GET['rooms'][0]))
 	include "include/trailer.inc.php";
 	die();
 }
-$back = (isset($_SERVER['HTTP_REFERER']))? htmlspecialchars($_SERVER['HTTP_REFERER']) :'';
-//if (isset($_SERVER['HTTP_REFERER']))
-//	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
-// page de retour
-$ret_page = (isset($_GET['page_ret']))? $_GET['page_ret'] : $back;
-
+$back = getBackUri();
 $area = mrbsGetRoomArea($_GET['rooms'][0]);
 $overload_data = array();
 $overload_fields_list = mrbsOverloadGetFieldslist($area);

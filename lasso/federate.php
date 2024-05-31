@@ -55,7 +55,7 @@ if (lassospkit_userid() == NULL)
       echo get_vocab('lasso_please_connect');
     }
   echo "<br />";
-  echo "<a href='{$_SERVER['HTTP_REFERER']}'>".get_vocab('back').'</a>';
+  echo "<a href='".getBackUri()."'>".get_vocab('back').'</a>';
 }
 else
 {

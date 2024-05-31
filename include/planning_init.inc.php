@@ -66,9 +66,7 @@ if (!isset($day))
 	$day = 1;
 */
 // Lien de retour
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 
 // Type de session
 if ((Settings::get("authentification_obli") == 0) && (getUserName() == ''))

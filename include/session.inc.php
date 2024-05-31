@@ -653,6 +653,10 @@ if ($row[7] != 0)
 	$_SESSION['default_room'] = $row[7];
 else
 	$_SESSION['default_room'] = Settings::get("default_room");
+
+// Enregistrement de la page courante pour le retour en arriere
+$_SESSION['back'] = [getRequestUri(), ''];
+
 if ($row[8] !='')
 	$_SESSION['default_style'] = $row[8];
 else
@@ -828,6 +832,11 @@ function grr_resumeSession()
 		// Resuming session
 	session_name(SESSION_NAME);
 	@session_start();
+
+	// Enregistrement de la page courante pour le retour en arriere
+	$_SESSION['back'][1] = $_SESSION['back'][0];
+	$_SESSION['back'][0] = getRequestUri();
+
 	if ((Settings::get('sso_statut') == 'lcs') and (!isset($_SESSION['est_authentifie_sso'])) and ($_SESSION['source_login'] == "ext"))
 		return (false);
 		// La session est-elle expirée
@@ -1208,6 +1217,49 @@ function grr_getinfo_ldap($_dn, $_login, $_password)
 	// Return infos
 	return array($l_nom, $l_prenom, $l_email);
 }
+
+/**
+ * Permet de récupérer l'uri demandé
+ */
+function getRequestUri()
+{
+	global $grr_script_name;
+	$RequestUri = "";
+	if (isset($_SERVER['REQUEST_URI']))
+		$RequestUri = $_SERVER['REQUEST_URI'];
+	else if (isset($_ENV['REQUEST_URI']))
+		$RequestUri = $_ENV['REQUEST_URI'];
+	else if (isset($_SERVER['HTTP_X_REWRITE_URL']))
+		$RequestUri = $_SERVER['HTTP_X_REWRITE_URL'];
+	else
+	{
+		if (!isset($_SERVER['QUERY_STRING']))
+			$_SERVER['QUERY_STRING'] = "";
+		if ((Settings::get("use_grr_url") == "y") && (Settings::get("grr_url") != ""))
+		{
+			if (substr(Settings::get("grr_url"), -1) != "/")
+				$ad_signe = "/";
+			else
+				$ad_signe = "";
+			$RequestUri = Settings::get("grr_url").$ad_signe.$grr_script_name.$_SERVER['QUERY_STRING'];
+		}
+		else
+		{
+			if (isset($_SERVER['PHP_SELF']))
+				$RequestUri = $_SERVER['PHP_SELF'].$_SERVER['QUERY_STRING'];
+		}
+	}
+	return $RequestUri;
+}
+
+/**
+ * Permet de récupérer l'uri de la page précédente
+ */
+function getBackUri()
+{
+	return htmlspecialchars($_SESSION['back'][1]);
+}
+
 // On fabrique l'url
 $url = rawurlencode(str_replace('&amp;','&',get_request_uri()));
 ?>

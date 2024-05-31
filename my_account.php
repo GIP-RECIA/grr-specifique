@@ -37,9 +37,7 @@ $month = isset($_POST['month']) ? $_POST['month'] : (isset($_GET['month']) ? $_G
 $year = isset($_POST['year']) ? $_POST['year'] : (isset($_GET['year']) ? $_GET['year'] : date('Y'));
 include_once('include/language.inc.php');
 include "include/resume_session.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 $user_login = isset($_POST['user_login']) ? $_POST['user_login'] : ($user_login = isset($_GET['user_login']) ? $_GET['user_login'] : NULL);
 $valid = isset($_POST['valid']) ? $_POST['valid'] : NULL;
 $msg = '';

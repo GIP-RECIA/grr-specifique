@@ -49,9 +49,7 @@ if ($info = mrbsGetEntryInfo($id))
 	$month = strftime("%m", $info["start_time"]);
 	$year  = strftime("%Y", $info["start_time"]);
 	$area  = mrbsGetRoomArea($info["room_id"]);
-	$back = "";
-	if (isset($_SERVER['HTTP_REFERER']))
-		$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+	$back = getBackUri();
 	if (authGetUserLevel(getUserName(), -1) < 1)
 	{
 		showAccessDenied($back);

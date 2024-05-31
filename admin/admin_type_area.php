@@ -20,16 +20,12 @@ include "../include/admin.inc.php";
 $grr_script_name = "admin_type_area.php";
 // Initialisation
 $id_area = isset($_GET["id_area"]) ? $_GET["id_area"] : NULL;
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 $day   = date("d");
 $month = date("m");
 $year  = date("Y");
 check_access(4, $back);
-$back = "";
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+
 // Gestion du retour à la page précédente sans enregistrement
 if (isset($_GET['change_done']))
 {

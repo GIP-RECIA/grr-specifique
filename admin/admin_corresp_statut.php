@@ -17,9 +17,7 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_config_sso.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 if (Settings::get("sso_ac_corr_profil_statut") != 'y')
 {
 	showAccessDenied($back);
@@ -76,9 +74,7 @@ if ((isset($_GET['action_del'])) && ($_GET['js_confirmed'] == 1) && ($_GET['acti
 	else
 		$msg = get_vocab("message_records");
 }
-$back = "";
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 //print the page header
 print_header("", "", "", $type="with_session");
 // Affichage de la colonne de gauche

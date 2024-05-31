@@ -45,9 +45,7 @@ if (isset($_POST['imap_statut']))
 		$grrSettings['imap_statut'] = $_POST['imap_statut'];
 	}
 }
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 if ((isset($imap_restrictions)) && ($imap_restrictions == true))
 {
 	showAccessDenied($back);

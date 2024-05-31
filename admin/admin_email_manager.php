@@ -24,9 +24,8 @@ if (isset($room))
 	settype($room,"integer");
 if (!isset($id_area))
 	settype($id_area,"integer");
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+
+$back = getBackUri();
 check_access(4, $back);
 // tableau des ressources auxquelles l'utilisateur n'a pas accès
 $tab_rooms_noaccess = verif_acces_ressource(getUserName(), 'all');

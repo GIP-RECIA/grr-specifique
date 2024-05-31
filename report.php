@@ -40,9 +40,7 @@ if (!isset($_GET['pview']))
 else
 	$_GET['pview'] = 1;
 //Récupération des informations relatives au serveur.
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 //Renseigne les droits de l'utilisateur, si les droits sont insufisants, l'utilisateur est avertit.
 if (!verif_access_search(getUserName()))
 {

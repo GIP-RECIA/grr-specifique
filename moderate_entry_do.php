@@ -44,9 +44,7 @@ else
 	$type_session = "with_session";
 // On vérifie que l'utilisateur a bien le droit d'être ici
 $room_id = grr_sql_query1("SELECT room_id FROM ".TABLE_PREFIX."_entry WHERE id='".$_POST['id']."'");
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 if (authGetUserLevel(getUserName(), $room_id) < 3)
 {
 	showAccessDenied($back);

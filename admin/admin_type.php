@@ -16,9 +16,7 @@
  */
 include "../include/admin.inc.php";
 $grr_script_name = "admin_type.php";
-$back = "";
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 check_access(6, $back);
 if ((isset($_GET['msg'])) && isset($_SESSION['displ_msg']) && ($_SESSION['displ_msg'] == 'yes') )
 	$msg = $_GET['msg'];

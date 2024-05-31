@@ -86,9 +86,7 @@ else
 	$moderate = 0;
 settype($type_affichage_reser, "integer");
 
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 
 if (isset($_POST["change_room_and_back"]))
 {

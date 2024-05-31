@@ -328,17 +328,13 @@ function update_site($id)
 	// Debut de l'affichage de la page
 	include_once('../include/admin.inc.php');
 	$grr_script_name = 'admin_site.php';
-	if (authGetUserLevel(getUserName(), -1, 'site') < 4)
-	{
-		$back = '';
-		if (isset($_SERVER['HTTP_REFERER']))
-			$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+	$back = getBackUri();
+	
+	if (authGetUserLevel(getUserName(), -1, 'site') < 4){
 		showAccessDenied($back);
 		exit();
 	}
-	$back = "";
-	if (isset($_SERVER['HTTP_REFERER']))
-		$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+	
 	// print the page header
 	print_header("", "", "", $type="with_session");
 	// Affichage de la colonne de gauche

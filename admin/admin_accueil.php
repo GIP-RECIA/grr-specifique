@@ -17,9 +17,7 @@
  */
 include "../include/admin.inc.php";
 $grr_script_name = "admin_accueil.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 if ((authGetUserLevel(getUserName(), -1, 'area') < 4) && (authGetUserLevel(getUserName(), -1, 'user') !=  1))
 {
 	showAccessDenied($back);

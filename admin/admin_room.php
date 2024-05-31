@@ -26,9 +26,7 @@ if ((isset($id_area))&&($id_area != -1))
 if (!isset($id_site))
 	$id_site = isset($_POST['id_site']) ? $_POST['id_site'] : (isset($_GET['id_site']) ? $_GET['id_site'] : -1);
 settype($id_site,"integer");
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+$back = getBackUri();
 $day   = date("d");
 $month = date("m");
 $year  = date("Y");

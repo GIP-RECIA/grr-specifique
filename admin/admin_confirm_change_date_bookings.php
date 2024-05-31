@@ -19,9 +19,8 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_confirm_change_date_bookings.php";
-$back = '';
-if (isset($_SERVER['HTTP_REFERER']))
-	$back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+
+$back = getBackUri();
 unset($display);
 $display = isset($_GET["display"]) ? $_GET["display"] : NULL;
 $day   = date("d");
