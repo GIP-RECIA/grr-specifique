@@ -1109,18 +1109,7 @@ function print_header($day = '', $month = '', $year = '', $type_session = 'with_
 			// Ajout pour le extended-uportal-header
 			echo '<extended-uportal-header messages=\'[{"locales": ["fr", "fr-FR"], "messages": { "message": {"header": {"login": "Connexion ENT" } }}}]\'';
 			echo '    domain="'.$_SERVER['HTTP_HOST'].'"';
-			echo '    service-name="GRR" context-api-url="/portail" sign-out-url="/portail/Logout"';
-			echo '    default-org-logo-path="/annuaire_images/default_banner_v1.jpg" default-avatar-path="/images/icones/noPictureUser.svg"';
-			echo '    default-org-icon-path="/images/partners/netocentre-simple.svg" favorite-api-url="/portail/api/layout"';
-			echo '    layout-api-url="/portail/api/v4-3/dlm/layout.json" organization-api-url="/change-etablissement/rest/v2/structures/structs/"';
-			echo '    portlet-api-url="/portail/api/v4-3/dlm/portletRegistry.json?category=All%20categories"';
-			echo '    user-info-api-url="/portail/api/v5-1/userinfo?claims=private,name,ESCOSIRENCourant,ESCOSIREN,picture&groups="';
-			echo '    session-api-url="/portail/api/session.json"';
-			echo '    user-info-portlet-url="/portail/api/ExternalURLStats?fname=ESCO-MCE&amp;service=/MCE"';
-			echo '    template-api-path="/commun/portal_template_api.tpl.json" switch-org-portlet-url="/portail/p/etablissement-swapper"';
-			echo '    favorites-portlet-card-size="small" grid-portlet-card-size="auto" hide-action-mode="never"';
-			echo '    show-favorites-in-slider="true" return-home-title="Aller à l\'accueil" return-home-target="_self"';
-			echo '    icon-type="nine-square" sign-in-url="/portail/Login" >';
+			echo '    service-name="GRR" template-api-path="/commun/portal_template_api.tpl.json" >';
 			echo '</extended-uportal-header>';
 			// Fin ajout pour le extended-uportal-header
 
