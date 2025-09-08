@@ -937,9 +937,9 @@ function begin_page($title, $page = "with_session")
 	$a .= '<title>'.$title.'</title>'.PHP_EOL;
 	$a .= '<link rel="shortcut icon" href="./favicon.ico" />'.PHP_EOL;
 	// Ajout pour le extended-uportal-header
-	$a .= '<script type="text/javascript" src="/commun/extended-uportal-header.min.js"></script>'.PHP_EOL;
+	$a .= '<script type="text/javascript" src="/resource-server/webjars/gip-recia__ui-webcomponents/dist/r-header.js"></script>'.PHP_EOL;
 	// Ajout pour le extended-uportal-footer
-	$a .= '<script type="text/javascript" src="/commun/extended-uportal-footer.min.js"></script>'.PHP_EOL;
+	$a .= '<script type="text/javascript" src="/resource-server/webjars/gip-recia__ui-webcomponents/dist/r-footer.js"></script>'.PHP_EOL;
 
 	if (@file_exists('admin_accueil.php') || @file_exists('install_mysql.php')){ // Si on est dans l'administration
 
@@ -1107,7 +1107,7 @@ function print_header($day = '', $month = '', $year = '', $type_session = 'with_
 			$year  = date("Y",$date_);
 			
 			// Ajout pour le extended-uportal-header
-			echo '<extended-uportal-header messages=\'[{"locales": ["fr", "fr-FR"], "messages": { "message": {"header": {"login": "Connexion ENT" } }}}]\'';
+			echo '<extended-uportal-header';
 			echo '    domain="'.$_SERVER['HTTP_HOST'].'"';
 			echo '    service-name="GRR" template-api-path="/commun/portal_template_api.tpl.json" >';
 			echo '</extended-uportal-header>';
