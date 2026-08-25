@@ -23,6 +23,7 @@ include "include/functions.inc.php";
 include "include/$dbsys.inc.php";
 include "include/mrbs_sql.inc.php";
 include "include/misc.inc.php";
+include "include/notification_api.inc.php";
 // Settings
 require_once("./include/settings.class.php");
 //Chargement des valeurs de la table settingS
@@ -599,6 +600,16 @@ if (empty($err) && ($error_booking_in_past == 'no') && ($error_duree_max_resa_ar
 		if ($rep_type != 0)
 		{
 			mrbsCreateRepeatingEntrys($starttime, $endtime, $rep_type, $rep_enddate, $rep_opt, $room_id, $create_by, $beneficiaire, $beneficiaire_ext, $name, $type, $description, $rep_num_weeks, $option_reservation, $overload_data, $entry_moderate, $rep_jour_c, $courrier, $rep_month_abs1, $rep_month_abs2);
+			//if ($send_mail_moderate){
+				$safe_room_id = protect_data_sql($room_id);
+				$sql_moderateurs = "SELECT u.login FROM ".TABLE_PREFIX."_j_user_room j INNER JOIN ".TABLE_PREFIX."_utilisateurs u ON j.login = u.login WHERE j.id_room='".$safe_room_id."' AND u.etat = 'actif'";
+				$res_moderateurs = grr_sql_query($sql_moderateurs);
+				if ($res_moderateurs){
+					for ($i = 0; ($row = grr_sql_row($res_moderateurs, $i)); $i++){
+						envoyerNotificationModerationKafka($id_first_resa, $name, getUserName(), $row[0]);
+					}
+				}
+			//}
 			if (Settings::get("automatic_mail") == 'yes')
 			{
 				if (isset($id) && ($id != 0))
@@ -625,6 +636,18 @@ if (empty($err) && ($error_booking_in_past == 'no') && ($error_duree_max_resa_ar
 				$entry_type = 0;
 			mrbsCreateSingleEntry($starttime, $endtime, $entry_type, $repeat_id, $room_id, $create_by, $beneficiaire, $beneficiaire_ext, $name, $type, $description, $option_reservation, $overload_data, $entry_moderate, $rep_jour_c, $statut_entry, $keys, $courrier);
 			$new_id = grr_sql_insert_id();
+			//if ($send_mail_moderate){
+				$safe_room_id = protect_data_sql($room_id);
+				$sql_moderateurs = "SELECT u.login FROM ".TABLE_PREFIX."_j_user_room j INNER JOIN ".TABLE_PREFIX."_utilisateurs u ON j.login = u.login WHERE j.id_room='".$safe_room_id."' AND u.etat = 'actif'";
+				$res_moderateurs = grr_sql_query($sql_moderateurs);
+				if ($res_moderateurs){
+					for ($i = 0; ($row = grr_sql_row($res_moderateurs, $i)); $i++){
+						envoyerNotificationModerationKafka($new_id, $name, getUserName(), $row[0]);
+					}
+				} else {
+					error_log("Error: failed to send notification");
+				}
+			//}
 			if (Settings::get("automatic_mail") == 'yes')
 			{
 				if (isset($id) && ($id != 0))
