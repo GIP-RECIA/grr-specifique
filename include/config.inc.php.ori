@@ -156,6 +156,22 @@ $sso_super_admin = false;
 // Set the fixed URL that will be set as the CAS service parameter. When this method is not called, a phpCAS script uses its own URL.
  $Url_CAS_setFixedServiceURL = '';
 
+// Public base URLs accepted by phpCAS when building the service URL.
+$cas_service_base_urls = array(
+  'https://www.chercan.fr',
+  'https://www.colleges-eureliens.fr',
+  'https://e-college.indre.fr',
+  'https://www.touraine-eschool.fr',
+  'https://ent.colleges41.fr',
+  'https://mon-e-college.loiret.fr',
+  'https://lycees.netocentre.fr',
+  'https://lycees.entkapreunion.re',
+  'https://cfa.netocentre.fr',
+  'https://formations-sociales.netocentre.fr',
+  'https://ent.recia.fr',
+);
+$cas_server_ca_cert_path = '/usr/local/ssl/ca/giprecia.net-cacert.pem';
+
 
 #####################################################
 # Paramètres propres à une authentification SSO LASSO
