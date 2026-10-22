@@ -443,10 +443,10 @@ while ($month_indice < $month_end)
 										echo " <img src=\"img_grr/flag_moderation.png\" alt=\"".get_vocab("en_attente_moderation")."\" title=\"".get_vocab("en_attente_moderation")."\" class=\"image\" /> \n";
 									if ($acces_fiche_reservation)
 										echo "<a title=\"".htmlspecialchars($d[$cday][$cmonth][$cyear]["data"][$i])."\" href=\"view_entry.php?id=" . $d[$cday][$cmonth][$cyear]["id"][$i]."&amp;page=month\">"
-									.$d[$cday][$cmonth][$cyear]["who1"][$i]{0}
+											.$d[$cday][$cmonth][$cyear]["who1"][$i][0]
 									. "</a>";
 									else
-										echo $d[$cday][$cmonth][$cyear]["who1"][$i]{0};
+										echo $d[$cday][$cmonth][$cyear]["who1"][$i][0];
 									echo "\n</td></tr></table>\n";
 								}
 							}

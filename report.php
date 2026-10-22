@@ -243,14 +243,12 @@ function do_summary(&$count, &$hours, &$room_hash, &$breve_description_hash, $en
 	// Make a sorted array of area/rooms, and of names, to use for column
 	// and row indexes. Use the rooms and names hashes built by accumulate().
 	// At PHP4 we could use array_keys().
-	reset($room_hash);
 	$rooms = array();
-	while (list($room_key) = each($room_hash))
+	foreach ($room_hash as $room_key => $_)
 		$rooms[] = $room_key;
 	ksort($rooms);
-	reset($breve_description_hash);
 	$breve_descriptions = array();
-	while (list($breve_description_key) = each($breve_description_hash))
+	foreach ($breve_description_hash as $breve_description_key => $_)
 		$breve_descriptions[] = $breve_description_key;
 	ksort($breve_descriptions);
 	$n_rooms = sizeof($rooms);

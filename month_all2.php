@@ -360,12 +360,12 @@ for ($ir = 0; ($row = grr_sql_row($res, $ir)); $ir++)
 										else
 										{
 											echo "<a title=\"".htmlspecialchars($d[$cday]["data"][$i])."\" href=\"view_entry.php?id=" . $d[$cday]["id"][$i]."&amp;page=month_all2\">"
-											.$d[$cday]["who1"][$i]{0}
+											.$d[$cday]["who1"][$i][0]
 											. "</a>";
 										}
 									}
 									else
-										echo $d[$cday]["who1"][$i]{0};
+										echo $d[$cday]["who1"][$i][0];
 									echo "</span></td></tr></table>";
 								}
 							}

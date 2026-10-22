@@ -923,7 +923,7 @@ class CAS_Client
 
         phpCAS::traceBegin();
         */
-     // le constructeur est patché selon la méthode suivie dans GEPI
+     // le constructeur est patchï¿½ selon la mï¿½thode suivie dans GEPI
  public function __construct(
  $server_version,
  $proxy,
@@ -946,7 +946,7 @@ class CAS_Client
         	throw new CAS_TypeMismatchException($server_uri, '$server_uri', 'string');
         if (gettype($changeSessionID) != 'boolean')
         	throw new CAS_TypeMismatchException($changeSessionID, '$changeSessionID', 'boolean');
-        // à voir :  tester le type de $service_address 
+        // ï¿½ voir :  tester le type de $service_address
 
         phpCAS::traceBegin();
         
@@ -3410,7 +3410,7 @@ class CAS_Client
                 case 'user':
                 case 'proxies':
                 case 'proxyGrantingTicket':
-                    continue;
+                    break;
                 default:
                     if (strlen(trim($attr_node->nodeValue))) {
                         phpCas :: trace(
