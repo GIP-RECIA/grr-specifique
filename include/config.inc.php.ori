@@ -86,10 +86,11 @@ if (!function_exists('grr_strftime')) {
 		$result = '';
 		foreach (preg_split('/(%[a-zA-Z%])/', $format, -1, PREG_SPLIT_DELIM_CAPTURE) as $part) {
 			if (isset($patterns[$part])) {
-				if (!isset($formatters[$part])) {
-					$formatters[$part] = new IntlDateFormatter($grr_locale, IntlDateFormatter::NONE, IntlDateFormatter::NONE, $grr_timezone, IntlDateFormatter::GREGORIAN, $patterns[$part]);
+				$formatter_key = $grr_locale . "\0" . $grr_timezone . "\0" . $part;
+				if (!isset($formatters[$formatter_key])) {
+					$formatters[$formatter_key] = new IntlDateFormatter($grr_locale, IntlDateFormatter::NONE, IntlDateFormatter::NONE, $grr_timezone, IntlDateFormatter::GREGORIAN, $patterns[$part]);
 				}
-				$formatted = $formatters[$part]->format($timestamp);
+				$formatted = $formatters[$formatter_key]->format($timestamp);
 				if ($formatted === false) {
 					throw new RuntimeException('Impossible de formater la date.');
 				}
