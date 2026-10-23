@@ -54,7 +54,8 @@ $nb_year_calendar = 10;
 // putenv("TZ=America/Toronto");
 /*
  * Paramètres régionaux de cette instance. Utilisez des identifiants IANA pour
- * le fuseau et BCP 47 pour la locale, par exemple Indian/Reunion et fr-FR.
+ * le fuseau et BCP 47 pour la locale. Pour La Réunion, utilisez
+ * Indian/Reunion et fr_RE.
  */
 $grr_timezone = 'Europe/Paris';
 $grr_locale = 'fr-FR';
