@@ -10,4 +10,4 @@
 /images
 .idea
 *.sql.gz
-/vendor
+/vendor*.sql

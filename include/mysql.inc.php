@@ -14,7 +14,7 @@
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  */
-
+mysqli_report(MYSQLI_REPORT_ERROR);
 if (empty($db_nopersist))
 	$GLOBALS['db_c'] = @mysqli_connect('p:'.$dbHost, $dbUser, $dbPass, $dbDb, $dbPort);
 else
