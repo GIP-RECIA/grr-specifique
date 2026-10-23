@@ -78,8 +78,7 @@ class Email{
 				"Reply-To: {$DE}" . "\r\n" .
 				'X-Mailer: PHP/' . phpversion();
 
-			//mail($A, $sujet, utf8_decode(utf8_encode($message)), $headers);
-            mail(str_replace(";",",",$A), $sujet, utf8_decode(utf8_encode(str_replace("<br>","",$message))), $headers); //YN selon Rapace sur le forum
+			mail(str_replace(";",",",$A), $sujet, iconv('UTF-8', 'ISO-8859-1//TRANSLIT', iconv('ISO-8859-1', 'UTF-8//IGNORE', str_replace("<br>","",$message))), $headers); //YN selon Rapace sur le forum
 		}
 
 	}

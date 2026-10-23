@@ -118,7 +118,7 @@ function test_utf8($str)
     else {
         // retourne TRUE
         // si la chaine decoder et encoder est egale a elle meme
-        return (utf8_encode(utf8_decode($str)) == $str);
+         return preg_match('//u', $str) === 1;
     }    
 }
 
@@ -139,7 +139,7 @@ function utf8_convert($string)
 	}
 
 	if (!test_utf8($string)){
-		return utf8_encode($string);
+		return iconv('ISO-8859-1', 'UTF-8//IGNORE', $string);
 	} else{
 		return $string;
 	}

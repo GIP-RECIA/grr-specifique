@@ -790,16 +790,9 @@ function heure_ete_hiver($type, $annee, $heure)
 	return $debut;
 }
 
-# Remove backslash-escape quoting if PHP is configured to do it with
-# magic_quotes_gpc. Use this whenever you need the actual value of a GET/POST
-# form parameter (which might have special characters) regardless of PHP's
-# magic_quotes_gpc setting.
 function unslashes($s)
 {
-	if (function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc())
-		return stripslashes($s);
-	else
-		return $s;
+	return $s;
 }
 
 // Corrige les caracteres degoutants utilises par les Windozeries
@@ -814,9 +807,6 @@ function corriger_caracteres($texte)
 function protect_data_sql($_value)
 {
 	global $use_function_mysql_real_escape_string;
-	//if (get_magic_quotes_gpc())
-	if (function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc())
-		$_value = stripslashes($_value);
 	if (!is_numeric($_value))
 	{
 		/*if (isset($use_function_mysql_real_escape_string) && ($use_function_mysql_real_escape_string==0))

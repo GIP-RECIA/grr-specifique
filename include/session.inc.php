@@ -238,11 +238,11 @@ function grr_opensession($_login, $_password, $_user_ext_authentifie = '', $tab_
 							}
 						}
 					// Convertir depuis UTF-8 (jeu de caracteres par defaut)
-						if ((function_exists("utf8_decode")) && (Settings::get("ConvertLdapUtf8toIso") == "y"))
+						if (Settings::get("ConvertLdapUtf8toIso") == "y")
 						{
-							$l_email = utf8_decode($l_email);
-							$l_nom = utf8_decode($l_nom);
-							$l_prenom = utf8_decode($l_prenom);
+							$l_email = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $l_email);
+							$l_nom = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $l_nom);
+							$l_prenom = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $l_prenom);
 						}
 					}
 					$nom_user = $l_nom;
@@ -476,9 +476,9 @@ if ($auth_ldap == 'yes')
 		// Lire les infos sur l'utilisateur depuis LDAP
 		$user_info = grr_getinfo_ldap($user_dn,$_login,$_password);
 		// Update GRR database
-		$user_info[0] = utf8_encode($user_info[0]);
-		$user_info[1] = utf8_encode($user_info[1]);
-		$user_info[2] = utf8_encode($user_info[2]);
+		$user_info[0] = iconv('ISO-8859-1', 'UTF-8//IGNORE', $user_info[0]);
+		$user_info[1] = iconv('ISO-8859-1', 'UTF-8//IGNORE', $user_info[1]);
+		$user_info[2] = iconv('ISO-8859-1', 'UTF-8//IGNORE', $user_info[2]);
 		$sql2 = "UPDATE ".TABLE_PREFIX."_utilisateurs SET
 		nom='".protect_data_sql($user_info[0])."',
 		prenom='".protect_data_sql($user_info[1])."',
@@ -501,9 +501,9 @@ if ($auth_ldap == 'yes')
 			return "3";
 		else
 		{
-			$user_info[0] = utf8_encode($user_info[0]);
-			$user_info[1] = utf8_encode($user_info[1]);
-			$user_info[2] = utf8_encode($user_info[2]);
+			$user_info[0] = iconv('ISO-8859-1', 'UTF-8//IGNORE', $user_info[0]);
+			$user_info[1] = iconv('ISO-8859-1', 'UTF-8//IGNORE', $user_info[1]);
+			$user_info[2] = iconv('ISO-8859-1', 'UTF-8//IGNORE', $user_info[2]);
 			// On insère le nouvel utilisateur
 			$sql = "INSERT INTO ".TABLE_PREFIX."_utilisateurs SET
 			nom='".protect_data_sql($user_info[0])."',
@@ -1208,9 +1208,9 @@ function grr_getinfo_ldap($_dn, $_login, $_password)
 	// Convertir depuis UTF-8 (jeu de caracteres par defaut)
 	if ((function_exists("utf8_decode")) and (Settings::get("ConvertLdapUtf8toIso") == "y"))
 	{
-		$l_email = utf8_decode($l_email);
-		$l_nom = utf8_decode($l_nom);
-		$l_prenom = utf8_decode($l_prenom);
+		$l_email = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $l_email);
+		$l_nom = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $l_nom);
+		$l_prenom = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $l_prenom);
 	}
 	// Return infos
 	return array($l_nom, $l_prenom, $l_email);
