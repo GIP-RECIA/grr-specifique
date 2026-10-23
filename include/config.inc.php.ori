@@ -54,11 +54,12 @@ $nb_year_calendar = 10;
 // putenv("TZ=America/Toronto");
 /*
  * Paramètres régionaux de cette instance. Utilisez des identifiants IANA pour
- * le fuseau et BCP 47 pour la locale. Pour La Réunion, utilisez
- * Indian/Reunion et fr_RE.
+ * le fuseau et BCP 47 pour la locale.
  */
 $grr_timezone = 'Europe/Paris';
 $grr_locale = 'fr-FR';
+// $grr_timezone = 'Indian/Reunion';
+// $grr_locale = 'fr_RE';
 
 if (!extension_loaded('intl')) {
 	throw new RuntimeException('L\'extension PHP intl est requise par GRR.');
