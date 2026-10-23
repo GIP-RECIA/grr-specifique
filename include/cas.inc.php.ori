@@ -51,6 +51,11 @@ if((isset($cas_proxy_server))&&($cas_proxy_server!="")&&(isset($cas_proxy_port))
  phpCAS::setExtraCurlOption(CURLOPT_PROXYPORT , $cas_proxy_port);
  phpCAS::setExtraCurlOption(CURLOPT_PROXYTYPE , CURLPROXY_HTTP);
  }
+if (isset($cas_logout_rebroadcast_nodes) && is_array($cas_logout_rebroadcast_nodes)) {
+  foreach ($cas_logout_rebroadcast_nodes as $node) {
+    phpCAS::addRebroadcastNode($node);
+  }
+}
 phpCAS::handleLogoutRequests(true, $cas_logout_allowed_hosts);
 if (phpCAS::checkAuthentication())
 {

@@ -178,6 +178,11 @@ $cas_logout_allowed_hosts = array(
   'php-node2.giprecia.net',
   'php-node5.giprecia.net',
 );
+$cas_logout_rebroadcast_nodes = array(
+  'http://php-node1.giprecia.net',
+  'http://php-node2.giprecia.net',
+  'http://php-node5.giprecia.net',
+);
 
 
 #####################################################
