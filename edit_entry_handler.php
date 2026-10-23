@@ -327,8 +327,8 @@ else
 		settype($end_year, "integer");
 		settype($end_minute, "integer");
 		settype($end_hour, "integer");
-		$minyear = strftime("%Y", Settings::get("begin_bookings"));
-		$maxyear = strftime("%Y", Settings::get("end_bookings"));
+		$minyear = grr_strftime("%Y", Settings::get("begin_bookings"));
+		$maxyear = grr_strftime("%Y", Settings::get("end_bookings"));
 		if ($end_day < 1)
 			$end_day = 1;
 		if ($end_day > 31)

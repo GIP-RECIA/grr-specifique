@@ -117,7 +117,7 @@ function cal($month, $year, $type)
 	$s = "";
 	$daysInMonth = getDaysInMonth($month, $year);
 	$date = mktime(12, 0, 0, $month, 1, $year);
-	$first = (strftime("%w",$date) + 7 - $weekstarts) % 7;
+	$first = (grr_strftime("%w",$date) + 7 - $weekstarts) % 7;
 	$monthName = ucfirst(utf8_strftime("%B", $date));
 
 	$s .= '<table class="table calendar2">'.PHP_EOL;
@@ -1528,10 +1528,10 @@ function genDateSelectorForm($prefix, $day, $month, $year, $option)
 	}
 	$selector_data .=  "</select>";
 	$selector_data .=  "<select class='test' name=\"{$prefix}year\" id=\"{$prefix}year\">\n";
-	$min = strftime("%Y", Settings::get("begin_bookings"));
+	$min = grr_strftime("%Y", Settings::get("begin_bookings"));
 	if ($option == "more_years")
 		$min = date("Y") - $nb_year_calendar;
-	$max = strftime("%Y", Settings::get("end_bookings"));
+	$max = grr_strftime("%Y", Settings::get("end_bookings"));
 	if ($option == "more_years")
 		$max = date("Y") + $nb_year_calendar;
 	for($i = $min; $i <= $max; $i++)
@@ -1718,7 +1718,7 @@ function get_default_room(){
  */
 function day_name($daynumber)
 {
-	return utf8_encode(strftime("%A", mktime(0, 0, 0, 1, 2 + $daynumber, 2000)));
+	return grr_strftime("%A", mktime(0, 0, 0, 1, 2 + $daynumber, 2000));
 }
 
 function affiche_heure_creneau($t,$resolution)
@@ -2544,7 +2544,7 @@ function send_mail($id_entry, $action, $dformat, $tab_id_moderes = array(), $old
 	$area_name    				= removeMailUnicode(htmlspecialchars($row[4]));
 	$room_id      				= $row[6];
 	$repeat_id    				= $row[7];
-	$date_avis    				= strftime("%Y/%m/%d", $row[10]);
+	$date_avis    				= grr_strftime("%Y/%m/%d", $row[10]);
 	$delais_option_reservation 	= $row[13];
 	$option_reservation 		= $row[14];
 	$moderate 					= $row[15];
@@ -2584,7 +2584,7 @@ function send_mail($id_entry, $action, $dformat, $tab_id_moderes = array(), $old
 		{
 			$row2 = grr_sql_row($res, 0);
 			$rep_type     = $row2[0];
-			$rep_end_date = strftime($dformat,$row2[1]);
+			$rep_end_date = grr_strftime($dformat,$row2[1]);
 			$rep_opt      = $row2[2];
 			$rep_num_weeks = $row2[3];
 		}
@@ -3745,7 +3745,7 @@ function describe_span($starts, $ends, $dformat)
 		$ampm = date("a",$starts);
 		$timeformat = "%I:%M$ampm";
 	}
-	$start_time = strftime($timeformat, $starts);
+	$start_time = grr_strftime($timeformat, $starts);
 	$duration = $ends - $starts;
 	if ($start_time == "00:00:00" && $duration == 60 * 60 * 24)
 		return $start_date . " - " . get_vocab("all_day");

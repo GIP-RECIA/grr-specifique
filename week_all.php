@@ -236,10 +236,10 @@ $num_week_day = $weekstarts;
 //$ferie = getHolidays($year);
 for ($weekcol = 0; $weekcol < 7; $weekcol++)
 {
-	$num_day = strftime("%d", $t);
-	$temp_month = utf8_encode(strftime("%m", $t));
+	$num_day = grr_strftime("%d", $t);
+	$temp_month = grr_strftime("%m", $t);
 	$temp_month2 = utf8_strftime("%b", $t);
-	$temp_year = strftime("%Y", $t);
+	$temp_year = grr_strftime("%Y", $t);
 	$tt = mktime(0, 0, 0, $temp_month, $num_day, $temp_year);
 	$jour_cycle = grr_sql_query1("SELECT Jours FROM ".TABLE_PREFIX."_calendrier_jours_cycle WHERE day='$t'");
 	$t += 86400;
@@ -315,14 +315,14 @@ for ($ir = 0; ($row = grr_sql_row($ressources, $ir)); $ir++)
 		for ($k = 0; $k <= 6; $k++)
 		{
 			$cday = date("j", $t2);
-			$cmonth = strftime("%m", $t2);
-			$cyear = strftime("%Y", $t2);
+			$cmonth = grr_strftime("%m", $t2);
+			$cyear = grr_strftime("%Y", $t2);
 			$t2 += 86400;
 			if (!isset($correct_heure_ete_hiver) || ($correct_heure_ete_hiver == 1))
 			{
-				$temp_day = strftime("%d", $t2);
-				$temp_month = strftime("%m", $t2);
-				$temp_year = strftime("%Y", $t2);
+				$temp_day = grr_strftime("%d", $t2);
+				$temp_month = grr_strftime("%m", $t2);
+				$temp_year = grr_strftime("%Y", $t2);
 				if (heure_ete_hiver("hiver", $temp_year,0) == mktime(0, 0, 0, $temp_month, $temp_day, $temp_year))
 					$t2 += 3600;
 				if (date("H", $t2) == "01")

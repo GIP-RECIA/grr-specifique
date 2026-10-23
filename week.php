@@ -364,8 +364,8 @@ $k = $day_week;
 $i = $time;
 for ($t = $week_start; $t <= $week_end; $t += 86400)
 {
-	$num_day = strftime("%d", $t);
-	$month_actuel = strftime("%m", $t);
+	$num_day = grr_strftime("%d", $t);
+	$month_actuel = grr_strftime("%m", $t);
 	$year_actuel  = date("Y",$t);
 	$tt = mktime(0, 0, 0, $month_actuel, $num_day,$year_actuel);
 	$jour_cycle = grr_sql_query1("SELECT Jours FROM ".TABLE_PREFIX."_calendrier_jours_cycle WHERE DAY='$i'");
@@ -392,7 +392,7 @@ for ($t = $week_start; $t <= $week_end; $t += 86400)
     }
     if (!isset($correct_heure_ete_hiver) || ($correct_heure_ete_hiver == 1))
     {
-        $num_day = strftime("%d", $t);
+        $num_day = grr_strftime("%d", $t);
         if (heure_ete_hiver("hiver", $year, 0) == mktime(0, 0, 0, $month, $num_day, $year))
             $t += 3600;
         if ((date("H",$t) == "13") || (date("H",$t) == "02"))

@@ -34,8 +34,8 @@ else
 	settype($month, "integer");
 	settype($day, "integer");
 	settype($year, "integer");
-	$minyear = strftime("%Y", Settings::get("begin_bookings"));
-	$maxyear = strftime("%Y", Settings::get("end_bookings"));
+	$minyear = grr_strftime("%Y", Settings::get("begin_bookings"));
+	$maxyear = grr_strftime("%Y", Settings::get("end_bookings"));
 	if ($day < 1)
 		$day = 1;
 	if ($day > 31)

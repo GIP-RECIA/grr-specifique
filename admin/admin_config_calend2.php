@@ -35,8 +35,8 @@ if (isset($_POST['record']) && ($_POST['record'] == 'yes'))
 	$result = 0;
 	$end_bookings = Settings::get("end_bookings");
 	$n = Settings::get("begin_bookings");
-	$month = strftime("%m", Settings::get("begin_bookings"));
-	$year = strftime("%Y", Settings::get("begin_bookings"));
+	$month = grr_strftime("%m", Settings::get("begin_bookings"));
+	$year = grr_strftime("%Y", Settings::get("begin_bookings"));
 	$day = 1;
 	// Pour aller chercher le Jour cycle qui débutera le premier cycle de jours
 	$m = Settings::get("jour_debut_Jours/Cycles");
@@ -96,8 +96,8 @@ echo "<table cellspacing=\"20\">\n";
 $n = Settings::get("begin_bookings");
 $end_bookings = Settings::get("end_bookings");
 $debligne = 1;
-$month = strftime("%m", Settings::get("begin_bookings"));
-$year = strftime("%Y", Settings::get("begin_bookings"));
+$month = grr_strftime("%m", Settings::get("begin_bookings"));
+$year = grr_strftime("%Y", Settings::get("begin_bookings"));
 $inc = 0;
 while ($n <= $end_bookings)
 {

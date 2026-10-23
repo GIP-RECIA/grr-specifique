@@ -70,8 +70,8 @@ else if (!isset($_POST['define_holidays'])){
                 $result = 0;
                 $end_bookings = Settings::get("end_bookings");
                 $begin_bookings = Settings::get("begin_bookings");
-                $month = strftime("%m", $begin_bookings );
-                $year = strftime("%Y", $begin_bookings );
+                $month = grr_strftime("%m", $begin_bookings );
+                $year = grr_strftime("%Y", $begin_bookings );
                 $day = 1;
                 $n = $begin_bookings;
                 while ($n <= $end_bookings)
@@ -99,9 +99,9 @@ else if (!isset($_POST['define_holidays'])){
             }
             $begin_bookings = Settings::get("begin_bookings");
             $end_bookings = Settings::get("end_bookings");
-            $month = utf8_encode(strftime("%m", $begin_bookings));
-            $year = strftime("%Y", $begin_bookings);
-            $yearFin = strftime("%Y", $end_bookings);
+            $month = grr_strftime("%m", $begin_bookings);
+            $year = grr_strftime("%Y", $begin_bookings);
+            $yearFin = grr_strftime("%Y", $end_bookings);
             $i = $year;
             $cocheFeries = "";
             while ($i <= $yearFin)
@@ -184,8 +184,8 @@ else if (!isset($_POST['define_holidays'])){
                     $result = 0;
                     $end_bookings = Settings::get("end_bookings");
                     $begin_bookings = Settings::get("begin_bookings");
-                    $month = strftime("%m", $begin_bookings);
-                    $year = strftime("%Y", $begin_bookings);
+                    $month = grr_strftime("%m", $begin_bookings);
+                    $year = grr_strftime("%Y", $begin_bookings);
                     $day = 1;
                     $n = $begin_bookings;
                     while ($n <= $end_bookings)
@@ -214,9 +214,9 @@ else if (!isset($_POST['define_holidays'])){
                 }
                 $begin_bookings = Settings::get("begin_bookings");
                 $end_bookings = Settings::get("end_bookings");
-                $month = utf8_encode(strftime("%m", $begin_bookings));
-                $year = strftime("%Y", $begin_bookings);
-                $yearFin = strftime("%Y", $end_bookings);
+                $month = grr_strftime("%m", $begin_bookings);
+                $year = grr_strftime("%Y", $begin_bookings);
+                $yearFin = grr_strftime("%Y", $end_bookings);
                 $i = $year;
                 $cocheVacances = "";
                 $zone = Settings::get("holidays_zone"); // en principe la zone est définie, au moins par défaut à A
@@ -237,9 +237,9 @@ else if (!isset($_POST['define_holidays'])){
                                 while ($t < $t_fin){ // la date du fichier est celle de la reprise des cours
                                     if (($t >= $begin_bookings) && ($t <= $end_bookings)) {
                                         $schoolHoliday[] = $t ; }
-                                    $jour = strftime("%d",$t);
-                                    $mois = strftime("%m",$t);
-                                    $annee = strftime("%y",$t);
+                                    $jour = grr_strftime("%d",$t);
+                                    $mois = grr_strftime("%m",$t);
+                                    $annee = grr_strftime("%y",$t);
                                     $t = mktime(0,0,0,$mois,$jour+1,$annee);
                                 }
                             }

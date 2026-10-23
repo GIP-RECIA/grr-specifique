@@ -646,9 +646,9 @@ echo '<hr /><h3>'.get_vocab('title_begin_end_bookings')."</h3>\n";
 		<td>
 			<?php
             $typeDate = 'begin_';
-            $bday = strftime('%d', Settings::get('begin_bookings'));
-            $bmonth = strftime('%m', Settings::get('begin_bookings'));
-            $byear = strftime('%Y', Settings::get('begin_bookings'));
+            $bday = grr_strftime('%d', Settings::get('begin_bookings'));
+            $bmonth = grr_strftime('%m', Settings::get('begin_bookings'));
+            $byear = grr_strftime('%Y', Settings::get('begin_bookings'));
             echo '<div class="col-xs-12">'.PHP_EOL;
             echo '<div class="form-inline">'.PHP_EOL;
             genDateSelector('begin_', $bday, $bmonth, $byear, 'more_years');
@@ -691,9 +691,9 @@ echo '<hr /><h3>'.get_vocab('title_begin_end_bookings')."</h3>\n";
 <td>
 	<?php
     $typeDate = 'end_';
-    $eday = strftime('%d', Settings::get('end_bookings'));
-    $emonth = strftime('%m', Settings::get('end_bookings'));
-    $eyear = strftime('%Y', Settings::get('end_bookings'));
+    $eday = grr_strftime('%d', Settings::get('end_bookings'));
+    $emonth = grr_strftime('%m', Settings::get('end_bookings'));
+    $eyear = grr_strftime('%Y', Settings::get('end_bookings'));
     echo '<div class="col-xs-12">'.PHP_EOL;
     echo '<div class="form-inline">'.PHP_EOL;
     genDateSelector('end_', $eday, $emonth, $eyear, 'more_years');

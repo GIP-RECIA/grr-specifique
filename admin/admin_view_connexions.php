@@ -53,11 +53,11 @@ echo "<h3>".get_vocab("users_connected")."</h3>";
 <hr style="margin-top: 32px; margin-bottom: 24px;"/>
 <?php
 if (!isset($_POST['histYear']))
-	$_POST['histYear'] = strftime("%Y");
+	$_POST['histYear'] = grr_strftime("%Y");
 if (!isset($_POST['histMonth']))
-	$_POST['histMonth'] = strftime("%m");
+	$_POST['histMonth'] = grr_strftime("%m");
 if (!isset($_POST['histDay']))
-	$_POST['histDay'] = strftime("%d");
+	$_POST['histDay'] = grr_strftime("%d");
 ?>
 <h3>
 	<?php
@@ -187,11 +187,11 @@ $jour =  substr($row[0],8,2);
 echo "<p>".get_vocab("logs_number")."<b>".$logs_number."</b><br />";
 echo get_vocab("older_date_log")."<b>".$jour."/".$mois."/".$annee."</b></p>";
 if (!isset($_POST['cleanYear']))
-	$_POST['cleanYear'] = strftime("%Y");
+	$_POST['cleanYear'] = grr_strftime("%Y");
 if (!isset($_POST['cleanMonth']))
-	$_POST['cleanMonth'] = strftime("%m");
+	$_POST['cleanMonth'] = grr_strftime("%m");
 if (!isset($_POST['cleanDay']))
-	$_POST['cleanDay'] = strftime("%d");
+	$_POST['cleanDay'] = grr_strftime("%d");
 ?>
 <div title="Nettoyage du journal" style="width: 100%;">
 	<p><?php echo get_vocab("erase_log")?></p>

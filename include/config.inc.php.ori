@@ -67,6 +67,47 @@ if (!extension_loaded('intl')) {
 
 date_default_timezone_set($grr_timezone);
 
+if (!function_exists('grr_strftime')) {
+	function grr_strftime($format, $timestamp = null)
+	{
+		global $grr_locale, $grr_timezone;
+		static $formatters = array();
+
+		if ($timestamp === null) {
+			$timestamp = time();
+		}
+
+		$patterns = array(
+			'%a' => 'EEE', '%A' => 'EEEE', '%b' => 'MMM', '%B' => 'MMMM',
+			'%d' => 'dd', '%H' => 'HH', '%I' => 'hh', '%m' => 'MM',
+			'%M' => 'mm', '%p' => 'a', '%T' => 'HH:mm:ss', '%y' => 'yy',
+			'%Y' => 'yyyy',
+		);
+		$result = '';
+		foreach (preg_split('/(%[a-zA-Z%])/', $format, -1, PREG_SPLIT_DELIM_CAPTURE) as $part) {
+			if (isset($patterns[$part])) {
+				if (!isset($formatters[$part])) {
+					$formatters[$part] = new IntlDateFormatter($grr_locale, IntlDateFormatter::NONE, IntlDateFormatter::NONE, $grr_timezone, IntlDateFormatter::GREGORIAN, $patterns[$part]);
+				}
+				$formatted = $formatters[$part]->format($timestamp);
+				if ($formatted === false) {
+					throw new RuntimeException('Impossible de formater la date.');
+				}
+				$result .= $formatted;
+			} elseif ($part === '%w') {
+				$datetime = new DateTimeImmutable('@' . $timestamp);
+				$result .= $datetime->setTimezone(new DateTimeZone($grr_timezone))->format('w');
+			} elseif ($part === '%%') {
+				$result .= '%';
+			} else {
+				$result .= $part;
+			}
+		}
+
+		return $result;
+	}
+}
+
 
 # Changement d'heure été<->hiver
 # $correct_heure_ete_hiver = 1 => GRR prend en compte les changements d'heure
