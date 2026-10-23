@@ -18,8 +18,8 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_email_manager.php";
-$id_area = isset($_GET["id_area"]) ? $_GET["id_area"] : NULL;
-$room = isset($_GET["room"]) ? $_GET["room"] : NULL;
+$id_area = $_GET["id_area"] ?? NULL;
+$room = $_GET["room"] ?? NULL;
 if (isset($room))
 	settype($room,"integer");
 if (!isset($id_area))
@@ -41,8 +41,8 @@ if (isset($_POST['mail1']))
 		die();
 	}
 }
-$reg_admin_login = isset($_GET["reg_admin_login"]) ? $_GET["reg_admin_login"] : NULL;
-$action = isset($_GET["action"]) ? $_GET["action"] : NULL;
+$reg_admin_login = $_GET["reg_admin_login"] ?? NULL;
+$action = $_GET["action"] ?? NULL;
 $msg='';
 
 if ($reg_admin_login) {

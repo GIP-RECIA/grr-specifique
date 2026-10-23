@@ -36,8 +36,8 @@ include "admin_col_gauche.php";
 
 echo '<p>| <a href="admin_user.php">'.get_vocab("back").'</a> |</p>';
 
-$reg_data = isset($_POST["reg_data"]) ? $_POST["reg_data"] : NULL;
-$is_posted = isset($_POST["is_posted"]) ? $_POST["is_posted"] : NULL;
+$reg_data = $_POST["reg_data"] ?? NULL;
+$is_posted = $_POST["is_posted"] ?? NULL;
 $test_login_existant = '';
 $test_nom_prenom_existant = '';
 $test_login = '';
@@ -71,9 +71,9 @@ if ($reg_data != 'yes')
 				}
 				if ($is_posted == '1')
 				{
-					$valid = isset($_POST["valid"]) ? $_POST["valid"] : NULL;
-					$en_tete = isset($_POST["en_tete"]) ? $_POST["en_tete"] : NULL;
-					$csv_file = isset($_FILES["csvfile"]) ? $_FILES["csvfile"] : NULL;
+					$valid = $_POST["valid"] ?? NULL;
+					$en_tete = $_POST["en_tete"] ?? NULL;
+					$csv_file = $_FILES["csvfile"] ?? NULL;
 
 					echo "<form enctype=\"multipart/form-data\" action=\"admin_import_users_csv.php\" method=\"post\" >";
 					if ($csv_file['tmp_name'] != "")
@@ -310,16 +310,16 @@ if ($reg_data != 'yes')
 			// Restriction dans le cas d'une démo
 			VerifyModeDemo();
 			// Phase d'enregistrement des données
-			$nb_row = isset($_POST["nb_row"]) ? $_POST["nb_row"] : NULL;
-			$reg_stat = isset($_POST["reg_stat"]) ? $_POST["reg_stat"] : NULL;
-			$reg_login = isset($_POST["reg_login"]) ? $_POST["reg_login"] : NULL;
-			$reg_nom = isset($_POST["reg_nom"]) ? $_POST["reg_nom"] : NULL;
-			$reg_prenom = isset($_POST["reg_prenom"]) ? $_POST["reg_prenom"] : NULL;
-			$reg_email = isset($_POST["reg_email"]) ? $_POST["reg_email"] : NULL;
-			$reg_mdp = isset($_POST["reg_mdp"]) ? $_POST["reg_mdp"] : NULL;
-			$reg_type_user = isset($_POST["reg_type_user"]) ? $_POST["reg_type_user"] : NULL;
-			$reg_statut = isset($_POST["reg_statut"]) ? $_POST["reg_statut"] : NULL;
-			$reg_type_auth = isset($_POST["reg_type_auth"]) ? $_POST["reg_type_auth"] : NULL;
+			$nb_row = $_POST["nb_row"] ?? NULL;
+			$reg_stat = $_POST["reg_stat"] ?? NULL;
+			$reg_login = $_POST["reg_login"] ?? NULL;
+			$reg_nom = $_POST["reg_nom"] ?? NULL;
+			$reg_prenom = $_POST["reg_prenom"] ?? NULL;
+			$reg_email = $_POST["reg_email"] ?? NULL;
+			$reg_mdp = $_POST["reg_mdp"] ?? NULL;
+			$reg_type_user = $_POST["reg_type_user"] ?? NULL;
+			$reg_statut = $_POST["reg_statut"] ?? NULL;
+			$reg_type_auth = $_POST["reg_type_auth"] ?? NULL;
 			$nb_row++;
 			for ($row = 1; $row < $nb_row; $row++)
 			{
@@ -345,7 +345,7 @@ if ($reg_data != 'yes')
 				}
 			}
 		}
-		
+
 	 echo "</td></tr></table>"; // fin de la colonne droite
     ?>
     </body>

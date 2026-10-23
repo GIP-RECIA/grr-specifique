@@ -36,8 +36,8 @@ if (isset($_GET["user_login"]) && (authGetUserLevel(getUserName(),-1,'user') == 
 }
 #If we dont know the right date then make it up
 unset($user_login);
-$user_login = isset($_GET["user_login"]) ? $_GET["user_login"] : NULL;
-$valid = isset($_GET["valid"]) ? $_GET["valid"] : NULL;
+$user_login = $_GET["user_login"] ?? NULL;
+$valid = $_GET["valid"] ?? NULL;
 $msg = '';
 $user_nom = '';
 $user_prenom = '';
@@ -51,16 +51,16 @@ if ($valid == "yes")
 {
 	// Restriction dans le cas d'une démo
 	VerifyModeDemo();
-	$reg_nom = isset($_GET["reg_nom"]) ? $_GET["reg_nom"] : NULL;
-	$reg_prenom = isset($_GET["reg_prenom"]) ? $_GET["reg_prenom"] : NULL;
-	$new_login = isset($_GET["new_login"]) ? $_GET["new_login"] : NULL;
+	$reg_nom = $_GET["reg_nom"] ?? NULL;
+	$reg_prenom = $_GET["reg_prenom"] ?? NULL;
+	$new_login = $_GET["new_login"] ?? NULL;
 	$reg_password = isset($_GET["reg_password"]) ? unslashes($_GET["reg_password"]) : NULL;
 	$reg_password2 = isset($_GET["reg_password2"]) ? unslashes($_GET["reg_password2"]) : NULL;
-	$reg_statut = isset($_GET["reg_statut"]) ? $_GET["reg_statut"] : NULL;
-	$reg_email = isset($_GET["reg_email"]) ? $_GET["reg_email"] : NULL;
-	$reg_etat = isset($_GET["reg_etat"]) ? $_GET["reg_etat"] : NULL;
-	$reg_source = isset($_GET["reg_source"]) ? $_GET["reg_source"] : NULL;
-	$reg_type_authentification = isset($_GET["type_authentification"]) ? $_GET["type_authentification"] : "locale";
+	$reg_statut = $_GET["reg_statut"] ?? NULL;
+	$reg_email = $_GET["reg_email"] ?? NULL;
+	$reg_etat = $_GET["reg_etat"] ?? NULL;
+	$reg_source = $_GET["reg_source"] ?? NULL;
+	$reg_type_authentification = $_GET["type_authentification"] ?? "locale";
 	if ($reg_type_authentification != "locale")
 		$reg_password = "";
 	if (($reg_nom == '') || ($reg_prenom == ''))

@@ -21,25 +21,25 @@ $grr_script_name = "admin_calend2.php";
 $back = getBackUri();
 check_access(4, $back);
 // Initialisation
-$etape = isset($_POST["etape"]) ? $_POST["etape"] : NULL;
-$areas = isset($_POST["areas"]) ? $_POST["areas"] : NULL;
-$rooms = isset($_POST["rooms"]) ? $_POST["rooms"] : NULL;
-$name = isset($_POST["name"]) ? $_POST["name"] : NULL;
-$beneficiaire = isset($_POST["beneficiaire"]) ? $_POST["beneficiaire"] : NULL;
-$description = isset($_POST["description"]) ? $_POST["description"] : NULL;
-$type_ = isset($_POST["type_"]) ? $_POST["type_"] : NULL;
-$type_resa = isset($_POST["type_resa"]) ? $_POST["type_resa"] : NULL;
-$hour = isset($_POST["hour"]) ? $_POST["hour"] : NULL;
+$etape = $_POST["etape"] ?? NULL;
+$areas = $_POST["areas"] ?? NULL;
+$rooms = $_POST["rooms"] ?? NULL;
+$name = $_POST["name"] ?? NULL;
+$beneficiaire = $_POST["beneficiaire"] ?? NULL;
+$description = $_POST["description"] ?? NULL;
+$type_ = $_POST["type_"] ?? NULL;
+$type_resa = $_POST["type_resa"] ?? NULL;
+$hour = $_POST["hour"] ?? NULL;
 settype($hour,"integer");
-$end_hour = isset($_POST["end_hour"]) ? $_POST["end_hour"] : NULL;
+$end_hour = $_POST["end_hour"] ?? NULL;
 settype($end_hour,"integer");
-$minute = isset($_POST["minute"]) ? $_POST["minute"] : NULL;
+$minute = $_POST["minute"] ?? NULL;
 settype($minute,"integer");
-$end_minute = isset($_POST["end_minute"]) ? $_POST["end_minute"] : NULL;
+$end_minute = $_POST["end_minute"] ?? NULL;
 settype($end_minute,"integer");
-$period = isset($_POST["period"]) ? $_POST["period"] : NULL;
-$end_period = isset($_POST["end_period"]) ? $_POST["end_period"] : NULL;
-$all_day = isset($_POST["all_day"]) ? $_POST["all_day"] : NULL;
+$period = $_POST["period"] ?? NULL;
+$end_period = $_POST["end_period"] ?? NULL;
+$all_day = $_POST["all_day"] ?? NULL;
 print_header("", "", "", $type="with_session");
 // Affichage de la colonne de gauche
 include "admin_col_gauche.php";
@@ -120,7 +120,7 @@ if (isset($_POST['record']) && ($_POST['record'] == 'yes'))
 										// Par sécurité, on teste quand même s'il reste des conflits
 										$err = mrbsCheckFree($row[0], $starttime, $endtime, 0,0);
 										if (!$err)
-											mrbsCreateSingleEntry($starttime, $endtime, 0, 0, $row[0], getUserName(), $beneficiaire, "", $name, $type_, $description, -1,array(),0,0,'-', 0, 0);
+											mrbsCreateSingleEntry($starttime, $endtime, 0, 0, $row[0], getUserName(), $beneficiaire, "", $name, $type_, $description, -1,[],0,0,'-', 0, 0);
 									}
 								}
 							}

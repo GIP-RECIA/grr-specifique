@@ -19,7 +19,7 @@ include "../include/admin.inc.php";
 $grr_script_name = "admin_import_entries_csv_direct.php";
  
  # print the page header
-print_header("","","","",$type="with_session", $page="admin");
+print_header("","","","");
 if (isset($_GET['ok'])) {
     $msg = get_vocab("message_records");
 	affiche_pop_up($msg,"admin");
@@ -30,8 +30,8 @@ include "admin_col_gauche.php";
 
 // affichage de la colonne de droite
  $back = "./admin_calend.php?";
- $joursemaine=array("dim"=>0,"lun"=>1,"mar"=>2,"mer"=>3,"jeu"=>4,"ven"=>5,"sam"=>6);
- $journumero=array(0=>"dim",1=>"lundi",2=>"mardi",3=>"mercredi",4=>"jeudi",5=>"vendredi",6=>"samedi");
+ $joursemaine=["dim"=>0, "lun"=>1, "mar"=>2, "mer"=>3, "jeu"=>4, "ven"=>5, "sam"=>6];
+ $journumero=[0=>"dim", 1=>"lundi", 2=>"mardi", 3=>"mercredi", 4=>"jeudi", 5=>"vendredi", 6=>"samedi"];
 
 // $long_max : doit être plus grand que la plus grande ligne trouvée dans le fichier CSV
 	$long_max = 8000;
@@ -126,7 +126,7 @@ include "admin_col_gauche.php";
   } else {
    // show upload form
         ?>
-       
+
         <h1>Importation d'un fichier de réservations dans GRR</h1>
         <p>
             Utiliser ce script pour importer un fichier de réservation dans GRR<br />
@@ -169,16 +169,16 @@ function ajoute_reservation($room_id,$date,$heure_deb,$minute_deb,$heure_fin,$mi
         //return true;
         global $max_rep_entrys, $erreur;
         $journee=86400; $semaine=86400*7;
-             
+
 		// Initialisation du test d'erreur
 		$erreur = '';
-		
+
 		$id=null; // nouvelle réservation
 		$ampm=NULL; // AMPM ou 24h
 		// détermination du type de réservation
         $type_id = grr_sql_query1("SELECT id FROM ".TABLE_PREFIX."_type_area WHERE type_name='".$type."'");
 		// voir pour traiter les erreurs 	
-		
+
         // détermination du starttime
         // on convertit la date en année, mois, jour
         $year = substr($date,0,4);settype($year,"integer");
@@ -203,27 +203,27 @@ function ajoute_reservation($room_id,$date,$heure_deb,$minute_deb,$heure_fin,$mi
         if ($endtime <= $starttime)
 			$erreur = 'y';
 
-       
+
         $statut_entry = "-";
 		$rep_jour_c = 0;
-				
+
 		$create_by = "Administrateur";
 		$beneficiaire = "Administrateur";
 		$benef_ext_nom = "Administrateur";
 		$benef_ext_email = "";
 		$beneficiaire_ext = concat_nom_email($benef_ext_nom, $benef_ext_email);
-		
+
 		$room_back =NULL; if (isset($room_back)) settype($room_back,"integer");
 		$option_reservation = NULL;
 		if (isset($option_reservation))
 			settype($option_reservation,"integer");
 		else
 			$option_reservation = -1;
-		
+
 		// On récupère la valeur de $area
 		$area = mrbsGetRoomArea($room_id); 
 		if(($room_id<=0) || ($area<=0)) { $erreur="Erreur de salle"; return false;}
-		
+
 		# When checking for overlaps, for Edit (not New), ignore this entry and series:
 		// $repeat_id = 0;
 		// if (isset($id) and ($id!=0)) {
@@ -232,12 +232,12 @@ function ajoute_reservation($room_id,$date,$heure_deb,$minute_deb,$heure_fin,$mi
 		//     if ($repeat_id < 0) $repeat_id = 0;
 		// } else     
 		$ignore_id = 0;
-		
+
 		# Acquire mutex to lock out others trying to book the same slot(s).
 		if (!grr_sql_mutex_lock("".TABLE_PREFIX."_entry"))
 			fatal_error(1, get_vocab('failed_to_acquire'));
-		
-		$date_now = mktime();
+
+		$date_now = time();
 		$error_booking_in_past = false;
 		$error_booking_room_out = false; //note si la ressource est disponible
 		$error_duree_max_resa_area = 'no';
@@ -248,7 +248,7 @@ function ajoute_reservation($room_id,$date,$heure_deb,$minute_deb,$heure_fin,$mi
 		$error_qui_peut_reserver_pour = 'no';
 		$error_heure_debut_fin = false;
 		$err = '';
-        
+
 		// on vérifie que le créneau est bien libre
         $occupied=mrbsCheckFree($room_id, $starttime, $endtime, 0, 0);
         // echo date('c',$starttime)." ".date('c',$endtime)."</br>";
@@ -260,7 +260,7 @@ function ajoute_reservation($room_id,$date,$heure_deb,$minute_deb,$heure_fin,$mi
             $error_booking_room_out = true ;
         }
         else{echo "créneau libre </br>";}
-        
+
         // on vérifie qu'on ne réserve pas dans le passé
         $error_booking_in_past = $starttime < $date_now ;
 		// Si il y a tentative de réserver dans le passé
@@ -273,7 +273,7 @@ function ajoute_reservation($room_id,$date,$heure_deb,$minute_deb,$heure_fin,$mi
 			// $erreur.= "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-        
+
 		if (empty($err)
 			and (!$error_booking_in_past)
 			and ($error_duree_max_resa_area == 'no')
@@ -304,9 +304,9 @@ function ajoute_reservation($room_id,$date,$heure_deb,$minute_deb,$heure_fin,$mi
                return true ;
                //return !($ecriture == 0);
 			}
-		
+
 		grr_sql_mutex_unlock("".TABLE_PREFIX."_entry");
-		
+
 		// Si l'utilisateur tente de réserver une ressource non disponible
 		if ($error_booking_room_out) {
 			// print_header();
@@ -315,11 +315,11 @@ function ajoute_reservation($room_id,$date,$heure_deb,$minute_deb,$heure_fin,$mi
 			// $erreur.=  "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-				
+
 		if(strlen($err))
 		{
 			print_header();
-		
+
 			echo "<h2>" . get_vocab("sched_conflict") . "</h2>";
 			if(!isset($hide_title))
 			{
@@ -327,13 +327,13 @@ function ajoute_reservation($room_id,$date,$heure_deb,$minute_deb,$heure_fin,$mi
 				echo "<UL>";
 			}
 			echo $err;
-		
+
 			if(!isset($hide_title))
 				echo "</UL>";
 				// possibilité de supprimer la (les) réservation(s) afin de valider la nouvelle réservation.
 				if(authGetUserLevel(getUserName(),$area,'area') >= 4)
 					echo "<center><table border=\"1\" cellpadding=\"10\" cellspacing=\"1\"><tr><td class='avertissement'><h3><a href='".traite_grr_url("","y")."edit_entry_handler.php?".$_SERVER['QUERY_STRING']."&amp;del_entry_in_conflict=yes'>".get_vocab("del_entry_in_conflict")."</a></h4></td></tr></table></center><br />";
-		
+
 		}
 		return true;
 		// Retour au calendrier

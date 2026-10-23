@@ -1,4 +1,3 @@
-
 <?php
 /**
  * admin_confirm_change_date_bookings.php
@@ -22,7 +21,7 @@ $grr_script_name = "admin_confirm_change_date_bookings.php";
 
 $back = getBackUri();
 unset($display);
-$display = isset($_GET["display"]) ? $_GET["display"] : NULL;
+$display = $_GET["display"] ?? NULL;
 $day   = date("d");
 $month = date("m");
 $year  = date("Y");

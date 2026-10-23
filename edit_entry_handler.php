@@ -47,7 +47,7 @@ if (isset($_GET["id"]))
 }
 else
 	$id = NULL;
-$name = isset($_GET["name"]) ? $_GET["name"] : NULL;
+$name = $_GET["name"] ?? NULL;
 if ((!isset($name) or (trim($name) == "")) && (Settings::get("remplissage_description_breve") == '1'))
 {
 	print_header();
@@ -55,26 +55,26 @@ if ((!isset($name) or (trim($name) == "")) && (Settings::get("remplissage_descri
 	include "include/trailer.inc.php";
 	die();
 }
-$description = isset($_GET["description"]) ? $_GET["description"] : NULL;
-$ampm = isset($_GET["ampm"]) ? $_GET["ampm"] : NULL;
-$keys = isset($_GET["keys"]) ? $_GET["keys"] : NULL;
+$description = $_GET["description"] ?? NULL;
+$ampm = $_GET["ampm"] ?? NULL;
+$keys = $_GET["keys"] ?? NULL;
 if ($keys == 'y')
 	$keys = 1;
 else
 	$keys = 0;
-$courrier = isset($_GET["courrier"]) ? $_GET["courrier"] : NULL;
+$courrier = $_GET["courrier"] ?? NULL;
 if ($courrier == 'y')
 	$courrier = 1;
 else
 	$courrier = 0;
-$day = isset($_GET["start_day"]) ? $_GET["start_day"] : NULL;
-$month = isset($_GET["start_month"]) ? $_GET["start_month"] : NULL;
-$year = isset($_GET["start_year"]) ? $_GET["start_year"] : NULL;
-$duration = isset($_GET["duration"]) ? $_GET["duration"] : NULL;
+$day = $_GET["start_day"] ?? NULL;
+$month = $_GET["start_month"] ?? NULL;
+$year = $_GET["start_year"] ?? NULL;
+$duration = $_GET["duration"] ?? NULL;
 $duration = str_replace(",", ".", "$duration ");
 
 if (isset($_GET["start_"])){
-	$debut = array();
+	$debut = [];
 	$debut = explode(':', $_GET["start_"]);
 	$hour = $debut[0];
 	$minute = $debut[1];
@@ -91,54 +91,54 @@ if (isset($minute))
 	if ($minute > 59)
 		$minute = 59;
 }
-$statut_entry = isset($_GET["statut_entry"]) ? $_GET["statut_entry"] : "-";
-$rep_jour_c = isset($_GET["rep_jour_"]) ? $_GET["rep_jour_"] : 0;
-$type = isset($_GET["type"]) ? $_GET["type"] : NULL;
-$rep_type = isset($_GET["rep_type"]) ? $_GET["rep_type"] : NULL;
+$statut_entry = $_GET["statut_entry"] ?? "-";
+$rep_jour_c = $_GET["rep_jour_"] ?? 0;
+$type = $_GET["type"] ?? NULL;
+$rep_type = $_GET["rep_type"] ?? NULL;
 if (isset($rep_type))
 	settype($rep_type,"integer");
-$rep_num_weeks = isset($_GET["rep_num_weeks"]) ? $_GET["rep_num_weeks"] : NULL;
+$rep_num_weeks = $_GET["rep_num_weeks"] ?? NULL;
 if (isset($rep_num_weeks))
 	settype($rep_num_weeks,"integer");
 if ($rep_num_weeks < 2)
 	$rep_num_weeks = 1;
-$rep_month = isset($_GET["rep_month"]) ? $_GET["rep_month"] : NULL;
+$rep_month = $_GET["rep_month"] ?? NULL;
 if (($rep_type == 3) && ($rep_month == 3))
 	$rep_type = 3;
 if (($rep_type == 3) && ($rep_month == 5))
 	$rep_type = 5;
-$rep_month_abs1 = isset($_GET["rep_month_abs1"]) ? $_GET["rep_month_abs1"] : NULL;
-$rep_month_abs2 = isset($_GET["rep_month_abs2"]) ? $_GET["rep_month_abs2"] : NULL;
+$rep_month_abs1 = $_GET["rep_month_abs1"] ?? NULL;
+$rep_month_abs2 = $_GET["rep_month_abs2"] ?? NULL;
 if (isset($rep_month_abs1))
 	settype($rep_month_abs1,"integer");
 if (isset($rep_month_abs2))
 	settype($rep_month_abs2,"integer");
-$create_by = isset($_GET["create_by"]) ? $_GET["create_by"] : NULL;
-$beneficiaire = isset($_GET["beneficiaire"]) ? $_GET["beneficiaire"] : "";
-$benef_ext_nom = isset($_GET["benef_ext_nom"]) ? $_GET["benef_ext_nom"] : "";
-$benef_ext_email = isset($_GET["benef_ext_email"]) ? $_GET["benef_ext_email"] : "";
+$create_by = $_GET["create_by"] ?? NULL;
+$beneficiaire = $_GET["beneficiaire"] ?? "";
+$benef_ext_nom = $_GET["benef_ext_nom"] ?? "";
+$benef_ext_email = $_GET["benef_ext_email"] ?? "";
 $beneficiaire_ext = concat_nom_email($benef_ext_nom, $benef_ext_email);
-$rep_id = isset($_GET["rep_id"]) ? $_GET["rep_id"] : NULL;
-$rep_day = isset($_GET["rep_day"]) ? $_GET["rep_day"] : NULL;
-$rep_end_day = isset($_GET["rep_end_day"]) ? $_GET["rep_end_day"] : NULL;
-$rep_end_month = isset($_GET["rep_end_month"]) ? $_GET["rep_end_month"] : NULL;
-$rep_end_year = isset($_GET["rep_end_year"]) ? $_GET["rep_end_year"] : NULL;
-$room_back = isset($_GET["room_back"]) ? $_GET["room_back"] : NULL;
-$oldRessource = isset($_GET["oldRessource"]) ? $_GET["oldRessource"] : NULL;
+$rep_id = $_GET["rep_id"] ?? NULL;
+$rep_day = $_GET["rep_day"] ?? NULL;
+$rep_end_day = $_GET["rep_end_day"] ?? NULL;
+$rep_end_month = $_GET["rep_end_month"] ?? NULL;
+$rep_end_year = $_GET["rep_end_year"] ?? NULL;
+$room_back = $_GET["room_back"] ?? NULL;
+$oldRessource = $_GET["oldRessource"] ?? NULL;
 if (isset($room_back) && ($room_back != 'all'))
 	settype($room_back,"integer");
 else $room_back = 'all'; // YN le 30-06-18
 $page = verif_page();
 if ($page == '')
 	$page = "day";
-$option_reservation = isset($_GET["option_reservation"]) ? $_GET["option_reservation"] : NULL;
+$option_reservation = $_GET["option_reservation"] ?? NULL;
 if (isset($option_reservation))
 	settype($option_reservation,"integer");
 else
 	$option_reservation = -1;
 if (isset($_GET["confirm_reservation"]))
 	$option_reservation = -1;
-$type_affichage_reser = isset($_GET["type_affichage_reser"]) ? $_GET["type_affichage_reser"] : NULL;
+$type_affichage_reser = $_GET["type_affichage_reser"] ?? NULL;
 if ($beneficiaire == "-1")
 	$beneficiaire = getUserName();
 if (($beneficiaire) == "")
@@ -169,7 +169,7 @@ if (!isset($_GET['rooms'][0]))
 }
 $back = getBackUri();
 $area = mrbsGetRoomArea($_GET['rooms'][0]);
-$overload_data = array();
+$overload_data = [];
 $overload_fields_list = mrbsOverloadGetFieldslist($area);
 foreach ($overload_fields_list as $overfield=>$fieldtype)
 {
@@ -222,11 +222,11 @@ if (check_begin_end_bookings($day, $month, $year))
 }
 if ($type_affichage_reser == 0)
 {
-	$period = isset($_GET["period"]) ? $_GET["period"] : NULL;
+	$period = $_GET["period"] ?? NULL;
 	if (isset($period))
 		settype($period,"integer");
-	$dur_units = isset($_GET["dur_units"]) ? $_GET["dur_units"] : NULL;
-	$all_day = isset($_GET["all_day"]) ? $_GET["all_day"] : NULL;
+	$dur_units = $_GET["dur_units"] ?? NULL;
+	$all_day = $_GET["all_day"] ?? NULL;
 	if ($enable_periods == 'y')
 	{
 		$resolution = 60;
@@ -299,7 +299,7 @@ else
 			$erreur = 'y';
 	}
 	else {
-		$fin = array();
+		$fin = [];
 		$fin = explode(':', $_GET["end_"]);
 		$_GET["end_hour"] = $fin[0];
 		$_GET["end_minute"] = $fin[1];
@@ -397,7 +397,7 @@ if ($rep_type == 2)
 		$rep_opt .= empty($rep_day[$i]) ? "0" : "1";
 }
 if ($rep_type != 0)
-	$reps = mrbsGetRepeatEntryList($starttime, isset($rep_enddate) ? $rep_enddate : 0, $rep_type, $rep_opt, $max_rep_entrys, $rep_num_weeks, $rep_jour_c, $area, $rep_month_abs1, $rep_month_abs2);
+	$reps = mrbsGetRepeatEntryList($starttime, $rep_enddate ?? 0, $rep_type, $rep_opt, $max_rep_entrys, $rep_num_weeks, $rep_jour_c, $area, $rep_month_abs1, $rep_month_abs2);
 $repeat_id = 0;
 if (isset($id) && ($id != 0))
 {
@@ -606,7 +606,7 @@ if (empty($err) && ($error_booking_in_past == 'no') && ($error_duree_max_resa_ar
 					if ($send_mail_moderate)
 						$message_error = send_mail($id_first_resa, 5, $dformat);
 					else
-						$message_error = send_mail($id_first_resa, 2, $dformat, array(), $oldRessource);
+						$message_error = send_mail($id_first_resa, 2, $dformat, [], $oldRessource);
 				}
 				else
 				{
@@ -632,7 +632,7 @@ if (empty($err) && ($error_booking_in_past == 'no') && ($error_duree_max_resa_ar
 					if ($send_mail_moderate)
 						$message_error = send_mail($new_id,5,$dformat);
 					else
-						$message_error = send_mail($new_id,2,$dformat, array(), $oldRessource);
+						$message_error = send_mail($new_id,2,$dformat, [], $oldRessource);
 				}
 				else
 				{

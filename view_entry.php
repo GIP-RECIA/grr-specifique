@@ -46,7 +46,7 @@ if ((Settings::get("authentification_obli") == 0) && (getUserName() == ''))
 else
 	$type_session = "with_session";
 unset($reg_statut_id);
-$reg_statut_id = isset($_GET["statut_id"]) ? $_GET["statut_id"] : "";
+$reg_statut_id = $_GET["statut_id"] ?? "";
 if (isset($_GET["id"]))
 {
 	$id = $_GET["id"];
@@ -76,7 +76,7 @@ if (isset($_GET["action_moderate"])){
             $year = date ('Y', $row1['0']);
             $month = date ('m', $row1['0']);
             $day = date ('d', $row1['0']);
-            $page = (isset($_GET['page']))? $_GET['page'] : "day";
+            $page = $_GET['page'] ?? "day";
             $back = $page.'.php?year='.$year.'&month='.$month.'&day='.$day;
             if (($page == "week_all") || ($page == "month_all") || ($page == "month_all2") || ($page == "day"))
                 $back .= "&area=".mrbsGetRoomArea($row1['1']);
@@ -270,11 +270,11 @@ $date_now = time();
 
 get_planning_area_values($area);
 if ($enable_periods == 'y')
-	list( $start_period, $start_date) = period_date_string($row[10]);
+	[$start_period, $start_date] = period_date_string($row[10]);
 else
 	$start_date = time_date_string($row[10],$dformat);
 if ($enable_periods == 'y')
-	list( , $end_date) =  period_date_string($row[11], -1);
+	[, $end_date] =  period_date_string($row[11], -1);
 else
 	$end_date = time_date_string($row[11], $dformat);
 if ($beneficiaire != "")
@@ -592,7 +592,7 @@ echo '<fieldset><legend style="font-size:12pt;font-weight:bold">'.get_vocab('ent
 		echo "</tr>";
 		echo "<tr>";
 			echo "<td colspan='2'>";
-                $room_back = isset($_GET['room_back']) ? $_GET['room_back'] : $room_id ;
+                $room_back = $_GET['room_back'] ?? $room_id ;
 				echo "<input class=\"btn btn-primary\" type=\"button\" onclick=\"location.href='edit_entry.php?id=$id&amp;day=$day&amp;month=$month&amp;year=$year&amp;page=$page&amp;room_back=$room_back'\" value=\"".get_vocab("editentry")."\">";
 				echo "<input class=\"btn btn-info\" type=\"button\" onclick=\"location.href='edit_entry.php?id=$id&amp;day=$day&amp;month=$month&amp;year=$year&amp;page=$page&amp;room_back=$room_back&amp;copier'\" value=\"".get_vocab("copyentry")."\">";
 				if ($can_delete_or_create == "y")
@@ -624,14 +624,14 @@ if ($repeat_id != 0)
     }
     grr_sql_free($res);
     if ($enable_periods == 'y')
-        list( $start_period, $start_date) = period_date_string($start_time);
+        [$start_period, $start_date] = period_date_string($start_time);
     else
         $start_date = time_date_string($start_time, $dformat);
     if ($enable_periods == 'y')
         toPeriodString($start_period, $duration, $dur_units);
     else
         toTimeString($duration, $dur_units);
-    $weeklist = array("unused", "every week", "week 1/2", "week 1/3", "week 1/4", "week 1/5");
+    $weeklist = ["unused", "every week", "week 1/2", "week 1/3", "week 1/4", "week 1/5"];
     if ($rep_type == 2)
         $affiche_period = get_vocab($weeklist[$rep_num_weeks]);
     else

@@ -23,8 +23,8 @@ check_access(6, $back);
 // Restriction dans le cas d'une démo
 VerifyModeDemo();
 unset($user_login);
-$user_login = isset($_POST["user_login"]) ? $_POST["user_login"] : ($user_login = isset($_GET["user_login"]) ? $_GET["user_login"] : NULL);
-$valid = isset($_POST["valid"]) ? $_POST["valid"] : NULL;
+$user_login = $_POST["user_login"] ?? ($user_login = $_GET["user_login"] ?? NULL);
+$valid = $_POST["valid"] ?? NULL;
 $msg = '';
 if ($valid == "yes")
 {

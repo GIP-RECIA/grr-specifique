@@ -34,7 +34,7 @@ include "include/resume_session.php";
 // Paramètres langage
 include "include/language.inc.php";
 
-$id_room = isset($_GET["id_room"]) ? $_GET["id_room"] : NULL;
+$id_room = $_GET["id_room"] ?? NULL;
 if (isset($id_room))
 	settype($id_room,"integer");
 else

@@ -54,15 +54,15 @@ if ((Settings::get("authentification_obli") == 0) && (getUserName() == ''))
 else
 	$type_session = "with_session";
 //Champs de création du rapport.
-$From_day = isset($_GET["From_day"]) ? $_GET["From_day"] : NULL;
-$From_month = isset($_GET["From_month"]) ? $_GET["From_month"] : NULL;
-$From_year = isset($_GET["From_year"]) ? $_GET["From_year"] : NULL;
-$To_day = isset($_GET["To_day"]) ? $_GET["To_day"] : NULL;
-$To_month = isset($_GET["To_month"]) ? $_GET["To_month"] : NULL;
-$To_year = isset($_GET["To_year"]) ? $_GET["To_year"] : NULL;
-$champ = array();
-$texte = array();
-$type_recherche = array();
+$From_day = $_GET["From_day"] ?? NULL;
+$From_month = $_GET["From_month"] ?? NULL;
+$From_year = $_GET["From_year"] ?? NULL;
+$To_day = $_GET["To_day"] ?? NULL;
+$To_month = $_GET["To_month"] ?? NULL;
+$To_year = $_GET["To_year"] ?? NULL;
+$champ = [];
+$texte = [];
+$type_recherche = [];
 $k = 0;
 if (isset($_GET['champ'][0]))
 {
@@ -77,7 +77,7 @@ if (isset($_GET['champ'][0]))
 		$k++;
 	}
 }
-$summarize = isset($_GET["summarize"]) ? $_GET["summarize"] : NULL;
+$summarize = $_GET["summarize"] ?? NULL;
 if (!isset($_GET["sumby"]))
 	$_GET["sumby"] = "6";
 else
@@ -243,11 +243,11 @@ function do_summary(&$count, &$hours, &$room_hash, &$breve_description_hash, $en
 	// Make a sorted array of area/rooms, and of names, to use for column
 	// and row indexes. Use the rooms and names hashes built by accumulate().
 	// At PHP4 we could use array_keys().
-	$rooms = array();
+	$rooms = [];
 	foreach ($room_hash as $room_key => $_)
 		$rooms[] = $room_key;
 	ksort($rooms);
-	$breve_descriptions = array();
+	$breve_descriptions = [];
 	foreach ($breve_description_hash as $breve_description_key => $_)
 		$breve_descriptions[] = $breve_description_key;
 	ksort($breve_descriptions);
@@ -270,8 +270,8 @@ function do_summary(&$count, &$hours, &$room_hash, &$breve_description_hash, $en
 			echo "<hr /><h1>".get_vocab("summary_header")."</h1><table class=\"table table-bordered table-striped\">\n";
 		echo "<tr><td class=\"BL\" align=\"left\"><b>".$premiere_cellule." \ ".get_vocab("room")."</b></td>\n";
 	}
-	$col_count_total = array();
-	$col_hours_total = array();
+	$col_count_total = [];
+	$col_hours_total = [];
 	for ($c = 0; $c < $n_rooms; $c++)
 	{
 		if ($csv == "n")

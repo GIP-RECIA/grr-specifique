@@ -39,7 +39,7 @@ if (verif_version())
 if (isset($_POST['login']) && isset($_POST['password']))
 {
 	// Détruit toutes les variables de session au cas où une session existait auparavant
-	$_SESSION = array();
+	$_SESSION = [];
 	$result = grr_opensession($_POST['login'], unslashes($_POST['password']));
 	// On écrit les données de session et ferme la session
 	session_write_close();

@@ -63,7 +63,7 @@ $this_area_comment = grr_sql_query1("SELECT comment_room FROM ".TABLE_PREFIX."_r
 $this_area_show_comment = grr_sql_query1("SELECT show_comment FROM ".TABLE_PREFIX."_room WHERE id=$room");
 
 //Pour vérifier si la plage de fin arrive sur un créneau ou non.
-$minutesFinCrenaux = array();
+$minutesFinCrenaux = [];
 for($h=0; $h<3600; $h+=$this_area_resolution) {
 	$minutesFinCrenaux[] = date('i', $h);
 }
@@ -593,7 +593,7 @@ $semaine_changement_heure_hiver = 'no';
 							if ($acces_fiche_reservation)
 								echo"</a>";
 						}
-						
+
 						if ((isset($d[$weekday][$slot - $decale_slot * $nb_case]["statut"])) && ($d[$weekday][$slot - $decale_slot * $nb_case]["statut"] != '-'))
 							echo '<img src="img_grr/buzy.png" alt="'.get_vocab("ressource actuellement empruntee").'" title="'.get_vocab("ressource actuellement empruntee").'" width="20" height="20" class="image" />'.PHP_EOL;
 						if (($this_delais_option_reservation > 0) && (isset($d[$weekday][$slot - $decale_slot * $nb_case]["option_reser"])) && ($d[$weekday][$slot - $decale_slot * $nb_case]["option_reser"] != -1))

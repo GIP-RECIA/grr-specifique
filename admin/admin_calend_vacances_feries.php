@@ -56,7 +56,7 @@ else if (!isset($_POST['define_holidays'])){
             if (isset($_POST['recordFeries']) && ($_POST['recordFeries'] == 'yes'))
             {
                 // On met de côté toutes les dates
-                $day_old = array();
+                $day_old = [];
                 $res_old = grr_sql_query("SELECT day FROM ".TABLE_PREFIX."_calendrier_feries");
                 if ($res_old)
                 {
@@ -170,7 +170,7 @@ else if (!isset($_POST['define_holidays'])){
                 if (isset($_POST['recordVacances']) && ($_POST['recordVacances'] == 'yes'))
                 { //phase d'enregistrement des jours de vacances scolaires
                     // On met de côté toutes les dates
-                    $day_old = array();
+                    $day_old = [];
                     $res_old = grr_sql_query("SELECT day FROM ".TABLE_PREFIX."_calendrier_vacances");
                     if ($res_old)
                     {
@@ -220,7 +220,7 @@ else if (!isset($_POST['define_holidays'])){
                 $i = $year;
                 $cocheVacances = "";
                 $zone = Settings::get("holidays_zone"); // en principe la zone est définie, au moins par défaut à A
-                $schoolHoliday = array();
+                $schoolHoliday = [];
                 $vacances = simplexml_load_file('../vacances.xml');
                 $libelle = $vacances->libelles->children();
                 $node = $vacances->calendrier->children();

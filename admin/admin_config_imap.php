@@ -18,18 +18,18 @@
 include "../include/admin.inc.php";
 $grr_script_name = "admin_config_imap.php";
 require_once("../include/settings.class.php");
-$valid = isset($_POST["valid"]) ? $_POST["valid"] : 'no';
-$etape = isset($_POST["etape"]) ? $_POST["etape"] : '0';
-$imap_domaine=isset($_POST["imap_domaine"]) ? $_POST["imap_domaine"] : "";
-$imap_adresse = isset($_POST["imap_adresse"]) ? $_POST["imap_adresse"] : "";
-$imap_port = isset($_POST["imap_port"]) ? $_POST["imap_port"] : "";
-$imap_type = isset($_POST["server_type"]) ? $_POST["server_type"]:"";
-$imap_ssl  = isset($_POST["server_ssl"]) ? $_POST["server_ssl"]:"";
-$imap_cert = isset($_POST["server_cert"]) ? $_POST["server_cert"]:"";
-$imap_tls  = isset($_POST["server_tls"]) ? $_POST["server_tls"]:"";
-$imap_string  = isset($_POST["imap_string"]) ? $_POST["imap_string"]:"";
-$imap_login=isset($_POST["imap_login"]) ? $_POST["imap_login"]:"";
-$imap_password=isset($_POST["imap_password"]) ? $_POST["imap_password"]:"";
+$valid = $_POST["valid"] ?? 'no';
+$etape = $_POST["etape"] ?? '0';
+$imap_domaine=$_POST["imap_domaine"] ?? "";
+$imap_adresse = $_POST["imap_adresse"] ?? "";
+$imap_port = $_POST["imap_port"] ?? "";
+$imap_type = $_POST["server_type"] ?? "";
+$imap_ssl  = $_POST["server_ssl"] ?? "";
+$imap_cert = $_POST["server_cert"] ?? "";
+$imap_tls  = $_POST["server_tls"] ?? "";
+$imap_string  = $_POST["imap_string"] ?? "";
+$imap_login=$_POST["imap_login"] ?? "";
+$imap_password=$_POST["imap_password"] ?? "";
 
 if (isset($_POST['imap_statut']))
 {

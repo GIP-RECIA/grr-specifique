@@ -31,12 +31,12 @@ include "../include/language.inc.php";
 //Chargement des valeurs de la table settingS
 if (!Settings::load())
 	die("Erreur chargement settings");
-$valid = isset($_POST["valid"]) ? $_POST["valid"] : 'no';
-$etape = isset($_POST["etape"]) ? $_POST["etape"] : '0';
-$adresse = isset($_POST["adresse"]) ? $_POST["adresse"] : NULL;
-$port = isset($_POST["port"]) ? $_POST["port"] : NULL;
-$login_ldap = isset($_POST["login_ldap"]) ? $_POST["login_ldap"] : NULL;
-$pwd_ldap = isset($_POST["pwd_ldap"]) ? $_POST["pwd_ldap"] : NULL;
+$valid = $_POST["valid"] ?? 'no';
+$etape = $_POST["etape"] ?? '0';
+$adresse = $_POST["adresse"] ?? NULL;
+$port = $_POST["port"] ?? NULL;
+$login_ldap = $_POST["login_ldap"] ?? NULL;
+$pwd_ldap = $_POST["pwd_ldap"] ?? NULL;
 $pwd_ldap = unslashes($pwd_ldap);
 if (isset($_POST["use_tls"]))
 {
@@ -46,14 +46,14 @@ if (isset($_POST["use_tls"]))
 }
 else
 	$use_tls = FALSE;
-$base_ldap = isset($_POST["base_ldap"]) ? $_POST["base_ldap"] : NULL;
-$base_ldap_autre = isset($_POST["base_ldap_autre"]) ? $_POST["base_ldap_autre"] : NULL;
-$ldap_filter = isset($_POST["ldap_filter"]) ? $_POST["ldap_filter"] : NULL;
+$base_ldap = $_POST["base_ldap"] ?? NULL;
+$base_ldap_autre = $_POST["base_ldap_autre"] ?? NULL;
+$ldap_filter = $_POST["ldap_filter"] ?? NULL;
 
-$ldap_group_member_attr = isset($_POST["ldap_group_member_attr"]) ? $_POST["ldap_group_member_attr"] : NULL;
-$ldap_group_base = isset($_POST["ldap_group_base"]) ? $_POST["ldap_group_base"] : NULL;
-$ldap_group_filter = isset($_POST["ldap_group_filter"]) ? $_POST["ldap_group_filter"] : NULL;
-$ldap_group_user_field = isset($_POST["ldap_group_user_field"]) ? $_POST["ldap_group_user_field"] : NULL;
+$ldap_group_member_attr = $_POST["ldap_group_member_attr"] ?? NULL;
+$ldap_group_base = $_POST["ldap_group_base"] ?? NULL;
+$ldap_group_filter = $_POST["ldap_group_filter"] ?? NULL;
+$ldap_group_user_field = $_POST["ldap_group_user_field"] ?? NULL;
 
 $titre_ldap = "Configuration de l'authentification LDAP";
 if (isset($_POST['reg_ldap_statut']))
@@ -301,7 +301,7 @@ if ((!grr_resumeSession()) && $valid != 'yes')
 							echo "<form action=\"admin_config_ldap.php\" method=\"post\"><div>\n";
 							// On lit toutes les infos (objectclass=*) dans le dossier
 							// Retourne un identifiant de résultat ($result), ou bien FALSE en cas d'erreur.
-							$result = ldap_read($ds, "", "objectclass=*", array("namingContexts"));
+							$result = ldap_read($ds, "", "objectclass=*", ["namingContexts"]);
 							$info = ldap_get_entries($ds, $result);
 							// Retourne un tableau associatif multi-dimensionnel ou FALSE en cas d'erreur. :
 							// $info["count"] = nombre d'entrées dans le résultat

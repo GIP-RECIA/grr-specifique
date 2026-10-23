@@ -20,7 +20,7 @@
 if (isset($_GET['UserAllRoomsMaxBooking']))
 {
     settype($_GET['UserAllRoomsMaxBooking'],"integer");
-    if ($_GET['UserAllRoomsMaxBooking']=='')
+    if ($_GET['UserAllRoomsMaxBooking']==0)
         $_GET['UserAllRoomsMaxBooking'] = -1;
     if ($_GET['UserAllRoomsMaxBooking']<-1)
         $_GET['UserAllRoomsMaxBooking'] = -1;

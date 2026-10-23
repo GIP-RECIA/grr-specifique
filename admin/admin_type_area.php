@@ -19,7 +19,7 @@
 include "../include/admin.inc.php";
 $grr_script_name = "admin_type_area.php";
 // Initialisation
-$id_area = isset($_GET["id_area"]) ? $_GET["id_area"] : NULL;
+$id_area = $_GET["id_area"] ?? NULL;
 $back = getBackUri();
 $day   = date("d");
 $month = date("m");

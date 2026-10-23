@@ -303,7 +303,7 @@ if (isset($_POST['ok'])) {
         }
     }
     // Enregistrement du logo
-    $doc_file = isset($_FILES['doc_file']) ? $_FILES['doc_file'] : null;
+    $doc_file = $_FILES['doc_file'] ?? null;
     /* Test premier, juste pour bloquer les double extensions */
     if (count(explode('.', $doc_file['name'])) > 2) {
 
@@ -360,7 +360,7 @@ if (isset($_POST['ok'])) {
 
                 /* je test si la destination est writable */
                 $dest = '../images/';
-                $randName = md5(uniqid(rand(), true));
+                $randName = md5(uniqid(random_int(0, mt_getrandmax()), true));
 
                 $pictureName = $randName.'.'.$extSafe;
                 $picturePath = $dest.$pictureName;
@@ -1411,7 +1411,7 @@ if (Settings::get('show_holidays') == 'Oui'){
     echo '<td>'.PHP_EOL;
     $vacances = simplexml_load_file('../vacances.xml');
     $libelle = $vacances->academies->children();
-    $acad = array();
+    $acad = [];
     foreach ($libelle as $key => $value) {
         if (!in_array($value['zone'], $acad)) {
             $acad[] .= $value['zone'];

@@ -25,9 +25,9 @@ if (!Settings::load()) {
     die('Erreur chargement settings');
 }
 // tableau des jours ordonnés
- $joursemaine=array("dim"=>0,"lun"=>1,"mar"=>2,"mer"=>3,"jeu"=>4,"ven"=>5,"sam"=>6);
- $journumero=array(0=>"dim",1=>"lundi",2=>"mardi",3=>"mercredi",4=>"jeudi",5=>"vendredi",6=>"samedi");
- 
+ $joursemaine=["dim"=>0, "lun"=>1, "mar"=>2, "mer"=>3, "jeu"=>4, "ven"=>5, "sam"=>6];
+ $journumero=[0=>"dim", 1=>"lundi", 2=>"mardi", 3=>"mercredi", 4=>"jeudi", 5=>"vendredi", 6=>"samedi"];
+
 # print the page header
 print_header('', '', '', $type = 'with_session');
 // Affichage de la colonne de gauche
@@ -152,7 +152,7 @@ include 'admin_col_gauche.php';
                    $row = grr_sql_row($res,$i);
                    if(($jour==$row[0]) && ($salle==$row[1]) && ($heure_deb_i==$row[2]) && ($minute_deb_i==$row[3]))
                    {
-					   if(strpos($lesclasses,$row[6])===false) $lesclasses=$lesclasses." et ".$row[6];
+					   if(strpos($lesclasses,(string) $row[6])===false) $lesclasses=$lesclasses." et ".$row[6];
 					   $i++; 
 				   } // on elimine les doublons (meme jour, meme salle, meme heure) en concaténant les classes
 				   else if(($row = grr_sql_row($res, $i)) && ($jour==$row[0]) && ($salle==$row[1]) && ($classe==$row[6]) && ($matiere==$row[7]) && ($heure_fin==$row[2]) && ($minute_fin==$row[3]))
@@ -217,7 +217,7 @@ include 'admin_col_gauche.php';
     <tr>
     <?php echo '<form enctype="multipart/form-data" action="./admin_import_entries_csv_udt.php" id="nom_formulaire" method="post" style="width: 100%;">'.PHP_EOL;
          echo '<input type="hidden" name="import" value="1" />'.PHP_EOL;
- 
+
 ?>
     </tr>
     <tr>
@@ -266,7 +266,7 @@ include 'admin_col_gauche.php';
             echo '<div id="fixe" style="text-align:center;"></td>'.PHP_EOL;
 echo '<td><input type="submit" id="import" value=" Importer les réservations! " /></td>'.PHP_EOL;
   echo '</tr>';
-  
+
 echo '</form>';
 
 //echo '</tr>';
@@ -278,7 +278,7 @@ echo '</table>';
 echo "</td></tr></table>\n";
 // fin du code de la page
 echo '</body></html>';                
-                
+
 //include "../include/trailer.inc.php";  // semble inutile
 
 function entre_reservation($room_id,$jour_semaine,$name,$description,
@@ -289,17 +289,17 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
         // return true;
         global $max_rep_entrys, $erreur;
         $journee=86400; $semaine=86400*7;
-             
+
 		// Initialisation du test d'erreur
 		$erreur = 'n';
-		
+
 		// Initialisation
 		$message_error = "";
-		
+
 		$id=null; // nouvelle réservation
 		$ampm=NULL; // AMPM ou 24h
 		$type = "A"; // type de réservation (cours, colle, ...)
-		
+
 		// $duration = 2; $duration = str_replace(",", ".", "$duration ");
 		settype($hour,"integer"); if ($hour > 23) $hour = 23;
 		settype($minute,"integer"); if ($minute > 59) $minute = 59;
@@ -312,7 +312,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 		            $starttime=$starttime0+($jour_semaine-$jour_semaine_debut+7)*$journee;
 		            if($rep_semaine==1) $starttime=$starttime+$semaine;
 		}
-		
+
 		// fin du creneau
 		settype($end_month,"integer");
 		settype($end_day,"integer");
@@ -339,15 +339,15 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 		               if($rep_semaine==1) $endtime=$endtime+$semaine;
 		}
 		// echo date("c",$starttime)."->".date("c",$endtime);
-		
+
 		//echo $endtime."\n";
-		
+
 		if ($endtime <= $starttime)
 			$erreur = 'y';
-				
+
 		$statut_entry = "-";
 		$rep_jour_c = 0;
-		
+
 		// gestion de la périodicité
 		$rep_type = 2; settype($rep_type,"integer"); // réservation hebdomadaire
 		if($rep_semaine==0) $rep_num_weeks = 1; else $rep_num_weeks = 2; 
@@ -361,33 +361,33 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// Cas où la date de fin de périodicité est supérieure à la date de fin de réservation
 		if ($rep_enddate > Settings::get("end_bookings")) $rep_enddate = Settings::get("end_bookings");
 		//echo $rep_enddate."\r";
-		
+
 		$create_by = "Administrateur";
 		$beneficiaire = "Administrateur";
 		$benef_ext_nom = "Administrateur";
 		$benef_ext_email = "";
 		$beneficiaire_ext = ""; //concat_nom_email($benef_ext_nom, $benef_ext_email);
-		
+
 		$room_back =NULL; if (isset($room_back)) settype($room_back,"integer");
 		$option_reservation = NULL;
 		if (isset($option_reservation))
 			settype($option_reservation,"integer");
 		else
 			$option_reservation = -1;
-		
+
 		// On récupère la valeur de $area
 		$area = mrbsGetRoomArea($room_id); 
 		if(($room_id<=0) || ($area<=0)) { $erreur="Erreur de salle"; return false;}
-		
+
 		# For weekly repeat(2), build string of weekdays to repeat on:
-		$rep_day=array(NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+		$rep_day=[NULL, NULL, NULL, NULL, NULL, NULL, NULL];
 		// $jour_semaine=date("w",$starttime)."\n"; // à corriger
 		$rep_day[$jour_semaine]=1;
 		$rep_opt = "";
 		if ($rep_type == 2)
 			for ($i = 0; $i < 7; $i++) $rep_opt .= empty($rep_day[$i]) ? "0" : "1";
-		
-		
+
+
 		# Expand a series into a list of start times:
 		// $reps est un tableau des dates de début de réservation
         // $rep_month_abs1 et $rep_month_abs2 semblent utilisés pour les jours cycles, je les initialise au hasard
@@ -395,8 +395,8 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
         $rep_month_abs2 = 0;
 		$reps = mrbsGetRepeatEntryList($starttime, $rep_enddate,
 				$rep_type, $rep_opt, $max_rep_entrys, $rep_num_weeks,$rep_jour_c,$area,$rep_month_abs1, $rep_month_abs2);
-		
-		
+
+
 		# When checking for overlaps, for Edit (not New), ignore this entry and series:
 		$repeat_id = 0;
 		if (isset($id) and ($id!=0)) {
@@ -405,12 +405,12 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 		    if ($repeat_id < 0) $repeat_id = 0;
 		} else     
 		$ignore_id = 0;
-		
+
 		# Acquire mutex to lock out others trying to book the same slot(s).
 		if (!grr_sql_mutex_lock("".TABLE_PREFIX."_entry"))
 			fatal_error(1, get_vocab('failed_to_acquire'));
-		
-		$date_now = mktime();
+
+		$date_now = time();
 		$error_booking_in_past = 'no';
 		$error_booking_room_out = 'no';
 		$error_duree_max_resa_area = 'no';
@@ -420,7 +420,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 		$error_chevauchement = 'no';
 		$error_qui_peut_reserver_pour = 'no';
 		$error_heure_debut_fin = 'no';
-	
+
 		$diff = $endtime - $starttime;
 		// On  vérifie que les différents créneaux ne se chevauchent pas.
 		if (!grrCheckOverlap($reps, $diff)){ 
@@ -435,12 +435,12 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
             }
 			$i++;
 		}
-		
+
 		// Si le test précédent est passé avec succès,
 		# Check for any schedule conflicts in each room we're going to try and
 		# book in
 		$err = "";
-		
+
 		if (($error_booking_in_past == 'no') and ($error_chevauchement=='no') and ($error_duree_max_resa_area == 'no') and ($error_delais_max_resa_room == 'no') and ($error_delais_min_resa_room == 'no')  and ($error_date_option_reservation == 'no') and ($error_qui_peut_reserver_pour == 'no') and ($error_heure_debut_fin=='no')) {
 			if(count($reps) < $max_rep_entrys) {
 				$diff = $endtime - $starttime;
@@ -462,7 +462,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 				$hide_title  = 1;
 			}
 		}
-		
+
 		if (empty($err)
 			and ($error_booking_in_past == 'no')
 			and ($error_duree_max_resa_area == 'no')
@@ -486,15 +486,15 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
                $overload_data = '';
 			   mrbsCreateRepeatingEntrys($starttime, $endtime,   $rep_type, $rep_enddate, $rep_opt,
 						$room_id, $create_by, $beneficiaire, $beneficiaire_ext, $name, $type, $description, $rep_num_weeks, $option_reservation,$overload_data, $entry_moderate,$rep_jour_c, $courrier, $rep_month_abs1, $rep_month_abs2);
-		
+
 			}
-		
+
 		  // Delete the original entry
-		
+
 		grr_sql_mutex_unlock("".TABLE_PREFIX."_entry");
-		
+
 		$area = mrbsGetRoomArea($room_id);
-		
+
 		// Si il y a tentative de réserver dans le passé
 		if ($error_booking_in_past == 'yes') {
 			$str_date = utf8_strftime("%d %B %Y, %H:%M", $date_now);
@@ -509,7 +509,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// $erreur.= "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-		
+
 		// Si il y a tentative de réserver pendant une durée dépassant la durée max
 		if ($error_duree_max_resa_area == 'yes') {
 			$area_id = grr_sql_query1("select area_id from ".TABLE_PREFIX."_room where id='".protect_data_sql($room_id)."'");
@@ -521,7 +521,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// $erreur.=  "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-		
+
 		// Si il y a tentative de réserver au delà du temps limite
 		if ($error_delais_max_resa_room == 'yes') {
 			print_header();
@@ -529,7 +529,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// $erreur.=  "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-		
+
 		// Dans le cas d'une réservation avec périodicité, s'il y a des créneaux qui se chevauchent
 		if ($error_chevauchement == 'yes') {
 			print_header();
@@ -537,7 +537,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// $erreur.=  "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-		
+
 		// Si il y a tentative de réserver en-deça du temps limite
 		if ($error_delais_min_resa_room == 'yes') {
 			print_header();
@@ -545,7 +545,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// $erreur.=  "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-		
+
 		// Si la date confirmation est supérieure à la date de début de réservation
 		if ($error_date_option_reservation == 'yes') {
 			print_header();
@@ -553,7 +553,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// $erreur.=  "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-		
+
 		// Si l'utilisateur tente de réserver une ressource non disponible
 		if ($error_booking_room_out == 'yes') {
 			print_header();
@@ -562,7 +562,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// $erreur.=  "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-		
+
 		// Si l'utilisateur tente de réserver au nom d'une autre personne pour une ressource pour laquelle il n'a pas le droit
 		if ($error_qui_peut_reserver_pour == 'yes') {
 			print_header();
@@ -570,7 +570,7 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// $erreur.=  "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-		
+
 		// L'heure de début ou l'heure de fin de réservation est en dehors des créneaux autorisés.
 		if ($error_heure_debut_fin == 'yes') {
 			print_header();
@@ -578,11 +578,11 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 			// $erreur.=  "<a href=\"".$back."&amp;Err=yes\">".get_vocab('returnprev')."</a>";
 			return false;
 		}
-		
+
 		if(strlen($err))
 		{
 			print_header();
-		
+
 			echo "<h2>" . get_vocab("sched_conflict") . "</h2>";
 			if(!isset($hide_title))
 			{
@@ -590,13 +590,13 @@ function entre_reservation($room_id,$jour_semaine,$name,$description,
 				echo "<UL>";
 			}
 			echo $err;
-		
+
 			if(!isset($hide_title))
 				echo "</UL>";
 				// possibilité de supprimer la (les) réservation(s) afin de valider la nouvelle réservation.
 				if(authGetUserLevel(getUserName(),$area,'area') >= 4)
 					echo "<center><table border=\"1\" cellpadding=\"10\" cellspacing=\"1\"><tr><td class='avertissement'><h3><a href='".traite_grr_url("","y")."edit_entry_handler.php?".$_SERVER['QUERY_STRING']."&amp;del_entry_in_conflict=yes'>".get_vocab("del_entry_in_conflict")."</a></h4></td></tr></table></center><br />";
-		
+
 		}
 		return true;
 		// Retour au calendrier

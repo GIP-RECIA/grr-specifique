@@ -55,27 +55,27 @@ function create_site($id_site)
 	}
 	// Initialisation des variables du formulaire
 	if (!isset($id_site))
-		$id_site = isset($_POST['id']) ? $_POST['id'] :  NULL;
+		$id_site = $_POST['id'] ?? NULL;
 	if (!isset($sitecode))
-		$sitecode = isset($_POST['sitecode']) ? $_POST['sitecode'] : NULL;
+		$sitecode = $_POST['sitecode'] ?? NULL;
 	if (!isset($sitename))
-		$sitename = isset($_POST['sitename']) ? $_POST['sitename'] :  NULL;
+		$sitename = $_POST['sitename'] ?? NULL;
 	if (!isset($adresse_ligne1))
-		$adresse_ligne1 = isset($_POST['adresse_ligne1']) ? $_POST['adresse_ligne1'] :  NULL;
+		$adresse_ligne1 = $_POST['adresse_ligne1'] ?? NULL;
 	if (!isset($adresse_ligne2))
-		$adresse_ligne2 = isset($_POST['adresse_ligne2']) ? $_POST['adresse_ligne2'] :  NULL;
+		$adresse_ligne2 = $_POST['adresse_ligne2'] ?? NULL;
 	if (!isset($adresse_ligne3))
-		$adresse_ligne3 = isset($_POST['adresse_ligne3']) ? $_POST['adresse_ligne3'] :  NULL;
+		$adresse_ligne3 = $_POST['adresse_ligne3'] ?? NULL;
 	if (!isset($cp))
-		$cp = isset($_POST['cp']) ? $_POST['cp'] :  NULL;
+		$cp = $_POST['cp'] ?? NULL;
 	if (!isset($ville))
-		$ville = isset($_POST['ville']) ? $_POST['ville'] :  NULL;
+		$ville = $_POST['ville'] ?? NULL;
 	if (!isset($pays))
-		$pays = isset($_POST['pays']) ? $_POST['pays'] :  NULL;
+		$pays = $_POST['pays'] ?? NULL;
 	if (!isset($tel))
-		$tel = isset($_POST['tel']) ? $_POST['tel'] :  NULL;
+		$tel = $_POST['tel'] ?? NULL;
 	if (!isset($fax))
-		$fax = isset($_POST['fax']) ? $_POST['fax'] :  NULL;
+		$fax = $_POST['fax'] ?? NULL;
 	// On affiche le formulaire de saisie quand l'appel de la fonction ne provient pas de la validation de ce même formulaire
 	if ((! (isset($_POST['save']) || isset($_GET['save']))) && ($id_site==0))
 	{
@@ -241,27 +241,27 @@ function update_site($id)
 		else
 		{
 			if (!isset($id))
-				$id = isset($_POST['id']) ? $_POST['id'] :  NULL;
+				$id = $_POST['id'] ?? NULL;
 			if (!isset($sitecode))
-				$sitecode = isset($_POST['sitecode']) ? $_POST['sitecode'] : NULL;
+				$sitecode = $_POST['sitecode'] ?? NULL;
 			if (!isset($sitename))
-				$sitename = isset($_POST['sitename']) ? $_POST['sitename'] :  NULL;
+				$sitename = $_POST['sitename'] ?? NULL;
 			if (!isset($adresse_ligne1))
-				$adresse_ligne1 = isset($_POST['adresse_ligne1']) ? $_POST['adresse_ligne1'] :  NULL;
+				$adresse_ligne1 = $_POST['adresse_ligne1'] ?? NULL;
 			if (!isset($adresse_ligne2))
-				$adresse_ligne2 = isset($_POST['adresse_ligne2']) ? $_POST['adresse_ligne2'] :  NULL;
+				$adresse_ligne2 = $_POST['adresse_ligne2'] ?? NULL;
 			if (!isset($adresse_ligne3))
-				$adresse_ligne3 = isset($_POST['adresse_ligne3']) ? $_POST['adresse_ligne3'] :  NULL;
+				$adresse_ligne3 = $_POST['adresse_ligne3'] ?? NULL;
 			if (!isset($cp))
-				$cp = isset($_POST['cp']) ? $_POST['cp'] :  NULL;
+				$cp = $_POST['cp'] ?? NULL;
 			if (!isset($ville))
-				$ville = isset($_POST['ville']) ? $_POST['ville'] :  NULL;
+				$ville = $_POST['ville'] ?? NULL;
 			if (!isset($pays))
-				$pays = isset($_POST['pays']) ? $_POST['pays'] :  NULL;
+				$pays = $_POST['pays'] ?? NULL;
 			if (!isset($tel))
-				$tel = isset($_POST['tel']) ? $_POST['tel'] :  NULL;
+				$tel = $_POST['tel'] ?? NULL;
 			if (!isset($fax))
-				$fax = isset($_POST['fax']) ? $_POST['fax'] :  NULL;
+				$fax = $_POST['fax'] ?? NULL;
 		 	// On vérifie que le code et le nom du site ont été renseignés
 			if ($sitecode == '' || $sitecode == NULL || $sitename == '' || $sitename==NULL)
 			{
@@ -347,8 +347,8 @@ function update_site($id)
 	else
 		$msg = '';
 	// Lecture des paramètres passés à la page
-	$id_site = isset($_POST['id']) ? $_POST['id'] : (isset($_GET['id']) ? $_GET['id'] : NULL);
-	$action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : NULL);
+	$id_site = $_POST['id'] ?? $_GET['id'] ?? NULL;
+	$action = $_POST['action'] ?? $_GET['action'] ?? NULL;
 	if ($action == NULL)
 		$action = 'read';
 	// SWITCH sur l'action (CRUD)

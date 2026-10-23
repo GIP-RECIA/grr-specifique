@@ -20,8 +20,8 @@ $grr_script_name = "admin_right.php";
 
 $back = getBackUri();
 
-$id_area = isset($_POST["id_area"]) ? $_POST["id_area"] : (isset($_GET["id_area"]) ? $_GET["id_area"] : NULL);
-$room = isset($_POST["room"]) ? $_POST["room"] : (isset($_GET["room"]) ? $_GET["room"] : NULL);
+$id_area = $_POST["id_area"] ?? $_GET["id_area"] ?? NULL;
+$room = $_POST["room"] ?? $_GET["room"] ?? NULL;
 if (isset($room))
 	settype($room,"integer");
 if (!isset($id_area))
@@ -33,10 +33,10 @@ print_header("", "", "", $type="with_session");
 include "admin_col_gauche.php";
 // tableau des ressources auxquelles l'utilisateur n'a pas accès
 $tab_rooms_noaccess = verif_acces_ressource(getUserName(), 'all');
-$reg_admin_login = isset($_POST["reg_admin_login"]) ? $_POST["reg_admin_login"] : NULL;
-$reg_multi_admin_login = isset($_POST["reg_multi_admin_login"]) ? $_POST["reg_multi_admin_login"] : NULL;
+$reg_admin_login = $_POST["reg_admin_login"] ?? NULL;
+$reg_multi_admin_login = $_POST["reg_multi_admin_login"] ?? NULL;
 $test_user =  isset($_POST["reg_multi_admin_login"]) ? "multi" : (isset($_POST["reg_admin_login"]) ? "simple" : NULL);
-$action = isset($_GET["action"]) ? $_GET["action"] : NULL;
+$action = $_GET["action"] ?? NULL;
 $msg = '';
 if ($test_user == "multi")
 {

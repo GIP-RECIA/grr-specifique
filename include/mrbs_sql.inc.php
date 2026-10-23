@@ -201,7 +201,7 @@ function mrbsOverloadGetFieldslist($id_area, $room_id = 0)
 	else
 		$sqlstring = "SELECT fieldname,fieldtype, id, fieldlist, affichage, overload_mail, obligatoire, confidentiel FROM ".TABLE_PREFIX."_overload WHERE id_area='".$id_area."' ORDER BY fieldname,fieldtype";
 	$result = grr_sql_query($sqlstring);
-	$fieldslist = array();
+	$fieldslist = [];
 	if (!$result)
 		fatal_error(1, grr_sql_error());
 	if (grr_sql_count($result) <0)
@@ -257,12 +257,12 @@ function mrbsOverloadGetFieldslist($id_area, $room_id = 0)
 function mrbsEntryGetOverloadDesc($id_entry)
 {
 	$room_id = 0;
-	$overload_array = array();
+	$overload_array = [];
 	$overload_desc = "";
 	//On récupère les données overload desc dans ".TABLE_PREFIX."_entry.
 	if ($id_entry != NULL)
 	{
-		$overload_array = array();
+		$overload_array = [];
 		$sqlstring = "SELECT overload_desc,room_id FROM ".TABLE_PREFIX."_entry WHERE id=".$id_entry.";";
 		$result = grr_sql_query($sqlstring);
 		if (!$result)
@@ -492,8 +492,8 @@ function same_day_next_month($time)
 
 function get_day_of_month($time, $rep_month_abs1, $rep_month_abs2)
 {
-	$days = array('monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-	$rep = array('first', 'second', 'third', 'fourth', 'five', 'last');
+	$days = ['monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+	$rep = ['first', 'second', 'third', 'fourth', 'five', 'last'];
 	$time = strtotime('+1 month', $time);
 	$str = $rep[$rep_month_abs1].' '.$days[$rep_month_abs2 - 1].' of '.date("F", $time).' '.date("Y", $time);
 	return strtotime($str);
@@ -522,8 +522,8 @@ function mrbsGetRepeatEntryList($time, $enddate, $rep_type, $rep_opt, $max_ittr,
 	$day   = date("d", $time);
 	$month = date("m", $time);
 	$year  = date("Y", $time);
-	$entrys = array();
-	$entrys_return = array();
+	$entrys = [];
+	$entrys_return = [];
 	$k = 0;
 	for($i = 0; $i < $max_ittr; $i++)
 	{
@@ -568,7 +568,7 @@ function mrbsGetRepeatEntryList($time, $enddate, $rep_type, $rep_opt, $max_ittr,
 			$sql = "SELECT * FROM ".TABLE_PREFIX."_calendrier_jours_cycle WHERE DAY >= '".$time2."' AND DAY <= '".$enddate."' AND Jours = '".$rep_jour_c."'";
 			$result = mysqli_query($GLOBALS['db_c'], $sql);
 			$kk = 0;
-			$tableFinale = array();
+			$tableFinale = [];
 			while ($table = mysqli_fetch_array($result))
 			{
 				$day   = date("d", $table['DAY']);
@@ -661,7 +661,7 @@ function mrbsGetEntryInfo($id)
 	if (!$res)
 		return;
 
-	$ret = array();
+	$ret = [];
 
 	if (grr_sql_count($res) > 0)
 	{
@@ -743,7 +743,7 @@ function moderate_entry_do($_id,$_moderate,$_description,$send_mail="yes")
 			fatal_error(0, grr_sql_error());
 		if (!(grr_backup($_id,$_SESSION['login'],$_description)))
 			fatal_error(0, grr_sql_error());
-		$tab_id_moderes = array();
+		$tab_id_moderes = [];
 	}
 	else
 	{
@@ -753,10 +753,10 @@ function moderate_entry_do($_id,$_moderate,$_description,$send_mail="yes")
 		$res = grr_sql_query($sql);
 		if (!$res)
 			fatal_error(0, grr_sql_error());
-		$tab_entry = array();
+		$tab_entry = [];
 		for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
 			$tab_entry[] = $row['0'];
-		$tab_id_moderes = array();
+		$tab_id_moderes = [];
 		// Boucle sur les résas
 		foreach ($tab_entry as $entry_tom)
 		{

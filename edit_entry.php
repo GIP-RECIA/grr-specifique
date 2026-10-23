@@ -26,12 +26,12 @@ if (isset($_GET["id"]))
 }
 else
 	$id = NULL;
-$period = isset($_GET["period"]) ? $_GET["period"] : NULL;
+$period = $_GET["period"] ?? NULL;
 if (isset($period))
 	settype($period,"integer");
 if (isset($period))
 	$end_period = $period;
-$edit_type = isset($_GET["edit_type"]) ? $_GET["edit_type"] : NULL;
+$edit_type = $_GET["edit_type"] ?? NULL;
 if (!isset($edit_type))
 	$edit_type = "";
 $page = verif_page();
@@ -76,7 +76,7 @@ if (isset($id))
 }
 else
 	Definition_ressource_domaine_site();
-$room_back = (isset($_GET['room_back']))? $_GET['room_back']: ((isset($_GET['room']))? $_GET['room'] :'all') ;
+$room_back = $_GET['room_back'] ?? $_GET['room'] ?? 'all' ;
 if (@file_exists("language/lang_subst_".$area.".".$locale))
 	include "language/lang_subst_".$area.".".$locale;
 get_planning_area_values($area);
@@ -202,7 +202,7 @@ if (isset($id))
 				$rep_day[6] = $row[3][6] != '0';
 			}
 			else
-				$rep_day = array(0, 0, 0, 0, 0, 0, 0);
+				$rep_day = [0, 0, 0, 0, 0, 0, 0];
 		}
 		else
 		{
@@ -220,7 +220,7 @@ if (isset($id))
 		$rep_end_day   = $day;
 		$rep_end_month = $month;
 		$rep_end_year  = $year;
-		$rep_day       = array(0, 0, 0, 0, 0, 0, 0);
+		$rep_day       = [0, 0, 0, 0, 0, 0, 0];
 		$rep_jour      = 0;
 	}
 }
@@ -276,7 +276,7 @@ else
 	$rep_end_day   	= $day;
 	$rep_end_month 	= $month;
 	$rep_end_year  	= $year;
-	$rep_day       	= array(0, 0, 0, 0, 0, 0, 0);
+	$rep_day       	= [0, 0, 0, 0, 0, 0, 0];
 	$rep_jour      	= 0;
 	$option_reservation = -1;
 	$modif_option_reservation = 'y';
@@ -295,7 +295,7 @@ if (!getWritable($beneficiaire, getUserName(),$id))
 $nb_areas = 0;
 $sql = "SELECT id, area_name FROM ".TABLE_PREFIX."_area";
 $res = grr_sql_query($sql);
-$allareas_id = array();
+$allareas_id = [];
 if ($res)
 {
 	for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
@@ -846,20 +846,20 @@ if ($type_affichage_reser == 0)
     // echo '<select class="form-control" name="dur_units" size="0.5">'.PHP_EOL;
     // echo '<select name="dur_units" >'.PHP_EOL;
 	if ($enable_periods == 'y')
-		$units = array("periods", "days");
+		$units = ["periods", "days"];
 	else
 	{
 		$duree_max_resa_area = grr_sql_query1("SELECT duree_max_resa_area FROM ".TABLE_PREFIX."_area WHERE id='".$area."'");
 		if ($duree_max_resa_area < 0)
-			$units = array("minutes", "hours", "days", "weeks");
+			$units = ["minutes", "hours", "days", "weeks"];
 		else if ($duree_max_resa_area < 60)
-			$units = array("minutes");
+			$units = ["minutes"];
 		else if ($duree_max_resa_area < 60*24)
-			$units = array("minutes", "hours");
+			$units = ["minutes", "hours"];
 		else if ($duree_max_resa_area < 60*24*7)
-			$units = array("minutes", "hours", "days");
+			$units = ["minutes", "hours", "days"];
 		else
-			$units = array("minutes", "hours", "days", "weeks");
+			$units = ["minutes", "hours", "days", "weeks"];
 	}
 	foreach ($units as $unit)
 	{
@@ -1055,8 +1055,8 @@ echo '<table class="table-header">',PHP_EOL;
 $sql = "SELECT id FROM ".TABLE_PREFIX."_area;";
 $res = grr_sql_query($sql);
 echo '<!-- ************* Periodic edition ***************** -->',PHP_EOL;
-$weeklist = array("unused","every week","week 1/2","week 1/3","week 1/4","week 1/5");
-$monthlist = array("firstofmonth","secondofmonth","thirdofmonth","fouthofmonth","fiveofmonth","lastofmonth");
+$weeklist = ["unused", "every week", "week 1/2", "week 1/3", "week 1/4", "week 1/5"];
+$monthlist = ["firstofmonth", "secondofmonth", "thirdofmonth", "fouthofmonth", "fiveofmonth", "lastofmonth"];
 if($periodiciteConfig == 'y'){
 	if ( ($edit_type == "series") || (isset($flag_periodicite)))
 	{
@@ -1212,7 +1212,7 @@ if($periodiciteConfig == 'y'){
 					echo '<tr><td class="E"><b>'.get_vocab('rep_rep_day').'</b> '.$opt.'</td></tr>'."\n";
 				else
 					echo '<tr><td class="E"><b>'.get_vocab('rep_rep_days').'</b> '.$opt.'</td></tr>'."\n";
-				if ($enable_periods=='y') list( $start_period, $start_date) =  period_date_string($start_time);
+				if ($enable_periods=='y') [$start_period, $start_date] =  period_date_string($start_time);
 				else $start_date = time_date_string($start_time,$dformat);
 				$duration = $end_time - $start_time;
 				if ($enable_periods=='y') toPeriodString($start_period, $duration, $dur_units);

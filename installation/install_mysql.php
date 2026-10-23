@@ -21,14 +21,14 @@ require_once("../include/misc.inc.php");
 require_once("../include/functions.inc.php");
 
 $nom_fic = "../include/connect.inc.php";
-$etape = isset($_GET["etape"]) ? $_GET["etape"] : NULL;
-$adresse_db = isset($_GET["adresse_db"]) ? $_GET["adresse_db"] : NULL;
-$port_db = isset($_GET["port_db"]) ? $_GET["port_db"] : NULL;
-$login_db = isset($_GET["login_db"]) ? $_GET["login_db"] : NULL;
-$pass_db = isset($_GET["pass_db"]) ? $_GET["pass_db"] : NULL;
-$choix_db = isset($_GET["choix_db"]) ? $_GET["choix_db"] : NULL;
-$table_new = isset($_GET["table_new"]) ? $_GET["table_new"] : NULL;
-$table_prefix = isset($_GET["table_prefix"]) ? $_GET["table_prefix"] : NULL;
+$etape = $_GET["etape"] ?? NULL;
+$adresse_db = $_GET["adresse_db"] ?? NULL;
+$port_db = $_GET["port_db"] ?? NULL;
+$login_db = $_GET["login_db"] ?? NULL;
+$pass_db = $_GET["pass_db"] ?? NULL;
+$choix_db = $_GET["choix_db"] ?? NULL;
+$table_new = $_GET["table_new"] ?? NULL;
+$table_prefix = $_GET["table_prefix"] ?? NULL;
 
 // Pour cette page uniquement, on désactive l'UTF8 et on impose l'ISO-8859-1
 $unicode_encoding = 1;

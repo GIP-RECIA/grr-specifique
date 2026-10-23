@@ -18,11 +18,11 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_room_del.php";
-$type = isset($_GET["type"]) ? $_GET["type"] : NULL;
-$confirm = isset($_GET["confirm"]) ? $_GET["confirm"] : NULL;
-$room = isset($_GET["room"]) ? $_GET["room"] : NULL;
-$id_area = isset($_POST["id_area"]) ? $_POST["id_area"] : (isset($_GET["id_area"]) ? $_GET["id_area"] : NULL);
-$id_site = isset($_POST['id_site']) ? $_POST['id_site'] : (isset($_GET['id_site']) ? $_GET['id_site'] : -1);
+$type = $_GET["type"] ?? NULL;
+$confirm = $_GET["confirm"] ?? NULL;
+$room = $_GET["room"] ?? NULL;
+$id_area = $_POST["id_area"] ?? $_GET["id_area"] ?? NULL;
+$id_site = $_POST['id_site'] ?? $_GET['id_site'] ?? -1;
 if (isset($room))
 	settype($room,"integer");
 if (isset($id_area))

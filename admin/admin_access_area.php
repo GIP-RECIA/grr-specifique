@@ -19,13 +19,13 @@
 include "../include/admin.inc.php";
 $grr_script_name = "admin_access_area.php";
 
-$id_area = isset($_POST["id_area"]) ? $_POST["id_area"] : (isset($_GET["id_area"]) ? $_GET["id_area"] : NULL);
+$id_area = $_POST["id_area"] ?? $_GET["id_area"] ?? NULL;
 if (!isset($id_area))
 	settype($id_area,"integer");
-$reg_user_login = isset($_POST["reg_user_login"]) ? $_POST["reg_user_login"] : NULL;
-$reg_multi_user_login = isset($_POST["reg_multi_user_login"]) ? $_POST["reg_multi_user_login"] : NULL;
+$reg_user_login = $_POST["reg_user_login"] ?? NULL;
+$reg_multi_user_login = $_POST["reg_multi_user_login"] ?? NULL;
 $test_user =  isset($_POST["reg_multi_user_login"]) ? "multi" : (isset($_POST["reg_user_login"]) ? "simple" : NULL);
-$action = isset($_GET["action"]) ? $_GET["action"] : NULL;
+$action = $_GET["action"] ?? NULL;
 $msg = '';
 
 

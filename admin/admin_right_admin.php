@@ -18,7 +18,7 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_right_admin.php";
-$id_area = isset($_POST["id_area"]) ? $_POST["id_area"] : (isset($_GET["id_area"]) ? $_GET["id_area"] : NULL);
+$id_area = $_POST["id_area"] ?? $_GET["id_area"] ?? NULL;
 if (!isset($id_area))
 	settype($id_area,"integer");
 
@@ -32,10 +32,10 @@ check_access(6, $back);
 print_header("", "", "", $type="with_session");
 // Affichage de la colonne de gauche
 include "admin_col_gauche.php";
-$reg_admin_login = isset($_POST["reg_admin_login"]) ? $_POST["reg_admin_login"] : NULL;
-$reg_multi_admin_login = isset($_POST["reg_multi_admin_login"]) ? $_POST["reg_multi_admin_login"] : NULL;
+$reg_admin_login = $_POST["reg_admin_login"] ?? NULL;
+$reg_multi_admin_login = $_POST["reg_multi_admin_login"] ?? NULL;
 $test_user =  isset($_POST["reg_multi_admin_login"]) ? "multi" : (isset($_POST["reg_admin_login"]) ? "simple" : NULL);
-$action = isset($_GET["action"]) ? $_GET["action"] : NULL;
+$action = $_GET["action"] ?? NULL;
 $msg = '';
 if ($test_user == "multi")
 {

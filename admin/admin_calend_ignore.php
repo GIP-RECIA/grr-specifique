@@ -30,7 +30,7 @@ echo "<h2>".get_vocab('calendrier_des_jours_hors_reservation')."</h2>\n";
 if (isset($_POST['record']) && ($_POST['record'] == 'yes'))
 {
 	// On met de côté toutes les dates
-	$day_old = array();
+	$day_old = [];
 	$res_old = grr_sql_query("SELECT day FROM ".TABLE_PREFIX."_calendar");
 	if ($res_old)
 	{
@@ -100,7 +100,7 @@ if (Settings::get("show_holidays") == 'Oui'){ // on n'affiche ce choix que si le
     // définir les jours fériés
     $req = "SELECT * FROM ".TABLE_PREFIX."_calendrier_feries";
     $ans = grr_sql_query($req);
-    $feries = array();
+    $feries = [];
     foreach($ans as $val){$feries[] = $val['DAY'];}
     $cocheferies = "";
     foreach ($feries as &$value) {
@@ -110,7 +110,7 @@ if (Settings::get("show_holidays") == 'Oui'){ // on n'affiche ce choix que si le
     // définir les vacances
     $req = "SELECT * FROM ".TABLE_PREFIX."_calendrier_vacances";
     $ans = grr_sql_query($req);
-    $vacances = array();
+    $vacances = [];
     foreach($ans as $val){$vacances[] = $val['DAY'];}
     $cocheVacances = "";
     foreach ($vacances as &$value) {

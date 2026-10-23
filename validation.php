@@ -275,11 +275,11 @@ $date_now = time();
 
 get_planning_area_values($area);
 if ($enable_periods == 'y')
-	list( $start_period, $start_date) = period_date_string($row[10]);
+	[$start_period, $start_date] = period_date_string($row[10]);
 else
 	$start_date = time_date_string($row[10],$dformat);
 if ($enable_periods == 'y')
-	list( , $end_date) =  period_date_string($row[11], -1);
+	[, $end_date] =  period_date_string($row[11], -1);
 else
 	$end_date = time_date_string($row[11], $dformat);
 if ($beneficiaire != "")
@@ -611,14 +611,14 @@ echo '<fieldset><legend style="font-size:12pt;font-weight:bold">'.get_vocab('ent
         }
         grr_sql_free($res);
         if ($enable_periods == 'y')
-            list( $start_period, $start_date) = period_date_string($start_time);
+            [$start_period, $start_date] = period_date_string($start_time);
         else
             $start_date = time_date_string($start_time, $dformat);
         if ($enable_periods == 'y')
             toPeriodString($start_period, $duration, $dur_units);
         else
             toTimeString($duration, $dur_units);
-        $weeklist = array("unused", "every week", "week 1/2", "week 1/3", "week 1/4", "week 1/5");
+        $weeklist = ["unused", "every week", "week 1/2", "week 1/3", "week 1/4", "week 1/5"];
         if ($rep_type == 2)
             $affiche_period = get_vocab($weeklist[$rep_num_weeks]);
         else

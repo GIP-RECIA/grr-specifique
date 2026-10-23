@@ -20,7 +20,7 @@ $msg = '';
 
 // Installation, Activation, Désactivation
 if (isset($_GET['activation'])) {
-	
+
 	$iter = $_GET['activation'];
 
 	$sql = "SELECT `nom`, `actif` FROM ".TABLE_PREFIX."_modulesext WHERE `nom` = '".$iter."';";
@@ -41,7 +41,7 @@ if (isset($_GET['activation'])) {
 				include '../modules/'.$iter.'/installation.php';
 				include '../modules/'.$iter.'/infos.php';
 				Module::Installation($iter, $module_versionBDD);
-				
+
 			} else{
 				$msg .= "Impossible de trouver le fichier d'installation et ou d'infos !\\n";
 			}
@@ -93,7 +93,7 @@ if (isset($_POST['ok']) && $upload_Module == 1) {
 							$msg .= "Erreur 8 - Le module n\'a pas pu être installé\\n";
 							$ok = 'no';
 						}
-						
+
                         $unlinkReturn = unlink($picturePath);
                         if (!$unlinkReturn) {
                             $msg .= "Erreur 9 - Installation réussie, cependant archive non supprimé.  Cette erreur peut être ignorée.\\n";
@@ -109,7 +109,7 @@ if (isset($_POST['ok']) && $upload_Module == 1) {
 			    $msg .= "Erreur 7 - Le module n\'a pas pu être enregistré !\\n";
 				$ok = 'no';	
 			}
-			
+
         }
     } elseif ($_FILES['doc_file']['name'] != '') {
         $msg .= "Erreur 6 - Le module n\'a pas pu être enregistré : le fichier sélectionné n'est pas valide !\\n";
@@ -181,10 +181,10 @@ if($upload_Module == 1){
 			if($iter != "." && $iter != ".."){
 				if(is_file('../modules/'.$iter.'/infos.php')){
 					include '../modules/'.$iter.'/infos.php';
-					$infosModule = array($module_nom,$module_description,$module_version,$module_autheur,$module_copyright);
+					$infosModule = [$module_nom, $module_description, $module_version, $module_autheur, $module_copyright];
 				}
 				if(!isset($infosModule)){
-					$infosModule = array();
+					$infosModule = [];
 					$infosModule[0] = "<font color='red'>Erreur lecture</font>";
 					$infosModule[1] = "<font color='red'>Erreur lecture</font>";
 					$infosModule[2] = "<font color='red'>Erreur lecture</font>";
@@ -201,7 +201,7 @@ if($upload_Module == 1){
 						$nb = grr_sql_count($res);
 						if($nb > 0){
 							$row = grr_sql_row($res, 0);
-							
+
 							if($row[1] == 0)
 								$activation = "Activer";
 							else

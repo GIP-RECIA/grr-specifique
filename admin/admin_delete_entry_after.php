@@ -80,7 +80,7 @@ include 'admin_col_gauche.php';
     <tr>
     <?php echo '<form enctype="multipart/form-data" action="./admin_delete_entry_after.php" id="nom_formulaire" method="post" style="width: 100%;">'.PHP_EOL;
          echo '<input type="hidden" name="delete" value="1" />'.PHP_EOL;
- 
+
 ?>
     </tr>
     <tr>

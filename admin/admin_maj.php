@@ -80,8 +80,8 @@ function traite_requete($requete = "")
 // Fin de fonction traite_requete
 
 
-$valid = isset($_POST["valid"]) ? $_POST["valid"] : 'no';
-$version_old = isset($_POST["version_old"]) ? $_POST["version_old"] : '';
+$valid = $_POST["valid"] ?? 'no';
+$version_old = $_POST["version_old"] ?? '';
 
 $majscript=false;
 if (defined('STDIN')&&isset($argv[1])&&$argv[1]==$apikey) {
@@ -125,10 +125,10 @@ if (Settings::get('sso_statut') == 'lcs')
 {
 	include LCS_PAGE_AUTH_INC_PHP;
 	include LCS_PAGE_LDAP_INC_PHP;
-	list ($idpers,$login) = isauth();
+	[$idpers, $login] = isauth();
 	if ($idpers)
 	{
-		list($user, $groups) = people_get_variables($login, true);
+		[$user, $groups] = people_get_variables($login, true);
 		$lcs_tab_login["nom"] = $user["nom"];
 		$lcs_tab_login["email"] = $user["email"];
 		$long = strlen($user["fullname"]) - strlen($user["nom"]);

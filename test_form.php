@@ -24,12 +24,12 @@ if (isset($_GET["id"]))
 }
 else
 	$id = NULL;
-$period = isset($_GET["period"]) ? $_GET["period"] : NULL;
+$period = $_GET["period"] ?? NULL;
 if (isset($period))
 	settype($period,"integer");
 if (isset($period))
 	$end_period = $period;
-$edit_type = isset($_GET["edit_type"]) ? $_GET["edit_type"] : NULL;
+$edit_type = $_GET["edit_type"] ?? NULL;
 if (!isset($edit_type))
 	$edit_type = "";
 $page = verif_page();

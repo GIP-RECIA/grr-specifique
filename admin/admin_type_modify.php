@@ -25,13 +25,13 @@ $month = date("m");
 $year  = date("Y");
 check_access(6, $back);
 // Initialisation
-$id_type = isset($_GET["id_type"]) ? $_GET["id_type"] : 0;
-$type_name = isset($_GET["type_name"]) ? $_GET["type_name"] : NULL;
-$order_display = isset($_GET["order_display"]) ? $_GET["order_display"] : NULL;
-$type_letter = isset($_GET["type_letter"]) ? $_GET["type_letter"] : NULL;
+$id_type = $_GET["id_type"] ?? 0;
+$type_name = $_GET["type_name"] ?? NULL;
+$order_display = $_GET["order_display"] ?? NULL;
+$type_letter = $_GET["type_letter"] ?? NULL;
 //$couleur = isset($_GET["couleur"]) ? $_GET["couleur"] : NULL;
-$couleur_hexa = isset($_GET["couleurhexa"]) ? $_GET["couleurhexa"] : NULL;
-$disponible = isset($_GET["disponible"]) ? $_GET["disponible"] : NULL;
+$couleur_hexa = $_GET["couleurhexa"] ?? NULL;
+$disponible = $_GET["disponible"] ?? NULL;
 $msg = '';
 
 // Couleurs par défaut

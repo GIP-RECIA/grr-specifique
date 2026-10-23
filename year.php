@@ -48,10 +48,10 @@ if ($_GET['pview'] == 1)
 	$class_image = "print_image";
 else
 	$class_image = "image";
-$from_month = isset($_GET["from_month"]) ? $_GET["from_month"] : NULL;
-$from_year = isset($_GET["from_year"]) ? $_GET["from_year"] : NULL;
-$to_month = isset($_GET["to_month"]) ? $_GET["to_month"] : NULL;
-$to_year = isset($_GET["to_year"]) ? $_GET["to_year"] : NULL;
+$from_month = $_GET["from_month"] ?? NULL;
+$from_year = $_GET["from_year"] ?? NULL;
+$to_month = $_GET["to_month"] ?? NULL;
+$to_year = $_GET["to_year"] ?? NULL;
 $day = 1;
 $date_now = time();
 //Default parameters:

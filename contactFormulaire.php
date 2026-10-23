@@ -39,70 +39,70 @@ bouton_retour_haut();
 
 ?>
 	<script>
-	
+
 		function remplirdureemin(res)
 		  { 
-		  
+
 				frmContact.dureemin.options.length = 0;
 				frmContact.debdureemin.options.length = 0;
 				resmin = res/60;
 				nbiteration = 60/resmin;
-				
+
 				var y= document.getElementById("debdureemin");
 				var x = document.getElementById("dureemin");
 				valeur = 0;
-				
+
 				for (i=0;i<nbiteration;i++){
 					frmContact.dureemin.options[i] = document.createElement("option");
 					frmContact.debdureemin.options[i] = document.createElement("option");
-					
+
 					if(i==0){
 						valeur = 00;
 					}else{
 						valeur = valeur + resmin;
 					}
-					
+
 						frmContact.dureemin.options[i].text = valeur +" min";
 						frmContact.dureemin.options[i].value = valeur;
 						x.add(frmContact.dureemin.options[i]);
-					
+
 						frmContact.debdureemin.options[i].text = valeur +" min";
 						frmContact.debdureemin.options[i].value = valeur;
 						y.add(frmContact.debdureemin.options[i]);
-					
+
 					}
-		
+
 				frmContact.dureemin.options.selectedIndex = 0;
 			}
 	</script>
-	
-	
-	
+
+
+
 	<form id="frmContact" method="post" action="traitementcontact.php">
 	<div id="formContact">
 		<div class="row">
-			
+
 			<fieldset>
-				
+
 				<legend><b>Vos coordonnées</b></legend>
 
 
 				<div class="col-lg-6 col-md-6 col-xs-12">
-					
+
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
 							<input class="form-control" type="text" id="nom"  size="8" name="nom" placeholder="Votre nom" required/>
 						</div>
 					</div>
-						
+
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
 							<input class="form-control" type="text" size="8" id="prenom"  name="prenom" placeholder="Votre prénom" />
 						</div>
 					</div>
-					
+
 				</div>
 				<div class="col-lg-6 col-md-6 col-xs-12">
 					<div class="form-group">
@@ -111,7 +111,7 @@ bouton_retour_haut();
 							<input class="form-control" type="text" id="email" size="8" name="email" placeholder="Votre adresse de courriel" required />
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></div>
@@ -119,19 +119,19 @@ bouton_retour_haut();
 						</div>
 					</div>
 				</div>
-				
+
 		</fieldset>
 	</div>
-				
+
 	<div class="row">
 
 				<fieldset>
 					<legend><b>Réservation</b></legend>
 					<label for="subject">Sujet :</label>
 					<textarea class="form-control" id="subject" name="sujet" cols="30" rows="4"></textarea><br/>
-					
-					
-					
+
+
+
 						<label>Domaines : </label>
 						<select id="area" name="area" class="form-control" required>
 							<option>SELECTIONNER UN DOMAINE </option>
@@ -149,13 +149,13 @@ bouton_retour_haut();
 									echo '<option onclick="" value="'.$id."/".$resolution_area.'"> '.$area_name.'</option>'.PHP_EOL;
 								}
 							}
-							
+
 							?>
 						</select>
-						
-							
-						
-						
+
+
+
+
 						<script>
 							$(document).ready(function()
 							{
@@ -168,7 +168,7 @@ bouton_retour_haut();
 									var value = values.split('/');
 									var id = value[0] ;
 									var resolution = value[1] ;
-									
+
 									remplirdureemin(resolution);
 									//~ remplirdebdureemin(resolution);
 									if (id != '')
@@ -200,18 +200,18 @@ bouton_retour_haut();
 								<option>SELECTIONNER UN DOMAINE </option>
 							</select>
 				</fieldset>
-				
+
 		</div>
-				
-				
+
+
 		<div class="row">	
-				
+
 				<div class="col-lg-6 col-md-6 col-xs-12">
-					
+
 					<div class="form-group">
 						<div class="input-group">
 
-				
+
 				<legend><b> Date :</b></legend>
 
 
@@ -262,7 +262,7 @@ bouton_retour_haut();
 	<?php echo get_vocab('top_of_page'); ?>
 	</div>
 
-	
+
 	<script>
 	jQuery(document).ready(function() {
 	jQuery("#formStep").validate({
@@ -279,7 +279,7 @@ jQuery.extend(jQuery.validator.messages, {
 	email: "votre message",
 });
 </script>
-	
+
 </div>
 </form>
 

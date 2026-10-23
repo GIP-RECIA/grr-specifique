@@ -82,21 +82,29 @@ function setHolidays($year = null)
 	$easterDay   = date('j', $easterDate);
 	$easterMonth = date('n', $easterDate);
 	$easterYear  = date('Y', $easterDate);
-	$holidays = array(
-	// Dates fixes
-	mktime(0, 0, 0, 1,  1,  $year),  // 1er janvier
-	mktime(0, 0, 0, 5,  1,  $year),  // Fête du travail
-	mktime(0, 0, 0, 5,  8,  $year),  // Victoire des alliés
-	mktime(0, 0, 0, 7,  14, $year),  // Fête nationale
-	mktime(0, 0, 0, 8,  15, $year),  // Assomption
-	mktime(0, 0, 0, 11, 1,  $year),  // Toussaint
-	mktime(0, 0, 0, 11, 11, $year),  // Armistice
-	mktime(0, 0, 0, 12, 25, $year),  // Noel
-	// Dates variables
-	mktime(0, 0, 0, $easterMonth, $easterDay + 1,  $easterYear),
-	mktime(0, 0, 0, $easterMonth, $easterDay + 39, $easterYear),
-	mktime(0, 0, 0, $easterMonth, $easterDay + 50, $easterYear),
-	);
+	$holidays = [
+     // Dates fixes
+     mktime(0, 0, 0, 1,  1,  $year),
+     // 1er janvier
+     mktime(0, 0, 0, 5,  1,  $year),
+     // Fête du travail
+     mktime(0, 0, 0, 5,  8,  $year),
+     // Victoire des alliés
+     mktime(0, 0, 0, 7,  14, $year),
+     // Fête nationale
+     mktime(0, 0, 0, 8,  15, $year),
+     // Assomption
+     mktime(0, 0, 0, 11, 1,  $year),
+     // Toussaint
+     mktime(0, 0, 0, 11, 11, $year),
+     // Armistice
+     mktime(0, 0, 0, 12, 25, $year),
+     // Noel
+     // Dates variables
+     mktime(0, 0, 0, $easterMonth, $easterDay + 1,  $easterYear),
+     mktime(0, 0, 0, $easterMonth, $easterDay + 39, $easterYear),
+     mktime(0, 0, 0, $easterMonth, $easterDay + 50, $easterYear),
+ ];
 	sort($holidays);
 	return $holidays;
 }
@@ -654,10 +662,7 @@ function plages_libre_semaine_ressource($id_room, $month_week, $day_week, $year_
  	include "config_ldap.inc.php";
  	$est_membre="non";
 	// LDAP attributs
- 	$members_attr = array (
-		$ldap_group_member_attr
-		// Recherche des Membres du groupe
- 		);
+ 	$members_attr = [$ldap_group_member_attr];
 		// Avec des GroupOfNames, ce ne serait pas ça.
 	$ds = @ldap_connect('ldap://' . $ldap_adresse . ':' . $ldap_port);
  	if ($ds)
@@ -821,7 +826,7 @@ function protect_data_sql($_value)
 // Traite les données envoyées par la methode GET de la variable $_GET["page"]
 function verif_page()
 {
-	$page = array("day", "week", "month", "week_all", "month_all", "month_all2");
+	$page = ["day", "week", "month", "week_all", "month_all", "month_all2"];
 	if (isset($_GET["page"]))
 	{
 		if (in_array($_GET["page"], $page))
@@ -915,7 +920,7 @@ function begin_page($title, $page = "with_session")
 	header('Content-Type: text/html; charset=utf-8');
 	if (!isset($_COOKIE['open']))
 	{
-		setcookie("open", "true", time()+3600);
+		setcookie("open", "true", ['expires' => time()+3600]);
 	}
 	$a = '<!DOCTYPE html>'.PHP_EOL;
 	$a .= '<html lang="fr">'.PHP_EOL;
@@ -1582,7 +1587,7 @@ function compare_ip_adr($ip1, $ips2)
         foreach ($ip2 as $ip){
             $slash = strpos($ip,'/');
             if ($slash !== false){
-                list($net,$mask) = preg_split("~/~",$ip);
+                [$net, $mask] = preg_split("~/~",$ip);
                 $lnet=ip2long($net);
                 $lip=ip2long($ip1);
                 $binnet=str_pad( decbin($lnet),32,"0",STR_PAD_LEFT );
@@ -1753,7 +1758,7 @@ function period_date_string($t, $mod_time = 0)
 	}
 	if ( $p_num >= count($periods_name) - 1 )
 		$p_num = count($periods_name) - 1;
-	return array($p_num, $periods_name[$p_num] . utf8_strftime(", ".$dformat, $t));
+	return [$p_num, $periods_name[$p_num] . utf8_strftime(", ".$dformat, $t)];
 }
 
 /*
@@ -2471,7 +2476,7 @@ function make_room_item_html($link, $current_area, $current_room, $year, $month,
 /**
  * @param integer $action
  */
-function send_mail($id_entry, $action, $dformat, $tab_id_moderes = array(), $oldRessource = '')
+function send_mail($id_entry, $action, $dformat, $tab_id_moderes = [], $oldRessource = '')
 {
 	global $vocab, $grrSettings, $locale, $weekstarts, $enable_periods, $periods_name;
 
@@ -2540,7 +2545,7 @@ function send_mail($id_entry, $action, $dformat, $tab_id_moderes = array(), $old
 	$jours_cycle 				= htmlspecialchars($row[17]);
 	$duration     				= $row[9];
 	if ($enable_periods == 'y')
-		list($start_period, $start_date) = period_date_string($row[10]);
+		[$start_period, $start_date] = period_date_string($row[10]);
 	else
 		$start_date = time_date_string($row[10],$dformat);
 	$rep_type = 0;
@@ -2582,7 +2587,7 @@ function send_mail($id_entry, $action, $dformat, $tab_id_moderes = array(), $old
 		toPeriodString($start_period, $duration, $dur_units);
 	else
 		toTimeString($duration, $dur_units);
-	$weeklist = array("unused", "every week", "week 1/2", "week 1/3", "week 1/4", "week 1/5");
+	$weeklist = ["unused", "every week", "week 1/2", "week 1/3", "week 1/4", "week 1/5"];
 	if ($rep_type == 2)
 		$affiche_period = $vocab[$weeklist[$rep_num_weeks]];
 	else
@@ -2772,7 +2777,7 @@ function send_mail($id_entry, $action, $dformat, $tab_id_moderes = array(), $old
 	if ($nombre > 0)
 	{
 		$destinataire = "";
-		$tab_destinataire = array();
+		$tab_destinataire = [];
 		for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
 		{
 			if ($row[0] != "")
@@ -3432,7 +3437,7 @@ function verif_acces_ressource($user, $id_room)
 	}
 	else
 	{
-		$tab_rooms_noaccess = array();
+		$tab_rooms_noaccess = [];
 		$sql = "SELECT id, who_can_see FROM ".TABLE_PREFIX."_room";
 		$res = grr_sql_query($sql);
 		if (!$res)
@@ -3600,7 +3605,7 @@ function showAccessDenied($back)
 		</p>
 	</body>
 	</html>
-	<?php
+<?php
 }
 /* showNoReservation()
  *
@@ -3705,14 +3710,14 @@ function date_time_string($t, $dformat)
 function describe_period_span($starts, $ends)
 {
 	global $enable_periods, $periods_name, $vocab, $duration;
-	list($start_period, $start_date) =  period_date_string($starts);
-	list( , $end_date) =  period_date_string($ends, -1);
+	[$start_period, $start_date] =  period_date_string($starts);
+	[, $end_date] =  period_date_string($ends, -1);
 	$duration = $ends - $starts;
 	toPeriodString($start_period, $duration, $dur_units);
 	if ($duration > 1)
 	{
-		list( , $start_date) =  period_date_string($starts);
-		list( , $end_date) =  period_date_string($ends, -1);
+		[, $start_date] =  period_date_string($starts);
+		[, $end_date] =  period_date_string($ends, -1);
 		$temp = $start_date . " ==> " . $end_date;
 	}
 	else
@@ -3957,7 +3962,7 @@ function resa_est_hors_reservation2($start_time,$end_time,$area)
 // trouve les utilisateurs gestionnaires de ressource
 function find_user_room ($id_room)
 {
-	$emails = array ();
+	$emails = [];
 	$sql = "select email from ".TABLE_PREFIX."_utilisateurs, ".TABLE_PREFIX."_j_user_room
 	where ".TABLE_PREFIX."_utilisateurs.login = ".TABLE_PREFIX."_j_user_room.login and id_room='".$id_room."'";
 	$res = grr_sql_query($sql);
@@ -4229,7 +4234,7 @@ Retourne un tableau contenant les nom et prénom et l'email de $_beneficiaire
 */
 function donne_nom_email($_beneficiaire)
 {
-	$tab_benef = array();
+	$tab_benef = [];
 	$tab_benef["nom"] = "";
 	$tab_benef["email"] = "";
 	if ($_beneficiaire == "")
@@ -4574,8 +4579,8 @@ function supprimerReservationsUtilisateursEXT($avec_resa,$avec_privileges)
 	// Récupération de tous les utilisateurs de la source EXT
 	$requete_users_ext = "SELECT login FROM ".TABLE_PREFIX."_utilisateurs WHERE source='ext' and statut<>'administrateur'";
 	$res = grr_sql_query($requete_users_ext);
-	$logins = array();
-	$logins_liaison  = array();
+	$logins = [];
+	$logins_liaison  = [];
 	if ($res)
 	{
 		for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)

@@ -18,7 +18,7 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_admin_site.php";
-$id_site = isset($_POST["id_site"]) ? $_POST["id_site"] : (isset($_GET["id_site"]) ? $_GET["id_site"] : NULL);
+$id_site = $_POST["id_site"] ?? $_GET["id_site"] ?? NULL;
 if (empty($id_site))
 	$id_site = get_default_site();
 if (!isset($id_site))
@@ -35,8 +35,8 @@ if (Settings::get("module_multisite") != "Oui")
 print_header("", "", "", $type="with_session");
 // Affichage de la colonne de gauche
 include "admin_col_gauche.php";
-$reg_admin_login = isset($_GET["reg_admin_login"]) ? $_GET["reg_admin_login"] : NULL;
-$action = isset($_GET["action"]) ? $_GET["action"] : NULL;
+$reg_admin_login = $_GET["reg_admin_login"] ?? NULL;
+$action = $_GET["action"] ?? NULL;
 $msg = '';
 
 if ($reg_admin_login)

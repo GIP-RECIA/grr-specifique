@@ -25,8 +25,8 @@ if($restaureBBD == 1){
 	$month = date("m");
 	$year  = date("Y");
 	check_access(6, $back);
-	$sql_file = isset($_FILES["sql_file"]) ? $_FILES["sql_file"] : NULL;
-	$file_name = isset($_GET["file_name"]) ? $_GET["file_name"] : NULL;
+	$sql_file = $_FILES["sql_file"] ?? NULL;
+	$file_name = $_GET["file_name"] ?? NULL;
 	VerifyModeDemo();
 	if (!$file_name)
 		print_header("", "", "", $type="with_session");

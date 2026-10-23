@@ -32,7 +32,7 @@ if (!grr_resumeSession())
 	die();
 };
 include "include/language.inc.php";
-$series = isset($_GET["series"]) ? $_GET["series"] : NULL;
+$series = $_GET["series"] ?? NULL;
 if (isset($series))
 	settype($series,"integer");
 $page = verif_page();
@@ -78,7 +78,7 @@ if ($info = mrbsGetEntryInfo($id))
 	$result = mrbsDelEntry(getUserName(), $id, $series, 1);
 	if ($result)
 	{
-        $room_back = isset($_GET['room_back']) ? $_GET['room_back'] : $info['room_id'];
+        $room_back = $_GET['room_back'] ?? $info['room_id'];
 		$_SESSION['displ_msg'] = 'yes';
         $ress = '';
         if ($room_back != 'all')  {$ress = "&room=".$room_back;}

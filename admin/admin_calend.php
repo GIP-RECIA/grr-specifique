@@ -24,12 +24,12 @@ $back = getBackUri();
 // vérification des droits d'accès 
 if(authGetUserLevel(getUserName(),-1,'area') < 5)
 {
-    showAccessDenied($day, $month, $year, '',$back);
+    showAccessDenied($day);
     exit();
 }
 
 # print the page header
-print_header("","","","",$type="with_session", $page="admin");
+print_header("","","","");
 // Affichage de la colonne de gauche
 include "admin_col_gauche.php";
 

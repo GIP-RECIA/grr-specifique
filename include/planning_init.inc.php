@@ -52,9 +52,9 @@ else
 	$class_image = "image";
 // initialisation des paramètres de temps
 $date_now = time();
-$day = (isset($_GET['day']))? $_GET['day'] : date("d"); // ou 1 ? YN le 07/03/2018
-$month = (isset($_GET['month']))? $_GET['month'] : date("m");
-$year = (isset($_GET['year']))? $_GET['year'] : date("Y");
+$day = $_GET['day'] ?? date("d"); // ou 1 ? YN le 07/03/2018
+$month = $_GET['month'] ?? date("m");
+$year = $_GET['year'] ?? date("Y");
 
 /*if (empty($month) || empty($year) || !checkdate($month, 1, $year))
 {

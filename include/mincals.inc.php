@@ -129,7 +129,7 @@ function minicals($year, $month, $day, $area, $room, $dmy)
 				}
 				$d++;
 			}
-			return array($d, $s);
+			return [$d, $s];
 		}
 
 		/**
@@ -259,7 +259,7 @@ function minicals($year, $month, $day, $area, $room, $dmy)
 	$nb_calendar = Settings::get("nb_calendar");
 	if ($nb_calendar >= 1)
 	{
-		$month_ = array();
+		$month_ = [];
 		$milieu = ($nb_calendar % 2 == 1) ? ($nb_calendar + 1) / 2 : $nb_calendar / 2;
 		for ($k = 1; $k < $milieu; $k++)
 			$month_[] = mktime(0, 0, 0, $month + $k - $milieu, 1, $year);

@@ -51,7 +51,7 @@ echo "<table class=\"table_adm4\">";
 		else
 			$chaine = '';
 		echo "<div id=\"colgauche\">\n";
-		$liste = array();
+		$liste = [];
 		if (authGetUserLevel(getUserName(), -1, 'area') >= 6)
 			$liste[] = 'admin_config.php';
 		if (authGetUserLevel(getUserName(), -1, 'area') >= 6)
@@ -66,7 +66,7 @@ echo "<table class=\"table_adm4\">";
 				$liste[] = 'admin_calend_jour_cycle.php';
 		}
 		affichetableau($liste,get_vocab("admin_menu_general"));
-		$liste = array();
+		$liste = [];
 		if (Settings::get("module_multisite") == "Oui")
 		{
 			if (authGetUserLevel(getUserName(), -1, 'area') >= 6)
@@ -81,7 +81,7 @@ echo "<table class=\"table_adm4\">";
 		else
 			affichetableau($liste,get_vocab("admin_menu_arearoom"));
 
-		$liste = array();
+		$liste = [];
 		if ((authGetUserLevel(getUserName(), -1, 'area') >= 6) || (authGetUserLevel(getUserName(), -1, 'user') == 1))
 			$liste[] = 'admin_user.php';
 		if (Settings::get("module_multisite") == "Oui")
@@ -99,7 +99,7 @@ echo "<table class=\"table_adm4\">";
 					$liste[] = 'admin_purge_accounts.php';
 			}
 			affichetableau($liste,get_vocab("admin_menu_user"));
-			$liste = array();
+			$liste = [];
 			if (authGetUserLevel(getUserName(), -1, 'area') >= 4)
 				$liste[] = 'admin_email_manager.php';
 			if (authGetUserLevel(getUserName(), -1, 'area') >= 6)
@@ -116,7 +116,7 @@ echo "<table class=\"table_adm4\">";
 			}
 			affichetableau($liste,get_vocab("admin_menu_various"));
 
-			$liste = array();
+			$liste = [];
 			if ( (authGetUserLevel(getUserName(), -1, 'area') >= 6) && ((!isset($sso_restrictions)) || ($ldap_restrictions == false)) )
 				$liste[] = 'admin_config_ldap.php';
 			if ( (authGetUserLevel(getUserName(), -1, 'area') >= 6) && ((!isset($sso_restrictions)) || ($sso_restrictions == false)) )

@@ -20,7 +20,7 @@ $grr_script_name = "day.php";
 include "include/planning_init.inc.php";
 
 // mois et année sont déjà fixés, si le jour n'est pas passé en paramètre, on le fixe à aujourd'hui
-$day = isset($_GET['day']) ? $_GET['day'] : date("d");
+$day = $_GET['day'] ?? date("d");
 // echo $day,' ',$month,' ',$year,'<br>';
 $ind = 1;
 $test = 0;
@@ -102,7 +102,7 @@ else
 grr_sql_free($res);
 
 // $room_back sert à pallier l'absence de page day_all => si room_back contient 'all', il ne faut pas passer room en paramètre
-$room_back = isset($_GET['room']) ? $_GET['room'] : 'all';
+$room_back = $_GET['room'] ?? 'all';
 
 // Dans le cas de l'affichage d'une ressource, dans l'autre cas on garde la requete dans planning_init.inc.php
 if($room_back != 'all'){
@@ -166,7 +166,7 @@ else
 echo  '</th>'.PHP_EOL;
 $room_column_width = (int)(90 / grr_sql_count($ressources));
 $nbcol = 0;
-$rooms = array();
+$rooms = [];
 $a = 0;
 for ($i = 0; ($row = grr_sql_row($ressources, $i)); $i++)
 {

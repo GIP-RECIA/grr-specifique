@@ -17,14 +17,14 @@
 
 include "../include/admin.inc.php";
 $grr_script_name = "admin_room.php";
-$id_area = isset($_POST["id_area"]) ? $_POST["id_area"] : (isset($_GET["id_area"]) ? $_GET["id_area"] : NULL);
+$id_area = $_POST["id_area"] ?? $_GET["id_area"] ?? NULL;
 if ((isset($id_area))&&($id_area != -1))
 {
 	settype($id_area,"integer");
 	$id_site = mrbsGetAreaSite($id_area);
 }
 if (!isset($id_site))
-	$id_site = isset($_POST['id_site']) ? $_POST['id_site'] : (isset($_GET['id_site']) ? $_GET['id_site'] : -1);
+	$id_site = $_POST['id_site'] ?? $_GET['id_site'] ?? -1;
 settype($id_site,"integer");
 $back = getBackUri();
 $day   = date("d");
@@ -203,7 +203,7 @@ if (Settings::get("module_multisite") == "Oui")
 		if (grr_sql_count($res) != 0)
 		{
             // on détermine les domaines accessibles à l'utilisateur -> rangés dans $tareas
-            $tareas = array();
+            $tareas = [];
             for ($i = 0; ($row = grr_sql_row($res, $i)); $i++){
                 if ((authGetUserLevel(getUserName(),$row[0],'area') >= 4)){
                     $tareas[] = $row ;

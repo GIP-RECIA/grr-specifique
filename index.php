@@ -217,10 +217,10 @@ else if (Settings::get('sso_statut') == 'lcs')
 {
 	include LCS_PAGE_AUTH_INC_PHP;
 	include LCS_PAGE_LDAP_INC_PHP;
-	list($idpers,$login) = isauth();
+	[$idpers, $login] = isauth();
 	if ($idpers)
 	{
-		list($user, $groups)=people_get_variables($login, true);
+		[$user, $groups]=people_get_variables($login, true);
 		$lcs_tab_login["nom"] = $user["nom"];
 		$lcs_tab_login["email"] = $user["email"];
 		$long = strlen($user["fullname"]) - strlen($user["nom"]);
@@ -319,7 +319,7 @@ if ((Settings::get('sso_statut') == 'lasso_visiteur') || (Settings::get('sso_sta
 		// Construit un identifiant unique
 		$sql = "SELECT login FROM ".TABLE_PREFIX."_utilisateurs WHERE login LIKE 'lasso_%'";
 		$res = grr_sql_query($sql);
-		$existing_users = array();
+		$existing_users = [];
 		for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
 			$existing_users[] = $row[0];
 		$max = 0;
@@ -344,9 +344,9 @@ if ((Settings::get('sso_statut') == 'lasso_visiteur') || (Settings::get('sso_sta
 	if ($attributes)
 	{
 		// Get infos from the Identity Provider
-		$user_infos = array();
+		$user_infos = [];
 		// Nom Prénom
-		list($tab_login['nom'], $tab_login['fullname']) = preg_split(' ', $attributes['cn'][0]);
+		[$tab_login['nom'], $tab_login['fullname']] = preg_split(' ', $attributes['cn'][0]);
 		$tab_login['email'] = $attributes['mail'][0];
 		// Pour l'instant on ne redéfinit pas le login
 		//$tab_login['???'] = $attributes['username'][0];
@@ -415,9 +415,9 @@ else if ((Settings::get('sso_statut') == 'http_visiteur') || (Settings::get('sso
 		$login = $_SERVER['PHP_AUTH_USER'];
 		// Pour les versions plus anciennes de PHP < 4.1.0 (en fait inutile ici car GRR exige PHP > 4.3.1
 	}
-	else if (isset($HTTP_SERVER_VARS['PHP_AUTH_USER']) && !empty($HTTP_SERVER_VARS['PHP_AUTH_USER']))
+	else if (isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER']))
 	{
-		$login = $HTTP_SERVER_VARS['PHP_AUTH_USER'];
+		$login = $_SERVER['PHP_AUTH_USER'];
 		// L'utilisateur est authentifié mais $_SERVER['PHP_AUTH_USER'] est vide, on tente de récupérer le login dans $_SERVER['REMOTE_USER']
 	}
 	else if (isset($_SERVER['REMOTE_USER']) && !empty($_SERVER['REMOTE_USER']))
@@ -449,7 +449,7 @@ else if ((Settings::get('sso_statut') == 'http_visiteur') || (Settings::get('sso
 		// Cas de PHP4 en mode CGI sur IIS
 	}
 	else if (isset($_SERVER['HTTP_AUTHORIZATION']) && !empty($_SERVER['HTTP_AUTHORIZATION']))
-		list($login, $pw) = explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
+		[$login, $pw] = explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)));
 	else
 	{
 		// on demande de s'identifier

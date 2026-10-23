@@ -19,8 +19,8 @@
 include "../include/admin.inc.php";
 $grr_script_name = "admin_user.php";
 $back = getBackUri();
-$display = isset($_GET["display"]) ? $_GET["display"] : NULL;
-$order_by = isset($_GET["order_by"]) ? $_GET["order_by"] : NULL;
+$display = $_GET["display"] ?? NULL;
+$order_by = $_GET["order_by"] ?? NULL;
 $msg = '';
 if ((authGetUserLevel(getUserName(), -1) < 6) && (authGetUserLevel(getUserName(), -1,'user') != 1))
 {
@@ -75,7 +75,7 @@ if ((isset($_GET['action'])) && ($_GET['action'] == "nettoyage") && (Settings::g
 			$user_login = $row[0];
 			$user_etat[$i] = $row[1];
 			$user_source = $row[2];
-			list($user, $groups) = people_get_variables($user_login, false);
+			[$user, $groups] = people_get_variables($user_login, false);
 			$flag = 1;
 			if ($user["uid"] == "")
 			{
@@ -132,7 +132,7 @@ if ((isset($_GET['action'])) && ($_GET['action'] == "synchro") && (Settings::get
 	for ($loop=0; $loop < $total_user; $loop++ )
 	{
 		$user_login = $users[$loop]["uid"];
-		list($user, $groups) = people_get_variables($user_login, true);
+		[$user, $groups] = people_get_variables($user_login, true);
 		$user_nom = $user["nom"];
 		$user_fullname = $user["fullname"];
 		$user_email = $user["email"];

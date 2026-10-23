@@ -19,8 +19,8 @@ include "../include/admin.inc.php";
 $grr_script_name = "admin_user.php";
 $back = getBackUri();
 
-$display = isset($_GET["display"]) ? $_GET["display"] : NULL;
-$order_by = isset($_GET["order_by"]) ? $_GET["order_by"] : NULL;
+$display = $_GET["display"] ?? NULL;
+$order_by = $_GET["order_by"] ?? NULL;
 $msg = '';
 if (((Settings::get("ldap_statut") == "") && (Settings::get("sso_statut") == "") && (Settings::get("imap_statut") == "")) || (authGetUserLevel(getUserName(), -1) < 6) && (authGetUserLevel(getUserName(), -1,'user') !=  1))
 {

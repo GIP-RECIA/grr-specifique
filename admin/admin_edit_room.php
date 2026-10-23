@@ -19,30 +19,30 @@ include "../include/admin.inc.php";
 $grr_script_name = "admin_edit_room.php";
 $ok = NULL;
 if (Settings::get("module_multisite") == "Oui")
-	$id_site = isset($_POST["id_site"]) ? $_POST["id_site"] : (isset($_GET["id_site"]) ? $_GET["id_site"] : -1);
-$action = isset($_POST["action"]) ? $_POST["action"] : (isset($_GET["action"]) ? $_GET["action"] : NULL);
-$add_area = isset($_POST["add_area"]) ? $_POST["add_area"] : (isset($_GET["add_area"]) ? $_GET["add_area"] : NULL);
-$area_id = isset($_POST["area_id"]) ? $_POST["area_id"] : (isset($_GET["area_id"]) ? $_GET["area_id"] : NULL);
-$retour_page = isset($_POST["retour_page"]) ? $_POST["retour_page"] : (isset($_GET["retour_page"]) ? $_GET["retour_page"] : NULL);
-$room = isset($_POST["room"]) ? $_POST["room"] : (isset($_GET["room"]) ? $_GET["room"] : NULL);
-$id_area = isset($_POST["id_area"]) ? $_POST["id_area"] : (isset($_GET["id_area"]) ? $_GET["id_area"] : NULL);
-$change_area = isset($_POST["change_area"]) ? $_POST["change_area"] : NULL;
-$area_name = isset($_POST["area_name"]) ? $_POST["area_name"] : NULL;
-$access = isset($_POST["access"]) ? $_POST["access"] : NULL;
-$ip_adr = isset($_POST["ip_adr"]) ? $_POST["ip_adr"] : NULL;
-$room_name = isset($_POST["room_name"]) ? $_POST["room_name"] : NULL;
-$description = isset($_POST["description"]) ? $_POST["description"] : NULL;
-$capacity = isset($_POST["capacity"]) ? $_POST["capacity"] : NULL;
-$duree_max_resa_area1  = isset($_POST["duree_max_resa_area1"]) ? $_POST["duree_max_resa_area1"] : NULL;
-$duree_max_resa_area2  = isset($_POST["duree_max_resa_area2"]) ? $_POST["duree_max_resa_area2"] : NULL;
-$delais_max_resa_room  = isset($_POST["delais_max_resa_room"]) ? $_POST["delais_max_resa_room"] : NULL;
-$delais_min_resa_room  = isset($_POST["delais_min_resa_room"]) ? $_POST["delais_min_resa_room"] : NULL;
-$delais_option_reservation  = isset($_POST["delais_option_reservation"]) ? $_POST["delais_option_reservation"] : NULL;
-$allow_action_in_past  = isset($_POST["allow_action_in_past"]) ? $_POST["allow_action_in_past"] : NULL;
-$dont_allow_modify  = isset($_POST["dont_allow_modify"]) ? $_POST["dont_allow_modify"] : NULL;
-$qui_peut_reserver_pour  = isset($_POST["qui_peut_reserver_pour"]) ? $_POST["qui_peut_reserver_pour"] : NULL;
-$who_can_see  = isset($_POST["who_can_see"]) ? $_POST["who_can_see"] : NULL;
-$max_booking = isset($_POST["max_booking"]) ? $_POST["max_booking"] : NULL;
+	$id_site = $_POST["id_site"] ?? $_GET["id_site"] ?? -1;
+$action = $_POST["action"] ?? $_GET["action"] ?? NULL;
+$add_area = $_POST["add_area"] ?? $_GET["add_area"] ?? NULL;
+$area_id = $_POST["area_id"] ?? $_GET["area_id"] ?? NULL;
+$retour_page = $_POST["retour_page"] ?? $_GET["retour_page"] ?? NULL;
+$room = $_POST["room"] ?? $_GET["room"] ?? NULL;
+$id_area = $_POST["id_area"] ?? $_GET["id_area"] ?? NULL;
+$change_area = $_POST["change_area"] ?? NULL;
+$area_name = $_POST["area_name"] ?? NULL;
+$access = $_POST["access"] ?? NULL;
+$ip_adr = $_POST["ip_adr"] ?? NULL;
+$room_name = $_POST["room_name"] ?? NULL;
+$description = $_POST["description"] ?? NULL;
+$capacity = $_POST["capacity"] ?? NULL;
+$duree_max_resa_area1  = $_POST["duree_max_resa_area1"] ?? NULL;
+$duree_max_resa_area2  = $_POST["duree_max_resa_area2"] ?? NULL;
+$delais_max_resa_room  = $_POST["delais_max_resa_room"] ?? NULL;
+$delais_min_resa_room  = $_POST["delais_min_resa_room"] ?? NULL;
+$delais_option_reservation  = $_POST["delais_option_reservation"] ?? NULL;
+$allow_action_in_past  = $_POST["allow_action_in_past"] ?? NULL;
+$dont_allow_modify  = $_POST["dont_allow_modify"] ?? NULL;
+$qui_peut_reserver_pour  = $_POST["qui_peut_reserver_pour"] ?? NULL;
+$who_can_see  = $_POST["who_can_see"] ?? NULL;
+$max_booking = $_POST["max_booking"] ?? NULL;
 settype($max_booking, "integer");
 if ($max_booking<-1)
 	$max_booking = -1;
@@ -64,21 +64,21 @@ else
 	// toutes les reservations sont considerees comme restituee
 	grr_sql_query("update ".TABLE_PREFIX."_entry set statut_entry = '-' where room_id = '".$room."'");
 }
-$picture_room = isset($_POST["picture_room"]) ? $_POST["picture_room"] : NULL;
-$comment_room = isset($_POST["comment_room"]) ? $_POST["comment_room"] : NULL;
+$picture_room = $_POST["picture_room"] ?? NULL;
+$comment_room = $_POST["comment_room"] ?? NULL;
 $show_comment = isset($_POST["show_comment"]) ? "y" : "n";
-$change_done = isset($_POST["change_done"]) ? $_POST["change_done"] : NULL;
+$change_done = $_POST["change_done"] ?? NULL;
 if(!isset($_POST["area_order"]) || empty($_POST["area_order"])){
 	$area_order = 0;
 } else{
 	$area_order = $_POST["area_order"];
 }
 
-$room_order = isset($_POST["room_order"]) ? $_POST["room_order"] : NULL;
-$change_room = isset($_POST["change_room"]) ? $_POST["change_room"] : NULL;
-$number_periodes = isset($_POST["number_periodes"]) ? $_POST["number_periodes"] : NULL;
-$type_affichage_reser = isset($_POST["type_affichage_reser"]) ? $_POST["type_affichage_reser"] : NULL;
-$retour_resa_obli = isset($_POST["retour_resa_obli"]) ? $_POST["retour_resa_obli"] : NULL;
+$room_order = $_POST["room_order"] ?? NULL;
+$change_room = $_POST["change_room"] ?? NULL;
+$number_periodes = $_POST["number_periodes"] ?? NULL;
+$type_affichage_reser = $_POST["type_affichage_reser"] ?? NULL;
+$retour_resa_obli = $_POST["retour_resa_obli"] ?? NULL;
 $moderate = isset($_POST['moderate']) ? $_POST["moderate"] : NULL;
 if ($moderate == 'on')
 	$moderate = 1;
@@ -276,7 +276,7 @@ if ((!empty($room)) || (isset($area_id)))
 			$room_name = get_vocab("room")." ".$room;
 			grr_sql_command("UPDATE ".TABLE_PREFIX."_room SET room_name='".protect_data_sql($room_name)."' WHERE id=$room");
 		}
-		$doc_file = isset($_FILES["doc_file"]) ? $_FILES["doc_file"] : NULL;
+		$doc_file = $_FILES["doc_file"] ?? NULL;
 		if (preg_match("`\.([^.]+)$`", $doc_file['name'], $match))
 		{
 			$ext = strtolower($match[1]);

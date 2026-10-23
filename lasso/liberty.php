@@ -25,17 +25,7 @@ require_once(SPKITLASSO.'/lassospkit_dispatcher.inc.php');
 require_once(SPKITLASSO.'/lassospkit_metadata.inc.php');
 require_once(SPKITLASSO.'/lassospkit_utils.inc.php');
 
-dispatch(array('/login' => login,
-               '/federate' => federate,
-               '/ssoAssertionConsumer' => ssoAssertionConsumer,
-               '/sloInit' => sloInit,
-               '/sloSoap' => sloSoap,
-               '/sloRedirect' => sloRedirect,
-               '/sloResponse' => sloResponse,
-               '/defederate' => defederate,
-               '/defederateReturn' => defederateReturn, 
-               '/defederateNotification' => defederateNotification,
-               '/metadata' => metadata));
+dispatch(['/login' => \LOGIN, '/federate' => \FEDERATE, '/ssoAssertionConsumer' => \SSOASSERTIONCONSUMER, '/sloInit' => \SLOINIT, '/sloSoap' => \SLOSOAP, '/sloRedirect' => \SLOREDIRECT, '/sloResponse' => \SLORESPONSE, '/defederate' => \DEFEDERATE, '/defederateReturn' => \DEFEDERATERETURN, '/defederateNotification' => \DEFEDERATENOTIFICATION, '/metadata' => \METADATA]);
 // TODO fill implementation
 function login() {
     $saml2 = new LassoSPKitLiberty(new LassoSPKitDummySession());

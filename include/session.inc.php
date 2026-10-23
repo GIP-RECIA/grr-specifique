@@ -33,7 +33,7 @@ if (!$settings)
  * @param string _password
  * @return string
  */
-function grr_opensession($_login, $_password, $_user_ext_authentifie = '', $tab_login = array(), $tab_groups = array())
+function grr_opensession($_login, $_password, $_user_ext_authentifie = '', $tab_login = [], $tab_groups = [])
 {
 	global $motDePasseConfig;
 
@@ -210,7 +210,7 @@ function grr_opensession($_login, $_password, $_user_ext_authentifie = '', $tab_
 					if (!$ds)
 						$ds = grr_connect_ldap($ldap_adresse,$ldap_port,$_login,$_password,$use_tls);
 					if ($ds)
-						$result = @ldap_read($ds, $user_dn, "objectClass=*", array(Settings::get("ldap_champ_nom"),Settings::get("ldap_champ_prenom"),Settings::get("ldap_champ_email")));
+						$result = @ldap_read($ds, $user_dn, "objectClass=*", [Settings::get("ldap_champ_nom"), Settings::get("ldap_champ_prenom"), Settings::get("ldap_champ_email")]);
 					if ($result)
 					{
 					// Recuperer les donnees de l'utilisateur
@@ -440,7 +440,7 @@ if ($auth_ldap == 'yes')
 			if (!$ds)
 				$ds = grr_connect_ldap($ldap_adresse,$ldap_port,$_login,$_password,$use_tls);
 			if ($ds)
-				$result = @ldap_read($ds, $user_dn, "objectClass=*", array(Settings::get("ldap_champ_nom"),Settings::get("ldap_champ_prenom"),Settings::get("ldap_champ_email")));
+				$result = @ldap_read($ds, $user_dn, "objectClass=*", [Settings::get("ldap_champ_nom"), Settings::get("ldap_champ_prenom"), Settings::get("ldap_champ_email")]);
 			if ($result) {
 				// Recuperer les donnees de l'utilisateur
 				$info = @ldap_get_entries($ds, $result);
@@ -636,7 +636,7 @@ else
 }
 
 		// reset $_SESSION
-$_SESSION = array();
+$_SESSION = [];
 $_SESSION['login'] = $row[0];
 $_SESSION['password'] = $row[1];
 $_SESSION['prenom'] = $row[2];
@@ -846,7 +846,7 @@ function grr_resumeSession()
 	{
 		$test_session = grr_sql_query1("SELECT count(LOGIN) from ".TABLE_PREFIX."_log where END > now() and LOGIN = '".protect_data_sql($_SESSION['login'])."'");
 		if ($test_session == 0)
-			$_SESSION = array();
+			$_SESSION = [];
 	}
 	if ((!isset($_SESSION)) or (!isset($_SESSION['login'])))
 		return (false);
@@ -913,10 +913,10 @@ function grr_closeSession(&$_auto)
 		grr_sql_query($sql);
 	}
 		// Détruit toutes les variables de session
-	$_SESSION = array();
+	$_SESSION = [];
 		// Détruit le cookie sur le navigateur
 	$CookieInfo = session_get_cookie_params();
-	@setcookie(session_name(), '', time()-3600, $CookieInfo['path']);
+	@setcookie(session_name(), '', ['expires' => time()-3600, 'path' => $CookieInfo['path']]);
 		// On détruit la session
 	session_destroy();
 }
@@ -1049,7 +1049,7 @@ function grr_ldap_search_user($ds, $basedn, $login_attr, $login, $filtre_sup = "
 	{
 		$filter = "(& ".$filter.$filtre_sup.")";
 	}
-	$res = @ldap_search($ds, $basedn, $filter, array ("dn", $login_attr),0,0);
+	$res = @ldap_search($ds, $basedn, $filter, ["dn", $login_attr],0,0);
 	if ($res)
 	{
 		$info = @ldap_get_entries($ds, $res);
@@ -1180,7 +1180,7 @@ function grr_getinfo_ldap($_dn, $_login, $_password)
 	}
 	if ($ds)
 	{
-		$result = @ldap_read($ds, $_dn, "objectClass=*", array(Settings::get("ldap_champ_nom"),Settings::get("ldap_champ_prenom"),Settings::get("ldap_champ_email")));
+		$result = @ldap_read($ds, $_dn, "objectClass=*", [Settings::get("ldap_champ_nom"), Settings::get("ldap_champ_prenom"), Settings::get("ldap_champ_email")]);
 	}
 	if (!$result)
 		return "2";
@@ -1215,7 +1215,7 @@ function grr_getinfo_ldap($_dn, $_login, $_password)
 		$l_prenom = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $l_prenom);
 	}
 	// Return infos
-	return array($l_nom, $l_prenom, $l_email);
+	return [$l_nom, $l_prenom, $l_email];
 }
 
 /**

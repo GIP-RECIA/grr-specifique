@@ -24,7 +24,7 @@ $day   = date("d");
 $month = date("m");
 $year  = date("Y");
 check_access(6, $back);
-$page_calend = isset($_GET["page_calend"]) ? $_GET["page_calend"] : '3';
+$page_calend = $_GET["page_calend"] ?? '3';
 if ($page_calend == 3)
 	include "./admin_config_calend3.php";
 else if ($page_calend == 2)

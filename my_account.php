@@ -32,22 +32,22 @@ if (!grr_resumeSession())
 	die();
 };
 Definition_ressource_domaine_site();
-$day = isset($_POST['day']) ? $_POST['day'] : (isset($_GET['day']) ? $_GET['day'] : date('d'));
-$month = isset($_POST['month']) ? $_POST['month'] : (isset($_GET['month']) ? $_GET['month'] : date('m'));
-$year = isset($_POST['year']) ? $_POST['year'] : (isset($_GET['year']) ? $_GET['year'] : date('Y'));
+$day = $_POST['day'] ?? $_GET['day'] ?? date('d');
+$month = $_POST['month'] ?? $_GET['month'] ?? date('m');
+$year = $_POST['year'] ?? $_GET['year'] ?? date('Y');
 include_once('include/language.inc.php');
 include "include/resume_session.php";
 $back = getBackUri();
-$user_login = isset($_POST['user_login']) ? $_POST['user_login'] : ($user_login = isset($_GET['user_login']) ? $_GET['user_login'] : NULL);
-$valid = isset($_POST['valid']) ? $_POST['valid'] : NULL;
+$user_login = $_POST['user_login'] ?? ($user_login = $_GET['user_login'] ?? NULL);
+$valid = $_POST['valid'] ?? NULL;
 $msg = '';
 if ($valid == 'yes')
 {
 	if (IsAllowedToModifyMdp())
 	{
-		$reg_password_a = isset($_POST['reg_password_a']) ? $_POST['reg_password_a'] : NULL;
-		$reg_password1 = isset($_POST['reg_password1']) ? $_POST['reg_password1'] : NULL;
-		$reg_password2 = isset($_POST['reg_password2']) ? $_POST['reg_password2'] : NULL;
+		$reg_password_a = $_POST['reg_password_a'] ?? NULL;
+		$reg_password1 = $_POST['reg_password1'] ?? NULL;
+		$reg_password2 = $_POST['reg_password2'] ?? NULL;
 		if (($reg_password_a != '') && ($reg_password1 != ''))
 		{
 			$reg_password_a_c = md5($reg_password_a);
@@ -87,9 +87,9 @@ if ($valid == 'yes')
 			$user_prenom = $row[3];
 		}
 	}
-	$reg_email = isset($_POST['reg_email']) ? $_POST['reg_email'] : $user_email;
-	$reg_nom = isset($_POST['reg_nom']) ? $_POST['reg_nom'] : $user_nom;
-	$reg_prenom = isset($_POST['reg_prenom']) ? $_POST['reg_prenom'] : $user_prenom;
+	$reg_email = $_POST['reg_email'] ?? $user_email;
+	$reg_nom = $_POST['reg_nom'] ?? $user_nom;
+	$reg_prenom = $_POST['reg_prenom'] ?? $user_prenom;
 	$champ_manquant = 'n';
 	if (trim($reg_nom) == '')
 		$champ_manquant = 'y';
@@ -135,12 +135,12 @@ if ($valid == 'yes')
 }
 if (($valid == 'yes') || ($valid=='reset'))
 {
-	$default_site = isset($_POST['id_site']) ? $_POST['id_site'] : NULL;
-	$default_area = isset($_POST['id_area']) ? $_POST['id_area'] : NULL;
-	$default_room = isset($_POST['id_room']) ? $_POST['id_room'] : NULL;
-	$default_style = isset($_POST['default_css']) ? $_POST['default_css'] : NULL;
-	$default_list_type = isset($_POST['area_item_format']) ? $_POST['area_item_format'] : NULL;
-	$default_language = isset($_POST['default_language']) ? $_POST['default_language'] : NULL;
+	$default_site = $_POST['id_site'] ?? NULL;
+	$default_area = $_POST['id_area'] ?? NULL;
+	$default_room = $_POST['id_room'] ?? NULL;
+	$default_style = $_POST['default_css'] ?? NULL;
+	$default_list_type = $_POST['area_item_format'] ?? NULL;
+	$default_language = $_POST['default_language'] ?? NULL;
 	$sql = "UPDATE ".TABLE_PREFIX."_utilisateurs
 	SET default_site = '".protect_data_sql($default_site)."',
 	default_area = '".protect_data_sql($default_area)."',

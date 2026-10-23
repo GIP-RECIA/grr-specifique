@@ -36,7 +36,7 @@ else
 $res = grr_sql_query("SELECT id, area_name, access FROM ".TABLE_PREFIX."_area ORDER BY order_display");
 if (!$res)
 	fatal_error(0, grr_sql_error());
-$userdomain = array();
+$userdomain = [];
 if (grr_sql_count($res) != 0)
 {
 	for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
