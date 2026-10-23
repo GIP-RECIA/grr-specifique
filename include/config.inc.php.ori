@@ -171,6 +171,13 @@ $cas_service_base_urls = array(
   'https://ent.recia.fr',
 );
 $cas_server_ca_cert_path = '/usr/local/ssl/ca/giprecia.net-cacert.pem';
+$cas_logout_allowed_hosts = array(
+  'ha1.giprecia.net',
+  'ha2.giprecia.net',
+  'php-node1.giprecia.net',
+  'php-node2.giprecia.net',
+  'php-node5.giprecia.net',
+);
 
 
 #####################################################

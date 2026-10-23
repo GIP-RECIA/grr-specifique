@@ -51,12 +51,7 @@ if((isset($cas_proxy_server))&&($cas_proxy_server!="")&&(isset($cas_proxy_port))
  phpCAS::setExtraCurlOption(CURLOPT_PROXYPORT , $cas_proxy_port);
  phpCAS::setExtraCurlOption(CURLOPT_PROXYTYPE , CURLPROXY_HTTP);
  }
-/*
-Gestion du single sign-out (version 1.0.0 de phpcas)
-Commentez la ligne suivante si vous avez une erreur du type
-PHP Fatal error:  Call to undefined method phpCAS::handlelogoutrequests() in /var/www/html/grr/include/cas.inc.php
-*/
-phpCAS::handleLogoutRequests(false);
+phpCAS::handleLogoutRequests(true, $cas_logout_allowed_hosts);
 if (phpCAS::checkAuthentication())
 {
 	// L'utilisateur est déjà authentifié, on continue
