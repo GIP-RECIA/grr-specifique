@@ -1,4 +1,4 @@
-name: grr-mue
+name: grr-specifique
 recipe: lamp
 config:
   webroot: .
@@ -19,7 +19,7 @@ services:
   database:
     overrides:
       ports:
-        - "3306:3306"
+        - "3307:3306"
   mailpit:
     type: mailpit
 tooling:
