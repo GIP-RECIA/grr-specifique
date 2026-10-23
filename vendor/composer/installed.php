@@ -3,11 +3,11 @@
         'name' => 'gip-recia/grr-specifique',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '1c09c1a0b09160679ba1a656b83f66e5daff5a84',
+        'reference' => '3d49ec97f10c7c39a8272105a9b7aecf23dd6279',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'apereo/phpcas' => array(
@@ -22,7 +22,7 @@
         'gip-recia/grr-specifique' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '1c09c1a0b09160679ba1a656b83f66e5daff5a84',
+            'reference' => '3d49ec97f10c7c39a8272105a9b7aecf23dd6279',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -37,6 +37,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'phpstan/phpstan' => array(
+            'pretty_version' => '1.12.34',
+            'version' => '1.12.34.0',
+            'reference' => '4dd89ca7aa30fdc6760be21550d583bcc32e8476',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpstan/phpstan',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'psr/log' => array(
             'pretty_version' => '3.0.2',
             'version' => '3.0.2.0',
@@ -45,6 +54,15 @@
             'install_path' => __DIR__ . '/../psr/log',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'rector/rector' => array(
+            'pretty_version' => '1.2.10',
+            'version' => '1.2.10.0',
+            'reference' => '40f9cf38c05296bd32f444121336a521a293fa61',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../rector/rector',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
     ),
 );
