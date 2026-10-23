@@ -1,0 +1,31 @@
+name: grr-mue
+recipe: lamp
+config:
+  webroot: .
+  php: '8.5'
+  database: mariadb:10.11
+  via: apache
+
+services:
+  appserver:
+    xdebug: true
+    build_as_root:
+      - apt-get update && apt-get install -y locales
+      - echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
+      - locale-gen
+    overrides:
+      environment:
+        PHP_INI_memory_limit: '256M'
+  database:
+    overrides:
+      ports:
+        - "3306:3306"
+  mailpit:
+    type: mailpit
+tooling:
+  mysql-import:
+    service: database
+    description: Importer un dump SQL dans la base grr
+proxy:
+  mailpit:
+    - mailpit-grr-mue.lndo.site

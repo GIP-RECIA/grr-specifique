@@ -8,3 +8,6 @@
 /export/export.xml
 /export/exportplus.xml
 /images
+.idea
+*.sql.gz
+/vendor
