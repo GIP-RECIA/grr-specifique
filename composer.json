@@ -1,0 +1,14 @@
+{
+    "name": "gip-recia/grr-specifique",
+    "description": "GRR-specific reservation management application",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "apereo/phpcas": "^1.6.2",
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

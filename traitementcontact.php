@@ -20,7 +20,6 @@ include "include/config.inc.php";
 include "include/misc.inc.php";
 include "include/$dbsys.inc.php";
 include "include/mrbs_sql.inc.php";
-include "phpmailer/class.phpmailer.php";
 
 $grr_script_name = "traitementcontact.php";
 // Settings
@@ -86,7 +85,6 @@ $mail_corps  .= " h ".$_POST['dureemin']. " \n</body></html>";
 $sujet ="Réservation d'une salle";
 $destinataire = Settings::get("mail_destinataire");
 
-require_once 'phpmailer/PHPMailerAutoload.php';
 require_once 'include/mail.class.php';
 
 Email::Envois($destinataire, $sujet, $mail_corps, $_POST['email'], '', '');

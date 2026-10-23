@@ -15,8 +15,7 @@
  * (at your option) any later version.
  */
 
-// phpCAS 1.6.2 is shared with the other ENT applications.
-include_once('/var/www/phpCAS/phpCAS-1.6.2/CAS.php');
+require_once __DIR__ . '/../vendor/autoload.php';
 // cas.sso est le fichier d'informations de connexions au serveur cas
 // Le fichier cas.sso doit etre stocké dans un sous-répertoire « CAS »
 // dans un répertoire correspondant a l'include_path du php.ini (exemple : /var/lib/php)
