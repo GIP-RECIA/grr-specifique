@@ -52,11 +52,18 @@ $nb_year_calendar = 10;
 */
 // putenv("TZ=posix/Etc/GMT+0");
 // putenv("TZ=America/Toronto");
-/* pour compatibilité php >= 5.1.0 et php 7, on n'utilisera pas la fonction ptuenv et la constante TZ, mais la fonction 
-date_default_timezone_set("votre_time_zone"); en remplaçant "votre_time_zone" par votre time zone, dont la liste est disponible ici :
-http://php.net/manual/fr/timezones.php
-*/
-date_default_timezone_set('Europe/Paris');
+/*
+ * Paramètres régionaux de cette instance. Utilisez des identifiants IANA pour
+ * le fuseau et BCP 47 pour la locale, par exemple Indian/Reunion et fr-FR.
+ */
+$grr_timezone = 'Europe/Paris';
+$grr_locale = 'fr-FR';
+
+if (!extension_loaded('intl')) {
+	throw new RuntimeException('L\'extension PHP intl est requise par GRR.');
+}
+
+date_default_timezone_set($grr_timezone);
 
 
 # Changement d'heure été<->hiver
