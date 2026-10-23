@@ -659,7 +659,7 @@ function plages_libre_semaine_ressource($id_room, $month_week, $day_week, $year_
 		// Recherche des Membres du groupe
  		);
 		// Avec des GroupOfNames, ce ne serait pas ça.
- 	$ds = @ldap_connect($ldap_adresse, $ldap_port);
+	$ds = @ldap_connect('ldap://' . $ldap_adresse . ':' . $ldap_port);
  	if ($ds)
  	{
  		$r = @ldap_bind ($ds, $ldap_login, $ldap_pwd);

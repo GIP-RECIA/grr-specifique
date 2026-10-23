@@ -973,7 +973,7 @@ function grr_verif_ldap($_login, $_password)
 }
 function grr_connect_ldap($l_adresse,$l_port,$l_login,$l_pwd, $use_tls, $msg_error = "no")
 {
-	$ds = @ldap_connect($l_adresse, $l_port);
+	$ds = @ldap_connect('ldap://' . $l_adresse . ':' . $l_port);
 	if ($ds)
 	{
 			 // On dit qu'on utilise LDAP V3, sinon la V2 par défaut est utilisé et le bind ne passe pas.
