@@ -390,10 +390,8 @@ if (isset($_POST['ok'])) {
                                     $retourSaveImage = imagepng($logoRecreated, $picturePath);
                                     break;
                             }
-                            $retourDestroy = imagedestroy($logoRecreated);
-                            if (!$retourSaveImage || !$retourDestroy) {
-                                /* gérer un warning juste ? */
-                                $msg .= " (Erreur de imagedestroy)\\n";
+							if (!$retourSaveImage) {
+								$msg .= " (Erreur d'enregistrement de l'image)\\n";
                             }
                             if (!Settings::set('logo', $pictureName)) {
                                 $msg .= "Erreur lors de l'enregistrement du logo !\\n";

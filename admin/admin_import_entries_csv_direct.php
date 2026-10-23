@@ -64,7 +64,7 @@ include "admin_col_gauche.php";
             echo "Erreur dans le nettoyage de la table CSV";
             die();
         }
-        while($reservation = fgetcsv($fp, $long_max, ";")) {
+        while($reservation = fgetcsv($fp, $long_max, ";", '"', '')) {
              // le jour de la réservation 
              $date=$reservation[0];
              // on décompose les heures de début et de fin
