@@ -931,9 +931,9 @@ function begin_page($title, $page = "with_session")
 	$a .= '<meta name="Robots" content="noindex" />'.PHP_EOL;
 	$a .= '<title>'.$title.'</title>'.PHP_EOL;
 	$a .= '<link rel="shortcut icon" href="./favicon.ico" />'.PHP_EOL;
-	// Ajout pour le extended-uportal-header
+	// Ajout pour le r-header
 	$a .= '<script type="text/javascript" src="/resource-server/webjars/gip-recia__ui-webcomponents/dist/r-header.js"></script>'.PHP_EOL;
-	// Ajout pour le extended-uportal-footer
+	// Ajout pour le r-footer
 	$a .= '<script type="text/javascript" src="/resource-server/webjars/gip-recia__ui-webcomponents/dist/r-footer.js"></script>'.PHP_EOL;
 
 	if (@file_exists('admin_accueil.php') || @file_exists('install_mysql.php')){ // Si on est dans l'administration
@@ -1101,12 +1101,13 @@ function print_header($day = '', $month = '', $year = '', $type_session = 'with_
 			$month = date("m",$date_);
 			$year  = date("Y",$date_);
 			
-			// Ajout pour le extended-uportal-header
-			echo '<extended-uportal-header';
+			// Ajout pour le r-header
+			echo '<r-header';
 			echo '    domain="'.$_SERVER['HTTP_HOST'].'"';
-			echo '    service-name="GRR" template-api-path="/commun/portal_template_api.tpl.json" >';
-			echo '</extended-uportal-header>';
-			// Fin ajout pour le extended-uportal-header
+			echo '    template-api-url="/commun/portal_template_api.tpl.json"';
+			echo '    fname="GRR2" >';
+			echo '</r-header>';
+			// Fin ajout pour le r-header
 
 			echo '<div id="toppanel">'.PHP_EOL;
 			echo '<div id="panel">'.PHP_EOL;

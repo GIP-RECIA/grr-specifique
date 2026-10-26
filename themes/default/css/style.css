@@ -178,11 +178,11 @@ a.buttonsReservation{cursor:pointer}
 table.ui-datepicker-calendar: {z-index: 10;}
 
 
-/* Ajout pour le extended-uportal-header */
+/* Ajout pour le r-header */
 html {
 	font-size: unset !important;
 }
 body{
 	margin-top: var(--recia-header-height, 68px) !important;
 }
-/* Fin Ajout pour le extended-uportal-header */
+/* Fin Ajout pour le r-header */
