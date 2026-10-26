@@ -19,13 +19,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // cas.sso est le fichier d'informations de connexions au serveur cas
 // Le fichier cas.sso doit etre stocké dans un sous-répertoire « CAS »
 // dans un répertoire correspondant a l'include_path du php.ini (exemple : /var/lib/php)
-//include(dirname(__FILE__).'/CAS/cas.sso');
-// désormais les paramètres sont définis en page d'administration
-$serveurSSO = Settings::get("cas_serveur");
-$serveurSSOPort = intval(Settings::get("cas_port"));
-$serveurSSORacine = Settings::get("cas_racine");
-$cas_proxy_server = Settings::get("cas_proxy_server");
-$cas_proxy_port = Settings::get("cas_proxy_port");
+include('cas.sso');
 /* declare le script comme un client CAS
  Si le dernier argument est à true, cela donne la possibilité à phpCAS d'ouvrir une session php.
 */
